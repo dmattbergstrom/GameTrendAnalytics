@@ -26,7 +26,8 @@ Since every user will have their own “watchlist”, the application demands a 
 5. The application should now be running on `http://localhost:3000`
 
 ## Architecture
-`imports/
+```
+imports/
   startup/
     client/
       index.js                 # import client startup through a single index entry point
@@ -56,4 +57,5 @@ client/
   main.js                      # client entry point, imports all client code
 
 server/
-  main.js                      # server entry point, imports all server code`
+  main.js                      # server entry point, imports all server code
+```
