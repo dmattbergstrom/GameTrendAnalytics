@@ -6,6 +6,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import AccountsUIWrapper from './components/AccountsUIWrapper.js';
 import Welcome from './pages/Welcome.js';
 
+// NOTE: ONLY FOR TESTING:
+import Line from './components/chart-types/Line.jsx';
+
 // App component - represents the whole app
 class App extends Component {
   constructor(props) {
@@ -18,6 +21,7 @@ class App extends Component {
         <header className="App-header">
 
           <AccountsUIWrapper />
+          <Line></Line>
 
           {/* this.props.currentUser ?
             IF LOGGED IN
