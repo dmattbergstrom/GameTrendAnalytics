@@ -17,13 +17,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
 
-             <AccountsUIWrapper />
+          <AccountsUIWrapper />
 
-            {/* this.props.currentUser ?
-              IF LOGGED IN
-            */}
-
-
+          {/* this.props.currentUser ?
+            IF LOGGED IN
+          */}
 
         </header>
       </div>
