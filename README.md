@@ -70,7 +70,9 @@ server/
 ## Nifty Bash Files (For UNIX systems)
 ```
   ./run_unix                  # Runs the program from the terminal.
+
   ./git_push_unix "<MSG>"     # Pushes all changes in current dir to current branch, with a commit message as parameter.
+  
   ./git_merge_unix
     "<MSG>"
     "<MERGE_TO>"
