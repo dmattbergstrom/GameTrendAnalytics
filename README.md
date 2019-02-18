@@ -30,22 +30,29 @@ Since every user will have their own “watchlist”, the application demands a 
 imports/
   startup/
     client/
-      index.js                 # import client startup through a single index entry point
-      routes.js                # set up all routes in the app
-      useraccounts-configuration.js # configure login templates
+      index.js                 # import client startup through a single index entry point.
+      routes.js                # set up all routes in the app.
+      accounts-config.js       # configuration of login template.
     server/
-      fixtures.js              # fill the DB with example data on startup
-      index.js                 # import server startup through a single index entry point
+      fixtures.js              # fill the DB with example data on startup.
+      index.js                 # import server startup through a single index entry point.
+      security.js              # contains collection-specific security.
 
   api/
-    lists/                     # a unit of domain logic
-      server/
-        publications.js        # all list-related publications
-        publications.tests.js  # tests for the list publications
-      lists.js                 # definition of the Lists collection
-      lists.tests.js           # tests for the behavior of that collection
-      methods.js               # methods related to lists
-      methods.tests.js         # tests for those methods
+    collections/               
+      */                         # a unit of domain logic for a given collection.
+        server/
+          publications.js        # all collection-related publications.
+          publications.tests.js  # tests for the collection publications.
+        *.js                     # definition of the given collection.
+        *.tests.js               # tests for the behavior of that collection.
+        methods.js               # methods related to this collection.
+        methods.tests.js         # tests for those methods.
+
+    model.js                     # a unit of domain logic for the entire application.
+    api-client.js                # API imports only for the client.
+    api.js                       # All API imports. (For both client and server).
+    subscriptions.js             # All collection subscriptions.
 
   ui/
     components/                # all reusable components in the application

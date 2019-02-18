@@ -1,0 +1,7 @@
+1. Create a folder like one of the working collections, in the imports/collections folder.
+2. Add the collection to imports/api/ "subscriptions.js" file  (See pattern of other collections)
+3. Add the collection to imports/api/ "api-client.js" file     (See pattern of other collections)
+4. Add the collection to imports/api/ "api.js" file            (See pattern of other collections)
+5. Add the desired allow/deny security in the startup/server/ "security.js" file. (See pattern of other collections)
+
+6. DONE!
