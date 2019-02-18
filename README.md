@@ -66,3 +66,14 @@ client/
 server/
   main.js                      # server entry point, imports all server code
 ```
+
+## Nifty Bash Files (For UNIX systems)
+```
+  ./run_unix                  # Runs the program from the terminal.
+  ./git_push_unix "<MSG>"     # Pushes all changes in current dir to current branch, with a commit message as parameter.
+  ./git_merge_unix
+    "<MSG>"
+    "<MERGE_TO>"
+    "<MERGE_FROM>"            # Does the same as the file above, and checks out a new branch <MERGE_TO> and attempts a merge with
+                              # <MERGE_FROM> branch.
+```
