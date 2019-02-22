@@ -23,9 +23,9 @@ class App extends Component {
           <AccountsUIWrapper />
           <Line></Line>
 
-          {/* this.props.currentUser ?
-            IF LOGGED IN
-          */}
+          {this.props.currentUser ?
+            <h1> Welcome </h1> : ""
+          }
 
         </header>
       </div>
