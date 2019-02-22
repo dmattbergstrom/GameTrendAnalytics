@@ -2,30 +2,31 @@
 *   General CSS (for the whole application)
 **/
 body {
-  font-family: sans-serif;
-  background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
-  background-attachment: fixed;
-
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  padding: 0;
-  margin: 0;
-
+  font-family: Helvetica, Montserrat, Arial, sans-serif;
   font-size: 14px;
 }
 
-header {
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
-  position: relative;
+h1,h2,h3,h4,h5 {
+  font-family: Helvetica, Montserrat, Arial, sans-serif;
 }
 
 #login-buttons {
   display: block;
 }
+
+/**
+* APP COLORS:
+***/
+.grey-dark { background-color: #343a40; }
+.grey-dark-text { color: #343a40; }
+.dark { background-color: #21252C; }
+.dark-text { color: #21252C; }
+.super-dark { background-color: #2B2D3E; }
+.super-dark-text { color: #2B2D3E; }
+
+.red{background-color:#FD6585;}
+.red-text{color:#FD6585;}
+.red-gradient{background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);}
+
+.white{background-color:#FFF;}
+.white-text{ color: #FFF;}
