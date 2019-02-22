@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import 'bootstrap/dist/css/bootstrap.css';
 
+// Components
 import AccountsUIWrapper from './components/AccountsUIWrapper.js';
 import Welcome from './pages/Welcome.js';
 
@@ -17,17 +19,18 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className="App super-dark">
 
+        {/* Navbar + Login! */}
+        <div className="container-fluid">
           <AccountsUIWrapper />
-          <Line></Line>
+        </div>
 
-          {this.props.currentUser ?
-            <h1> Welcome </h1> : ""
-          }
+        {/* Dynamic Content */}
+        <div className="container-fluid container-padding">
 
-        </header>
+        </div>
+
       </div>
     );
   }
