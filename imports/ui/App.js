@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+
+// Routes
+import { Router, Route, Switch } from 'react-router';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const browserHistory = createBrowserHistory();
+
+// Bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 // Components
-import AccountsUIWrapper from './components/AccountsUIWrapper.js';
 import Welcome from './pages/Welcome.js';
-
-// NOTE: ONLY FOR TESTING:
-import Line from './components/chart-types/Line.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 
 // App component - represents the whole app
 class App extends Component {
@@ -20,16 +26,16 @@ class App extends Component {
   render() {
     return (
       <div className="App super-dark">
-
         {/* Navbar + Login! */}
-        <div className="container-fluid">
-          <AccountsUIWrapper />
-        </div>
+        <Navbar currentUser={this.props.currentUser}/>
 
-        {/* Dynamic Content */}
-        <div className="container-fluid container-padding">
-
-        </div>
+        {/* App Routes */}
+        <Router history={browserHistory}>
+          <Switch>
+            <Route exact path="/" render={()=>""}/>
+            <Route path="/welcome" render={()=><Welcome/>}/>
+          </Switch>
+        </Router>
 
       </div>
     );

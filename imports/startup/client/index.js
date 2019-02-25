@@ -2,13 +2,12 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 
-import './accounts-config.js';
+import './accounts-config.js'; // Import account config
+import "../../api/api-client.js";// Import collections:
 
-// Import all collections:
-import "../../api/api-client.js";
+import App from "../../ui/App.js";
 
-import App from '../../ui/App.js';
 
 Meteor.startup(() => {
-  render(<App />, document.getElementById('render-target'));
+  render(<App/>, document.getElementById('render-target'));
 });

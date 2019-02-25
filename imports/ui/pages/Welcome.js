@@ -5,6 +5,10 @@ import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';
 
 export default class Welcome extends Component {
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
     return (
       <div className="Welcome container-fluid">

@@ -1,0 +1,17 @@
+.accounts-dialog {
+  background-color: #343a40;
+  border: 1px solid #20c997;
+  color:#eee;
+}
+
+.accounts-dialog input { color: #444; }
+.login-close-text, .additional-link {color:#20c997!important;}
+
+#login-buttons .login-button, .accounts-dialog .login-button {color:#17a87d; background-color:transparent; border: 1px solid #17a87d;}
+#login-buttons .login-button:hover, .accounts-dialog .login-button:hover {color:#eee; background-color:#17a87d; border: 1px solid transparent;}
+
+#login-buttons {
+  display: block;
+  position: relative;
+  top: 3px;
+}
