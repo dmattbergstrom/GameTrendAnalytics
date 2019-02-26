@@ -8,6 +8,12 @@ import "../../api/api-client.js";// Import collections:
 // Only Import BootstrapJS, since we have installed CSS locally. (Because of MeteorJS load order.)
 import 'bootstrap/dist/js/bootstrap.js';
 
+// Import FontAwesome Icons:
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+library.add(faCheck);
+
+// Import App Layout where all pages will be rendered:
 import App from "../../ui/App.js";
 
 Meteor.startup(() => {

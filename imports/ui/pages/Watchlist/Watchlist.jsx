@@ -6,13 +6,16 @@ import { Link } from 'react-router-dom';
 
 import "./Watchlist.css"
 
+// FontAwesome Icons:
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 export default class Watchlist extends Component {
   constructor(props) {
     super(props);
   }
 
   // TODO: Do similiar in REACT STATE instead!
-  // Find the "category" field of each game id, in DB,
+  // Find the "category" field of each game id, in DB.
   // And display accordingly.
   filter(target){
     if (target != 'all') {
@@ -26,7 +29,7 @@ export default class Watchlist extends Component {
   render() {
     return (
       <div className="Watchlist container-fluid">
-
+<h1 className="white-text"></h1>
       			<div className="table-container col-sm-10 offset-sm-1 dark">
 
       						<div className="pull-right">
@@ -43,10 +46,12 @@ export default class Watchlist extends Component {
         								<tbody>
         									<tr data-status="trending">
         										<td>
-        											<div className="form-check">
-        												<input type="checkbox" id="checkbox1"/>
-        												<label for="checkbox1"></label>
-        											</div>
+                            <div className="checkbox">
+                              <label>
+                               <input type="checkbox" name="o3" value=""/>
+                               <span className="cr"><FontAwesomeIcon className="cr-icon green-text" icon="check" /></span>
+                               </label>
+                            </div>
         										</td>
         										<td>
         											<div className="media">

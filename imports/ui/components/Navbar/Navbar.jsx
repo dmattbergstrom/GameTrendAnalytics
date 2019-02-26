@@ -4,6 +4,10 @@ import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';
 
+// CSS
+import "./Navbar.css";
+
+// Components
 import AccountsUIWrapper from '../AccountsUIWrapper/AccountsUIWrapper.js';
 
 export default class Navbar extends Component {
