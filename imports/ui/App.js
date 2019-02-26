@@ -9,12 +9,8 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 const browserHistory = createBrowserHistory();
 
-// Bootstrap
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
-
 // Components
-import Welcome from './pages/Welcome.js';
+import Watchlist from './pages/Watchlist/Watchlist.jsx';
 import Gameinfo from './pages/Gameinfo.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 
@@ -34,8 +30,8 @@ class App extends Component {
         <Router history={browserHistory}>
           <Switch>
             <Route exact path="/" render={()=>""}/>
-            <Route path="/welcome" render={()=><Welcome/>}/>
             <Route path="/gameinfo" render={()=><Gameinfo/>}/>
+            <Route path="/watchlist" render={()=><Watchlist/>}/>
           </Switch>
         </Router>
 

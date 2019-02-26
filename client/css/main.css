@@ -1,35 +1,4 @@
 /**
-*   General CSS (for the whole application)
-**/
-body {
-  font-family: Helvetica, Montserrat, Arial, sans-serif;
-  margin: 0px;
-  padding: 0px;
-  font-size: 14px;
-}
-
-.App {
-  min-height: 100vh;
-}
-
-.button {
-  padding: 8px 12px;
-  border-radius: 5px;
-  outline: none;
-  border: none;
-}
-
-.container-padding {
-  padding: 10px 5px;
-}
-
-h1,h2,h3,h4,h5 {
-  font-family: Helvetica, Montserrat, Arial, sans-serif;
-}
-
-a { text-decoration: none!important; }
-
-/**
 *   APP COLORS:
 ***/
 .dark-grey { background-color: #343a40; }
@@ -37,6 +6,9 @@ a { text-decoration: none!important; }
 
 .super-dark { background-color: #21252C; }
 .super-dark-text { color: #21252C; }
+
+.inverse-super-dark {color:#eee; background-color:transparent; border: 1px solid #21252C;}
+.inverse-super-dark:hover {color:#eee; background-color:#21252C; border: 1px solid transparent;}
 
 .dark { background-color: #2B2D3E; }
 .dark-text { color: #2B2D3E; }
@@ -56,6 +28,9 @@ a { text-decoration: none!important; }
 .dark-red {background-color:#c82145;}
 .dark-red-text {color:#c82145;}
 
+.inverse-dark-red {color:#c82145; background-color:transparent; border: 1px solid #c82145;}
+.inverse-dark-red:hover {color:#eee; background-color:#c82145; border: 1px solid transparent;}
+
 .dark-green {background-color:#17a87d;}
 .dark-green-text {color:#17a87d;}
 
@@ -64,6 +39,9 @@ a { text-decoration: none!important; }
 
 .dark-blue {background-color:#0d98ae;}
 .dark-blue-text {color:#0d98ae;}
+
+.inverse-dark-blue {color:#0d98ae; background-color:transparent; border: 1px solid #0d98ae;}
+.inverse-dark-blue:hover {color:#eee; background-color:#0d98ae; border: 1px solid transparent;}
 
 .apex-red {background-color: #FD6585;}
 .apex-red-text {color: #FD6585;}
@@ -74,6 +52,59 @@ a { text-decoration: none!important; }
 .white-text { color: #eee;}
 .white-border {border:1px solid #eee;}
 
+/**
+*   General CSS (for the whole application)
+**/
+body {
+  /* Makes font sharper */
+  font-feature-settings: "kern","liga","clig","calt";
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+
+
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+.button {
+  padding: 8px 12px;
+  border-radius: 5px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.active-button {
+  background-color: #eee;
+  color: #21252C;
+  border: 1px solid #eee;
+}
+
+.container-padding {
+  padding: 10px 5px;
+}
+
+.hoverable{transition: 0.2s;}
+.hoverable:hover{
+  cursor: pointer;
+  transform: scale(1.10);
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: Helvetica, Montserrat, Arial, sans-serif;
+}
+
+a { text-decoration: none!important; }
+
+/**
+*   Other
+**/
 .line {
   color: white;
 }
