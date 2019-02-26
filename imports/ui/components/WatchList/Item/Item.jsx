@@ -12,8 +12,17 @@ export default class Item extends Component {
   }
 
   render() {
+    let categoryClasses = "media-meta pull-right ";
+    if (this.props.category == "trending") {
+      categoryClasses += "green-text";
+    } else if (this.props.category == "straight") {
+      categoryClasses += "blue-text";
+    } else if (this.props.category == "falling") {
+      categoryClasses += "red-text";
+    }
+
     return (
-      <tr data-status="trending">
+      <tr data-status={this.props.category}>
         <td>
         <div className="checkbox">
           <label>
@@ -25,15 +34,15 @@ export default class Item extends Component {
         <td>
           <div className="media">
             <a href="#" className="pull-left">
-              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" className="media-photo"/>
+              <img src={this.props.imgSrc} className="media-photo"/>
             </a>
           </div>
         </td>
         <td>
           <div className="media-body">
-            <span className="media-meta pull-right green-text">TRENDING</span>
+            <span className={categoryClasses}>{this.props.category.toUpperCase()}</span>
             <p className="title">
-              <a href="">Lorem Impsum</a>
+              <a href="">{this.props.gameName}</a>
             </p>
           </div>
         </td>
