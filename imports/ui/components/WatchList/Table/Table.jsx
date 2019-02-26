@@ -42,11 +42,7 @@ export default class Table extends Component {
     }
   }
 
-  // TODO: Do similiar in REACT STATE instead!
-  // Find the "category" field of each game id, in DB.
-  // And display accordingly.
   filter(category){
-
     let mappedItems = testItems.map((item, index)=>{
       if (category == item.category || category == "all") {
         return <Item key={index} gameName={item.gameName} category={item.category} imgSrc={item.imgSrc} />
@@ -54,7 +50,6 @@ export default class Table extends Component {
     });
 
     this.setState({activeFilter:category, Items: mappedItems})
-
   }
 
   render() {
