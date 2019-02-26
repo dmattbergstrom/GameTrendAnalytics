@@ -11,20 +11,31 @@ export default class Watchlist extends Component {
     super(props);
   }
 
+  // TODO: Do similiar in REACT STATE instead!
+  // Find the "category" field of each game id, in DB,
+  // And display accordingly.
+  filter(target){
+    if (target != 'all') {
+      $('.table tr').css('display', 'none');
+      $('.table tr[data-status="' + target + '"]').fadeIn('slow');
+    } else {
+      $('.table tr').css('display', 'none').fadeIn('slow');
+    }
+  }
+
   render() {
     return (
       <div className="Watchlist container-fluid">
 
-      			<div className="col-sm-10 offset-sm-1 dark">
-
+      			<div className="table-container col-sm-10 offset-sm-1 dark">
 
       						<div className="pull-right">
 
       							<div className="table-filter-buttons">
-      								<button type="button" className="button inverse-dark-green hoverable btn-filter" data-target="trending">Trending</button>
-      								<button type="button" className="button inverse-dark-blue hoverable btn-filter" data-target="straight">Straight</button>
-      								<button type="button" className="button inverse-dark-red hoverable btn-filter" data-target="falling">Falling</button>
-      								<button type="button" className="button inverse-super-dark hoverable btn-filter active-button" data-target="all">All</button>
+      								<button type="button" className="button inverse-dark-green hoverable btn-filter" data-target="trending" onClick={() => this.filter("trending")}>Trending</button>
+      								<button type="button" className="button inverse-dark-blue hoverable btn-filter" data-target="straight" onClick={() => this.filter("straight")}>Straight</button>
+      								<button type="button" className="button inverse-dark-red hoverable btn-filter" data-target="falling" onClick={() => this.filter("falling")}>Falling</button>
+      								<button type="button" className="button inverse-super-dark hoverable btn-filter active-button" data-target="all" onClick={() => this.filter("all")}>All</button>
       						   </div>
 
         						<div className="table-container">
@@ -49,7 +60,6 @@ export default class Watchlist extends Component {
                                 <span className="media-meta pull-right green-text">TRENDING</span>
                                 <p className="title">
                                   <a href="">Lorem Impsum</a>
-                                  {/*<span className="pull-right trending"> (trending)</span>*/}
                                 </p>
                               </div>
                             </td>

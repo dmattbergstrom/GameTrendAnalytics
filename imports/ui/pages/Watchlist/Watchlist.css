@@ -1,20 +1,10 @@
-.table-filter-buttons {
-	padding: 10px;
-}
+.Watchlist { margin-top: 20px; }
 
+.table-filter-buttons { padding: 10px; }
 .table-filter-buttons button { margin: 5px; }
 
-.table-filter tr td:first-child {
-	width: 38px;
-}
-.table-filter tr td:nth-child(2) {
-	width: 35px;
-}
+.table-filter tr td:first-child { width: 38px;}
+.table-filter tr td:nth-child(2) { width: 35px; }
 
-.table-filter .media-photo {
-	width: 45px;
-}
-
-.table-filter .media-meta {
-	font-size: 11px;
-}
+.table-filter .media-photo { width: 45px; }
+.table-filter .media-meta { font-size: 11px; }
