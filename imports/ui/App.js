@@ -10,7 +10,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 const browserHistory = createBrowserHistory();
 
 // Components
-import Watchlist from './pages/Watchlist/Watchlist.jsx';
+import WatchList from './pages/WatchList/WatchList.jsx';
 import Gameinfo from './pages/Gameinfo.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 
@@ -31,7 +31,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={()=>""}/>
             <Route path="/gameinfo" render={()=><Gameinfo/>}/>
-            <Route path="/watchlist" render={()=><Watchlist/>}/>
+            <Route path="/watchlist" render={()=><WatchList currentUser={this.props.currentUser}/>}/>
           </Switch>
         </Router>
 
