@@ -73,3 +73,44 @@ a { text-decoration: none!important; }
 .white {background-color:#eee;}
 .white-text { color: #eee;}
 .white-border {border:1px solid #eee;}
+
+.line {
+  color: white;
+}
+
+#gameinfo {
+  background-color: #343a40;
+  border: 3px solid #252830;
+  border-radius: 5px;
+  height: 85vh;
+  overflow: auto;
+  padding: 10px;
+}
+
+#chart {
+  margin: 0!important;
+  padding: 0!important;
+}
+#chartContainer {
+  height: 45vh;
+  background-color: #252830;
+}
+
+#otherGameInformation {
+  margin-top: 10px;
+  color: #17a87d;
+}
+
+hr {
+  background-color: #787878;
+  width: 90%;
+}
+
+#typeOfChartForm {
+  color: #eee;
+}
+
+.radiobox {
+  margin-top: 20px;
+  font-size: 20px;
+}

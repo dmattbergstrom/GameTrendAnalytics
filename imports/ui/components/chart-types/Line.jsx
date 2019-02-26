@@ -8,6 +8,7 @@ class Line extends Component {
 
     this.state = {
       options: {
+        colors: ['#17a2b8', '#eee', '#9C27B0'],
         stroke: {
           curve: 'smooth'
         },
@@ -15,11 +16,11 @@ class Line extends Component {
           size: 0
         },
         xaxis: {
-          categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         }
       },
       series: [{
-        data: [30, 40, 25, 50, 49, 21, 70, 51]
+        data: [40, 25, 50, 49, 21, 70, 51]
       }],
     }
   }
@@ -27,7 +28,7 @@ class Line extends Component {
   render() {
     return (
       <div className="line">
-        <Chart options={this.state.options} series={this.state.series} type="line" width="500" />
+        <Chart options={this.state.options} series={this.state.series} type="line" width="100%" height="300" />
       </div>
     );
   }

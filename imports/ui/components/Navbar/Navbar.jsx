@@ -29,8 +29,8 @@ export default class Navbar extends Component {
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a className="dropdown-item" href="#">Show All</a>
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">1</a>
-                  <a className="dropdown-item" href="#">2</a>
+                  <a className="dropdown-item" href="#">Apex Legends</a>
+                  <a className="dropdown-item" href="#">Counter Strike</a>
                 </div>
               </li> : ''
             }

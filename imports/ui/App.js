@@ -15,6 +15,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 
 // Components
 import Welcome from './pages/Welcome.js';
+import Gameinfo from './pages/Gameinfo.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 
 // App component - represents the whole app
@@ -34,6 +35,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={()=>""}/>
             <Route path="/welcome" render={()=><Welcome/>}/>
+            <Route path="/gameinfo" render={()=><Gameinfo/>}/>
           </Switch>
         </Router>
 
