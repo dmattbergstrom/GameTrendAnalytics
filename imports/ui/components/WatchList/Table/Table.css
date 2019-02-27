@@ -1,0 +1,10 @@
+.table-container { margin-top: 20px; }
+
+.table-buttons { padding: 20px 5px 10px 5px; }
+.table-buttons button { margin: 6px; }
+
+.table-filter tr td:first-child { width: 38px;}
+.table-filter tr td:nth-child(2) { width: 35px; }
+
+.table-filter .media-photo { width: 45px; }
+.table-filter .media-meta { font-size: 11px; }

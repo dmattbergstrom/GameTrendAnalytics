@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Template } from 'meteor/templating';
-import { Blaze } from 'meteor/blaze';
-
-// FontAwesome Icons:
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// CSS
+import "./Item.css";
 
 export default class Item extends Component {
   constructor(props) {
@@ -12,21 +10,24 @@ export default class Item extends Component {
   }
 
   render() {
+
+    const {id,category, imgSrc, gameName, checkBoxHandler} = this.props;
+
     let categoryClasses = "media-meta pull-right ";
-    if (this.props.category == "trending") {
+    if (category == "trending") {
       categoryClasses += "green-text";
-    } else if (this.props.category == "straight") {
+    } else if (category == "straight") {
       categoryClasses += "blue-text";
-    } else if (this.props.category == "falling") {
+    } else if (category == "falling") {
       categoryClasses += "red-text";
     }
 
     return (
-      <tr data-status={this.props.category}>
+      <tr data-status={category}>
         <td>
         <div className="checkbox">
           <label>
-           <input type="checkbox" name="o3" value=""/>
+           <input id={id} onChange={checkBoxHandler} type="checkbox" name="checkbox" value=""/>
            <span className="cr"><FontAwesomeIcon className="cr-icon green-text" icon="check" /></span>
            </label>
         </div>
@@ -34,15 +35,15 @@ export default class Item extends Component {
         <td>
           <div className="media">
             <a href="#" className="pull-left">
-              <img src={this.props.imgSrc} className="media-photo"/>
+              <img src={imgSrc} className="media-photo"/>
             </a>
           </div>
         </td>
         <td>
           <div className="media-body">
-            <span className={categoryClasses}>{this.props.category.toUpperCase()}</span>
+            <span className={categoryClasses}>{category.toUpperCase()}</span>
             <p className="title">
-              <a href="">{this.props.gameName}</a>
+              <a href="">{gameName}</a>
             </p>
           </div>
         </td>

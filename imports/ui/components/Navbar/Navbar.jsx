@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Template } from 'meteor/templating';
-import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';
 
 // CSS
@@ -31,10 +28,10 @@ export default class Navbar extends Component {
                   Watchlist
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">Show All</a>
+                  <a className="dropdown-item" href="/watchlist">Show All</a>
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">Apex Legends</a>
-                  <a className="dropdown-item" href="#">Counter Strike</a>
+                  <a className="dropdown-item" href="/gameinfo/ID">Apex Legends</a>
+                  <a className="dropdown-item" href="/gameinfo/ID">Counter Strike</a>
                 </div>
               </li> : ''
             }

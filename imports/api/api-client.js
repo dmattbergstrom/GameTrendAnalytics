@@ -1,2 +1,3 @@
 // Define all collections:
-import "./collections/tasks/tasks.js";
+import "./collections/games/games.js";
+import "./collections/watchlist/watchlist.js";
