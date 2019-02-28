@@ -54,7 +54,7 @@ const handleError = (error) => {
 // Init API calls every 12h. Make initial API call too, if its been over 12h.
 Meteor.startup(function(){
 
-    // Check las inserted objects date to determine whether we need an initial API call.
+    // Check last inserted objects date to determine whether we need an initial API call.
     const lastInsertedObj = Games.find({}, {sort: { _id: -1 }}, { limit: 1}).fetch().pop();
     if (lastInsertedObj || lastInsertedObj != undefined) {
       const hourTimeDiff = (new Date() - new Date(lastInsertedObj.updated)) / (1000 * 60 * 60);
