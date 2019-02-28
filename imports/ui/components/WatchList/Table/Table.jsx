@@ -38,18 +38,19 @@ export default class Table extends Component {
     this.checkBoxHandler = this.checkBoxHandler.bind(this);
     this.showBtnOptions = this.showBtnOptions.bind(this);
     this.filter = this.filter.bind(this);
-
-    const mappedItems = testItems.map((item, index)=>{
-      const {id,gameName,category,imgSrc} = item;
-      return <Item id={id} key={index} gameName={gameName} category={category} imgSrc={imgSrc} checkBoxHandler={this.checkBoxHandler} />
-    });
+    this.mapWatchlistItems = this.mapWatchlistItems.bind(this);
 
     this.state = {
+      checkedItems: [],
+    }
+
+    const mappedItems = this.mapWatchlistItems("all");
+    this.state = {
       activeFilter: "all",
-      items: mappedItems,
       checkedItems: [],
       btnOptions: "",
-    }
+      items: mappedItems
+    };
   }
 
   /**
@@ -78,14 +79,25 @@ export default class Table extends Component {
   *   Rerenders the items that match the category filter.
   **/
   filter(category){
+    const mappedItems = this.mapWatchlistItems(category);
+    this.setState({activeFilter:category, items: mappedItems})
+  }
+
+  mapWatchlistItems(category){
     const mappedItems = testItems.map((item, index)=>{
       if (category == item.category || category == "all") {
         const {id,gameName,category,imgSrc} = item;
-        return <Item id={id} key={index} gameName={gameName} category={category} imgSrc={imgSrc} checkBoxHandler={this.checkBoxHandler} />
+        const isChecked = this.state.checkedItems.includes(id);
+        return (
+          <Item
+            id={id} key={index} gameName={gameName}
+            category={category} imgSrc={imgSrc}
+            checkBoxHandler={this.checkBoxHandler} isChecked={isChecked}
+          />
+        );
       }
     });
-
-    this.setState({activeFilter:category, items: mappedItems})
+    return mappedItems;
   }
 
   /**

@@ -9,10 +9,13 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 const browserHistory = createBrowserHistory();
 
-// Components
+// General Components:
+import Navbar from './components/Navbar/Navbar.jsx';
+
+// Page Components
+import Overview from './pages/Overview/Overview.jsx';
 import WatchList from './pages/WatchList/WatchList.jsx';
 import Gameinfo from './pages/Gameinfo.jsx';
-import Navbar from './components/Navbar/Navbar.jsx';
 
 // App component - represents the whole app
 class App extends Component {
@@ -29,7 +32,7 @@ class App extends Component {
         {/* App Routes */}
         <Router history={browserHistory}>
           <Switch>
-            <Route exact path="/" render={()=>""}/>
+            <Route exact path="/" render={()=><Overview/>}/>
             <Route path="/gameinfo" render={()=><Gameinfo/>}/>
             <Route path="/watchlist" render={()=><WatchList currentUser={this.props.currentUser}/>}/>
           </Switch>

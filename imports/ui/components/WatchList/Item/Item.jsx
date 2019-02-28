@@ -11,7 +11,7 @@ export default class Item extends Component {
 
   render() {
 
-    const {id,category, imgSrc, gameName, checkBoxHandler} = this.props;
+    const {id,category, imgSrc, gameName, checkBoxHandler, isChecked} = this.props;
 
     let categoryClasses = "media-meta pull-right ";
     if (category == "trending") {
@@ -27,7 +27,7 @@ export default class Item extends Component {
         <td>
         <div className="checkbox">
           <label>
-           <input id={id} onChange={checkBoxHandler} type="checkbox" name="checkbox" value=""/>
+           <input id={id} onChange={checkBoxHandler} type="checkbox" name="checkbox" value="" defaultChecked={isChecked}/>
            <span className="cr"><FontAwesomeIcon className="cr-icon green-text" icon="check" /></span>
            </label>
         </div>
