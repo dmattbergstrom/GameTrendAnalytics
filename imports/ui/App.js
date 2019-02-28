@@ -41,6 +41,9 @@ class App extends Component {
 }
 
 export default withTracker(() => {
+  // Subscribing to all relevant collections for all pages:
+  Meteor.subscribe('games');
+  Meteor.subscribe('watchlist');
   return {
     currentUser: Meteor.user(),
   };

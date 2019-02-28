@@ -3,9 +3,7 @@ import { HTTP } from 'meteor/http';
 
 // Load in collections:
 import  "../../api/api.js";
-
-// TODO: GET COLLECTION REFERENCED!
-import {Games} from "../../api/collections/games/games.js"
+import Games from "../../api/collections/games/games.js"
 
 const CLIENT_ID = '1p1vbzyuiq4miuyp06p3bbduvj4t4o';
 
@@ -20,6 +18,8 @@ Meteor.methods({
         if (!e) {
           let games = JSON.parse(res.content).top;
           games.map((game)=>{
+            // TODO: Maybe clean data a little bit?
+            game.updated = new Date();
             Games.insert(game);
           });
         } else {
@@ -51,11 +51,24 @@ const handleError = (error) => {
   }
 };
 
-// Init API calls every 24h. Make initial API call too.
+// Init API calls every 12h. Make initial API call too, if its been over 12h.
 Meteor.startup(function(){
-    const msToDay = 1000*60*60*24;
-    // Meteor.call("getTopGames",10); TODO: UNCOMMENT TO TEST!
-    Meteor.setInterval(function(){
 
+    // Check las inserted objects date to determine whether we need an initial API call.
+    const lastInsertedObj = Games.find({}, {sort: { _id: -1 }}, { limit: 1}).fetch().pop();
+    if (lastInsertedObj || lastInsertedObj != undefined) {
+      const hourTimeDiff = (new Date() - new Date(lastInsertedObj.updated)) / (1000 * 60 * 60);
+      if (hourTimeDiff > 12) {
+        Meteor.call("getTopGames",100);
+      }
+    } else {
+      // DB was empty. Make initial API call.
+      Meteor.call("getTopGames",100);
+    }
+
+    // Set a timer to keep updating the DB.
+    const msToDay = 1000*60*60*12;
+    Meteor.setInterval(function(){
+      Meteor.call("getTopGames",100);
     }, msToDay);
 });

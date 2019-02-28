@@ -1,7 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
+import SimpleSchema from 'simpl-schema';
 
-export const Games = new Mongo.Collection('games');
+// const schema = new SimpleSchema({
+//   name: String,
+// }).validate({
+//   name: 2,
+// });
+
+const Games = new Mongo.Collection('games');
+export default Games;
 
 // TODO: Add SimpleSchema

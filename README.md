@@ -52,7 +52,6 @@ imports/
     model.js                     # a unit of domain logic for the entire application.
     api-client.js                # API imports only for the client.
     api.js                       # All API imports. (For both client and server).
-    subscriptions.js             # All collection subscriptions.
 
   ui/
     components/                # all reusable components in the application
@@ -72,7 +71,7 @@ server/
   ./run_unix                  # Runs the program from the terminal.
 
   ./git_push_unix "<MSG>"     # Pushes all changes in current dir to current branch, with a commit message as parameter.
-  
+
   ./git_merge_unix
     "<MSG>"
     "<MERGE_TO>"

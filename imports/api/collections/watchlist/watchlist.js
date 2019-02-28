@@ -2,6 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-export const Watchlist = new Mongo.Collection('watchlist');
-
+const Watchlist = new Mongo.Collection('watchlist');
+export default Watchlist;
 // TODO: Add SimpleSchema
