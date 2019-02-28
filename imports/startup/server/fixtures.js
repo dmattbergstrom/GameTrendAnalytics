@@ -67,8 +67,8 @@ Meteor.startup(function(){
     }
 
     // Set a timer to keep updating the DB.
-    const msToDay = 1000*60*60*12;
+    const msToTwelveH = 1000*60*60*12;
     Meteor.setInterval(function(){
       Meteor.call("getTopGames",100);
-    }, msToDay);
+    }, msToTwelveH);
 });
