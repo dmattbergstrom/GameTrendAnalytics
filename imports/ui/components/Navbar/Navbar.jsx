@@ -8,11 +8,16 @@ import "./Navbar.css";
 import AccountsUIWrapper from '../AccountsUIWrapper/AccountsUIWrapper.js';
 
 export default class Navbar extends Component {
+
+  constructor(props){
+    super(props);
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark dark-grey container-fluid">
 
-        <a className="navbar-brand" href="#">Twitch Trend Analytics</a>
+        <a className="navbar-brand" href="/">Twitch Trend Analytics</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -20,16 +25,17 @@ export default class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#">Overview <span className="sr-only">(current)</span></a>
+              <a className="nav-link" href="/">Overview <span className="sr-only">(current)</span></a>
             </li>
             { this.props.currentUser ?
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a className="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Watchlist
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a className="dropdown-item" href="/watchlist">Show All</a>
                   <div className="dropdown-divider"></div>
+                  {/* TODO: Get the watchlist games! */}
                   <a className="dropdown-item" href="/gameinfo/ID">Apex Legends</a>
                   <a className="dropdown-item" href="/gameinfo/ID">Counter Strike</a>
                 </div>
