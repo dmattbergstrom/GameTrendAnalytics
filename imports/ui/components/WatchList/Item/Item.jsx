@@ -11,7 +11,7 @@ export default class Item extends Component {
 
   render() {
 
-    const {id,category, imgSrc, gameName, checkBoxHandler, isChecked} = this.props;
+    const {id, category, imgSrc, gameName, checkBoxHandler, isChecked} = this.props;
 
     let categoryClasses = "media-meta pull-right ";
     if (category == "trending") {

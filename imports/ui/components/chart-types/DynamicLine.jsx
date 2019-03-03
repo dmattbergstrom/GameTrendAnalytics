@@ -22,8 +22,24 @@ class DynamicLine extends Component {
           size: 0
         },
         xaxis: {
-          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        }
+          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          labels: {
+            style: {
+              colors: '#fff', // Kan göra en array av denna om man vill ka olika färger på mån -> sön.
+            },
+          },
+        },
+
+        yaxis: {
+        show: true,
+        showAlways: true,
+        labels: {
+            show: true,
+            style: {
+              color: "#fff",
+            },
+          },
+        },
       },
       series: seriesData,
     }
@@ -31,7 +47,7 @@ class DynamicLine extends Component {
 
   render() {
     return (
-      <div className="line">
+      <div className="chartType">
         <Chart options={this.state.options} series={this.state.series} type="line" width="100%" height="300" />
       </div>
     );

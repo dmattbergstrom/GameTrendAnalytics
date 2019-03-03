@@ -105,8 +105,8 @@ a { text-decoration: none!important; }
 /**
 *   Other
 **/
-.line {
-  color: white;
+.chartType {
+  color: #444;  /* Ändras denna ändras färgen när man "hoverar" på ett värde i grafen */
 }
 
 #gameinfo {
@@ -125,6 +125,7 @@ a { text-decoration: none!important; }
 #chartContainer {
   height: 45vh;
   background-color: #252830;
+  color: #444;
 }
 
 #otherGameInformation {
