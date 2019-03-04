@@ -16,12 +16,15 @@ export default class Overview extends Component {
   }
 
   render() {
-    if (this.props.model)
+
+    const {model} = this.props;
+    if (model)
       console.log(this.props.model.getAllGames());
+      
     return (
       <div className="Overview">
         <div className="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 container-fluid">
-          <br/><br/>
+          <br /><br />
           <h4 className="white-text"><b>TOP 10 GAMES LAST 7 DAYS</b></h4>
           <DynamicLine/>
         </div>

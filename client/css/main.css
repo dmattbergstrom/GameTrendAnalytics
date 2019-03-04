@@ -52,6 +52,8 @@
 .white-text { color: #eee;}
 .white-border {border:1px solid #eee;}
 
+.fa-spin { color:#20c997; margin-top: 35vh; } /* Spinner; */
+
 /**
 *   General CSS (for the whole application)
 **/

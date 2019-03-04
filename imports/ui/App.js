@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Router
 import { Router, Route, Switch } from 'react-router';
@@ -29,6 +30,9 @@ class App extends Component {
 
   render() {
 
+    const spinner = <div className="col s12 text-center"><FontAwesomeIcon size="5x" icon="spinner" spin /></div>;
+
+    // Create Model Instance:
     const {loading, currentUser, games} = this.props;
     let modelInstance;
     if (!loading)
@@ -39,15 +43,14 @@ class App extends Component {
         {/* Navbar + Login! */}
         <Navbar currentUser={currentUser}/>
 
-        {/* App Routes */}
+        {/* App Routes: Show loading until model can be sent down as props. */}
         <Router history={browserHistory}>
           <Switch>
-            <Route exact path="/" render={()=><Overview model={modelInstance}/>}/>
-            <Route path="/gameinfo" render={()=><Gameinfo model={modelInstance}/>}/>
-            <Route path="/watchlist" render={()=><Watchlist currentUser={currentUser} model={modelInstance}/>}/>
+            <Route exact path="/" render={() => loading ? spinner : <Overview loading={loading} model={modelInstance}/>}/>
+            <Route path="/gameinfo" render={() => loading ? spinner : <Gameinfo model={modelInstance}/>}/>
+            <Route path="/watchlist" render={() => loading ? spinner : <Watchlist currentUser={currentUser} model={modelInstance}/>}/>
           </Switch>
         </Router>
-
       </div>
     );
   }
