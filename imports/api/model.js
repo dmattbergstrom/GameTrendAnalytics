@@ -5,6 +5,7 @@ import { Meteor } from "meteor/meteor";
 const Model = function(){
 
   var thisWeeksGameData = [];
+  var watchlist = [];
 
   const dataObject = (pop, view, chan, upd)=>{
     return {
@@ -15,7 +16,7 @@ const Model = function(){
     };
   }
 
-  this.setThisWeeksGameData = function(games){
+  this.setGames = function(games){
     games.forEach((g) => {
       const { viewers, channels, game, _id, updated } = g;
       const { name, popularity, logo } = game;
@@ -35,6 +36,25 @@ const Model = function(){
         }
       }
     });
+
+    // Add derivative data to our stored games:
+    for (const index in thisWeeksGameData) {
+      const game = thisWeeksGameData[index];
+      let avg_popularity = 0, avg_viewers = 0, avg_channels = 0;
+      const { data } = game;
+      const { length } = data;
+      data.forEach(dataset => {
+        avg_popularity += dataset.popularity;
+        avg_viewers += dataset.viewers;
+        avg_channels += dataset.channels;
+      });
+      game.avg_popularity = parseInt(avg_popularity / length);
+      game.avg_viewers = parseInt(avg_viewers / length);
+      game.avg_channels = parseInt(avg_channels / length);
+
+      thisWeeksGameData[index] = game;
+    }
+
   }
 
   // console.log(thisWeeksGameData);
@@ -69,6 +89,10 @@ const Model = function(){
 
   this.getSpecificGame = (name) => {
     return thisWeeksGameData[name];
+  };
+
+  this.setWatchlist = (wl) => {
+    watchlist = wl;
   };
 
   this.getWatchlist = () => {
