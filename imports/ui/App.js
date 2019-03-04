@@ -34,7 +34,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={()=><Overview/>}/>
             <Route path="/gameinfo" render={()=><Gameinfo/>}/>
-            <Route path="/watchlist" render={()=><WatchList currentUser={this.props.currentUser}/>}/>
+            <Route path="/watchlist" render={()=><Watchlist currentUser={this.props.currentUser}/>}/>
           </Switch>
         </Router>
 
