@@ -11,6 +11,7 @@ const browserHistory = createBrowserHistory();
 
 //Collections:
 import Games from "/imports/api/collections/games/games.js";
+import WatchlistCollection from "/imports/api/collections/watchlist/watchlist.js";
 
 // General Components:
 import Navbar from './components/Navbar/Navbar.jsx';
@@ -29,10 +30,13 @@ class App extends Component {
   }
 
   componentWillMount() {
+    // If the model hasn't loaded in it's necessary data, please do so after App mounting.
     Tracker.autorun(() => {
       if (!modelInstance.getAllGames() || modelInstance.getAllGames().length <= 0) {
         const games = Games.find({}).fetch();
-        modelInstance.setThisWeeksGameData(games);
+        const watchlist = WatchlistCollection.find({}).fetch();
+        modelInstance.setGames(games);
+        modelInstance.setWatchlist(watchlist);
       }
     })
   }
@@ -47,7 +51,7 @@ class App extends Component {
     return (
       <div className="App super-dark">
         {/* Navbar + Login! */}
-        <Navbar currentUser={currentUser}/>
+        <Navbar currentUser={currentUser} model={modelInstance}/>
 
         {/* App Routes: Show loading until model can be sent down as props. */}
         <Router history={browserHistory}>
