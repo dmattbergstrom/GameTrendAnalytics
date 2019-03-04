@@ -58,6 +58,24 @@ export const Model = function(games){
   //   }
   // ];
 
+  // NOTE: For testing
+  let thisWeeksGameData = [
+     {
+      _id: 1,
+      name: "Apex Legends"
+      data: [
+        {
+          popularity: 123123,
+          viewers: 123,
+          channels: 123,
+          updated: new Date().toString(),
+        },
+      ]
+      logo: "",
+    }
+  ];
+  // -----------------------
+
   this.getAllGames = function() {
     return thisWeeksGameData;
   };
@@ -70,11 +88,11 @@ export const Model = function(games){
     console.log("Empty");
   };
 
-  this.removeFromWatchlist = (id) => {
-    console.log("Empty");
+  this.getWatchlist = () => {
+    // TODO: To be filled...
   };
 
-  this.addToWatchlist = (id) => {
-    console.log("Empty");
+  this.addToWatchlist = () => {
+    // TODO: To be filled...
   };
 };
