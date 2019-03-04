@@ -20,7 +20,7 @@ import Overview from './pages/Overview/Overview.jsx';
 import Watchlist from './pages/Watchlist/Watchlist.jsx';
 import Gameinfo from './pages/Gameinfo/Gameinfo.jsx';
 
-import { Model } from '../api/model.js';
+import { modelInstance } from '../api/model.js';
 
 // App component - represents the whole app
 class App extends Component {
@@ -28,15 +28,21 @@ class App extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    Tracker.autorun(() => {
+      if (!modelInstance.getAllGames() || modelInstance.getAllGames().length <= 0) {
+        const games = Games.find({}).fetch();
+        modelInstance.setThisWeeksGameData(games);
+      }
+    })
+  }
+
   render() {
 
     const spinner = <div className="col s12 text-center"><FontAwesomeIcon size="5x" icon="spinner" spin /></div>;
 
     // Create Model Instance:
-    const {loading, currentUser, games} = this.props;
-    let modelInstance;
-    if (!loading)
-      modelInstance = new Model(games);
+    const {loading, currentUser} = this.props;
 
     return (
       <div className="App super-dark">
@@ -67,7 +73,6 @@ export default withTracker(() => {
   const loading = handles.some(handle => !handle.ready());
   return {
     loading: loading,
-    currentUser: Meteor.user(),
-    games: Games.find().fetch()
+    currentUser: Meteor.user()
   };
 })(App);

@@ -16,10 +16,8 @@ export default class Overview extends Component {
   }
 
   render() {
-
     const {model} = this.props;
-    if (model)
-      console.log(this.props.model.getAllGames());
+    console.log(this.props.model.getAllGames());
       
     return (
       <div className="Overview">
