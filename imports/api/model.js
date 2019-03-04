@@ -1,22 +1,53 @@
 // Model:n vi använder för att lagra, hämta och hantera vår data (som inte hämtas från API:n)
 
 const Model = function () {
-  let AllGames = [];
+  let thisWeeksGameData = []; 
+  
+  // thisWeeksGameData = [
+  //    {
+  //     _id: 
+  //     name:
+  //     data: [
+  //       {
+  //         popularity:
+  //         viewers:
+  //         channels:
+  //         updated:
+  //       },
+  //       ...
+  //       ...
+  //       ...
+  //       {
+  //         popularity:
+  //         viewers:
+  //         channels:
+  //         updated:
+  //       }
+  //     ]
+  //     logo:
+  //   }
+  // ];
+
+
   var test = "hej";
 
   this.getAllGames = function() {
-      console.log(test);
+    return thisWeeksGameData;
   };
 
-  this.getSpecificGame = () => {
+  this.getSpecificGame = (id) => {
+    thisWeeksGameData.forEach(game => {
+      if(game._id == id)
+        return game;
+    });
+    return {};
+  };
+
+  this.removeFromWatchlist = (id) => {
     console.log("Empty");
   };
 
-  this.removeSpecificGame = (id) => {
-    console.log("Empty");
-  };
-
-  this.addNewGame = (id) => {
+  this.addToWatchlist = (id) => {
     console.log("Empty");
   };
 };
