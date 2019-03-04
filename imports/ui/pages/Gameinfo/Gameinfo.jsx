@@ -10,8 +10,8 @@ import { modelInstance } from '../../../api/model.js';
 export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
-    modelInstance.getAllGames;
-    modelInstance.getSpecificGame;
+    console.log(modelInstance.getAllGames());
+    console.log(modelInstance.getSpecificGame(2));
     this.state = {
       id : 1, // this.props.game.id
       title : "Apex Legends", // this.props.game.title
