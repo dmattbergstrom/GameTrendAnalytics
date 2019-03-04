@@ -54,21 +54,24 @@ const handleError = (error) => {
 // Init API calls every 12h. Make initial API call too, if its been over 12h.
 Meteor.startup(function(){
 
+    const limit = 50;
+    const hours = 24;
+
     // Check last inserted objects date to determine whether we need an initial API call.
     const lastInsertedObj = Games.find({}, {sort: { _id: -1 }}, { limit: 1}).fetch().pop();
     if (lastInsertedObj || lastInsertedObj != undefined) {
       const hourTimeDiff = (new Date() - new Date(lastInsertedObj.updated)) / (1000 * 60 * 60);
-      if (hourTimeDiff > 12) {
-        Meteor.call("getTopGames",100);
+      if (hourTimeDiff > hours) {
+        Meteor.call("getTopGames",limit);
       }
     } else {
       // DB was empty. Make initial API call.
-      Meteor.call("getTopGames",100);
+      Meteor.call("getTopGames",limit);
     }
 
     // Set a timer to keep updating the DB.
-    const msToTwelveH = 1000*60*60*12;
+  const msToDay = 1000 * 60 * 60 * hours;
     Meteor.setInterval(function(){
-      Meteor.call("getTopGames",100);
-    }, msToTwelveH);
+      Meteor.call("getTopGames",limit);
+    }, msToDay);
 });
