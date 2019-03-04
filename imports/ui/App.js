@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
-// Routes
+// Router
 import { Router, Route, Switch } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
-
 const browserHistory = createBrowserHistory();
+
+//Collections:
+import Games from "/imports/api/collections/games/games.js";
 
 // General Components:
 import Navbar from './components/Navbar/Navbar.jsx';
@@ -17,6 +19,8 @@ import Overview from './pages/Overview/Overview.jsx';
 import Watchlist from './pages/Watchlist/Watchlist.jsx';
 import Gameinfo from './pages/Gameinfo/Gameinfo.jsx';
 
+import { Model } from '../api/model.js';
+
 // App component - represents the whole app
 class App extends Component {
   constructor(props) {
@@ -24,17 +28,23 @@ class App extends Component {
   }
 
   render() {
+
+    const {loading, currentUser, games} = this.props;
+    let modelInstance;
+    if (!loading)
+      modelInstance = new Model(games);
+
     return (
       <div className="App super-dark">
         {/* Navbar + Login! */}
-        <Navbar currentUser={this.props.currentUser}/>
+        <Navbar currentUser={currentUser}/>
 
         {/* App Routes */}
         <Router history={browserHistory}>
           <Switch>
-            <Route exact path="/" render={()=><Overview/>}/>
-            <Route path="/gameinfo" render={()=><Gameinfo/>}/>
-            <Route path="/watchlist" render={()=><Watchlist currentUser={this.props.currentUser}/>}/>
+            <Route exact path="/" render={()=><Overview model={modelInstance}/>}/>
+            <Route path="/gameinfo" render={()=><Gameinfo model={modelInstance}/>}/>
+            <Route path="/watchlist" render={()=><Watchlist currentUser={currentUser} model={modelInstance}/>}/>
           </Switch>
         </Router>
 
@@ -45,9 +55,16 @@ class App extends Component {
 
 export default withTracker(() => {
   // Subscribing to all relevant collections for all pages:
-  Meteor.subscribe('games');
-  Meteor.subscribe('watchlist');
+  const handles = [
+    Meteor.subscribe('games'),
+    Meteor.subscribe('watchlist'),
+  ];
+
+  // If handles aren't ready, "loading" will be set to true.
+  const loading = handles.some(handle => !handle.ready());
   return {
+    loading: loading,
     currentUser: Meteor.user(),
+    games: Games.find().fetch()
   };
 })(App);

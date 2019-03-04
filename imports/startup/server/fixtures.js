@@ -53,7 +53,7 @@ const handleError = (error) => {
 
 // Init API calls every 12h. Make initial API call too, if its been over 12h.
 Meteor.startup(function(){
-
+  
     const limit = 50;
     const hours = 24;
 
