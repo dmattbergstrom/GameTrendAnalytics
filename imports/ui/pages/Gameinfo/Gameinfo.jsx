@@ -5,11 +5,13 @@ import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';
 import Line from '../../components/chart-types/Line.jsx';
 import Area from '../../components/chart-types/Area.jsx';
+import { modelInstance } from '../../../api/model.js';
 
 export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
-
+    modelInstance.getAllGames;
+    modelInstance.getSpecificGame;
     this.state = {
       id : 1, // this.props.game.id
       title : "Apex Legends", // this.props.game.title
