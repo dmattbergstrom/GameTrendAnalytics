@@ -14,7 +14,7 @@ import Navbar from './components/Navbar/Navbar.jsx';
 
 // Page Components
 import Overview from './pages/Overview/Overview.jsx';
-import WatchList from './pages/WatchList/WatchList.jsx';
+import Watchlist from './pages/Watchlist/Watchlist.jsx';
 import Gameinfo from './pages/Gameinfo/Gameinfo.jsx';
 
 // App component - represents the whole app

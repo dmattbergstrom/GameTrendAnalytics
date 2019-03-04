@@ -4,12 +4,12 @@ import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';
 
-import "./WatchList.css"
+import "./Watchlist.css"
 
 // Components
 import Table from '../../components/WatchList/Table/Table.jsx';
 
-export default class WatchList extends Component {
+export default class Watchlist extends Component {
   constructor(props) {
     super(props);
   }
