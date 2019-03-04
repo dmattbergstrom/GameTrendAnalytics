@@ -2,11 +2,11 @@
 
 const Model = function () {
 
-  let thisWeeksGameData = []; 
-  
+  let thisWeeksGameData = [];
+  // NOTE: Skeleton for how each game will be represented.
   // thisWeeksGameData = [
   //    {
-  //     _id: 
+  //     _id:
   //     name:
   //     data: [
   //       {
@@ -29,6 +29,24 @@ const Model = function () {
   //   }
   // ];
 
+  // NOTE: For testing
+  let thisWeeksGameData = [
+     {
+      _id: 1,
+      name: "Apex Legends"
+      data: [
+        {
+          popularity: 123123,
+          viewers: 123,
+          channels: 123,
+          updated: new Date().toString(),
+        },
+      ]
+      logo: "",
+    }
+  ];
+  // -----------------------
+
   this.getAllGames = function() {
     return thisWeeksGameData;
   };
@@ -41,12 +59,12 @@ const Model = function () {
     return {};
   };
 
-  this.removeFromWatchlist = (id) => {
-    console.log("Empty");
+  this.getWatchlist = () => {
+    // TODO: To be filled...
   };
 
-  this.addToWatchlist = (id) => {
-    console.log("Empty");
+  this.addToWatchlist = () => {
+    // TODO: To be filled...
   };
 };
 
