@@ -46,14 +46,39 @@ const Model = function(){
       let avg_popularity = 0, avg_viewers = 0, avg_channels = 0;
       const { data } = game;
       const { length } = data;
-      data.forEach(dataset => {
+
+      // Calculate averages & growth:
+      let startPop = 0, endPop = 0, growthRate = 0;
+      for(const i in data) {
+        const dataset = data[i];
+        if (i == 0) {
+          startPop = dataset.popularity;
+        } else if (i == length-1) {
+          endPop = dataset.popularity;
+          growthRate = endPop/startPop;
+        }
         avg_popularity += dataset.popularity;
         avg_viewers += dataset.viewers;
         avg_channels += dataset.channels;
-      });
+      }
       game.avg_popularity = parseInt(avg_popularity / length);
       game.avg_viewers = parseInt(avg_viewers / length);
       game.avg_channels = parseInt(avg_channels / length);
+
+      // Calculate status:
+      let status = "";
+      const lowerLimit = 0.98;
+      const upperLimit = 1.02;
+
+      if (growthRate <= lowerLimit){
+        status = "falling";
+      } else if (growthRate < upperLimit) {
+        status = "straight";
+      } else if (upperLimit <= growthRate) {
+        status = "trending";
+      }
+      game.growthRate = growthRate;
+      game.status = status;
 
       thisWeeksGameData[index] = game;
     }
