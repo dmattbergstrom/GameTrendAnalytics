@@ -111,7 +111,7 @@ const Model = function(){
   let thisWeeksGameData = [
      {
       _id: 1,
-      name: "Apex Legends"
+      name: "Apex Legends",
       data: [
         {
           popularity: 123123,
@@ -119,7 +119,7 @@ const Model = function(){
           channels: 123,
           updated: new Date().toString(),
         },
-      ]
+      ],
       logo: "",
     }
   ];
