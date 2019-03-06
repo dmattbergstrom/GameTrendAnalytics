@@ -70,8 +70,15 @@ Meteor.startup(function(){
     }
 
     // Set a timer to keep updating the DB.
-  const msToDay = 1000 * 60 * 60 * hours;
+    const msToDay = 1000 * 60 * 60 * hours;
     Meteor.setInterval(function(){
       Meteor.call("getTopGames",limit);
     }, msToDay);
+
+    // Ping Heroku server every 5 min so it doesn't go to sleep.
+    const msToFiveMin = 1000 * 5 * 60;
+    Meteor.setInterval(function () {
+      HTTP.get('https://game-trend-analytics.herokuapp.com/');
+    }, msToFiveMin);
+    
 });
