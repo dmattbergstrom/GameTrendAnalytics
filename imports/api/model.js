@@ -34,10 +34,6 @@ const Model = function(){
           };
         }
       }
-<<<<<<< HEAD
-    }
-  });
-=======
     });
 
     // Add derivative data to our stored games:
@@ -86,7 +82,6 @@ const Model = function(){
   }
 
   // console.log(thisWeeksGameData);
->>>>>>> mattias
   
   // thisWeeksGameData = [
   //    name: {
