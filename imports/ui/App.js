@@ -11,7 +11,6 @@ const browserHistory = createBrowserHistory();
 
 //Collections:
 import Games from "/imports/api/collections/games/games.js";
-import WatchlistCollection from "/imports/api/collections/watchlist/watchlist.js";
 
 // General Components:
 import Navbar from './components/Navbar/Navbar.jsx';
@@ -34,9 +33,7 @@ class App extends Component {
     Tracker.autorun(() => {
       if (!modelInstance.getAllGames() || modelInstance.getAllGames().length <= 0) {
         const games = Games.find({}).fetch();
-        const watchlist = WatchlistCollection.find({}).fetch();
         modelInstance.setGames(games);
-        modelInstance.setWatchlist(watchlist);
       }
     })
   }

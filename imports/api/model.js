@@ -1,10 +1,35 @@
 // Model:n vi använder för att lagra, hämta och hantera vår data (som inte hämtas från API:n)
 import { Meteor } from "meteor/meteor";
+import Games from "./collections/games/games";
+import Watchlistcollection from "./collections/watchlist/watchlist";
 
 const Model = function(){
 
   var thisWeeksGameData = [];
   var watchlist = [];
+
+  const waitForDataLoad = (colname, findDoc = {}) => {
+    // choose the global context based on the environment
+    const root = Meteor.isClient ? window : global;
+    // find the instance in the global context - e.g. window['Games']
+    const collection = root[colname];
+
+    const subscription = Meteor.subscribe(colname.toLowerCase()).ready();
+
+    console.log(window["WatchlistCollection"]);
+
+    Meteor.setTimeout(() => {
+      if (subscription){
+        console.log(collection);
+        return collection.find(findDoc).fetch();
+      } else {
+        waitForDataLoad(colname, findDoc);
+      }
+    }, 1000);
+
+    return 1;
+
+  }
 
   const dataObject = (pop, view, chan, upd)=>{
     return {
@@ -133,13 +158,11 @@ const Model = function(){
     return thisWeeksGameData[name];
   };
 
-  this.setWatchlist = (wl) => {
-    watchlist = wl;
+  this.getWatchlist = () => {
+    waitForDataLoad("Watchlistcollection", {});
   };
 
-  this.getWatchlist = () => {
-    return watchlist;
-  };
+  console.log(this.getWatchlist());
 
   this.removeFromWatchlist = (name) => {
     delete watchlist[watchlist.indexOf("name")];
