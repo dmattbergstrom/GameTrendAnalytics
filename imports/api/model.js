@@ -108,7 +108,7 @@ const Model = function(){
   // ];
 
   // NOTE: For testing
-  let thisWeeksGameData = [
+  let testData = [
      {
       _id: 1,
       name: "Apex Legends",
@@ -120,7 +120,7 @@ const Model = function(){
           updated: new Date().toString(),
         },
       ],
-      logo: "",
+      logo: ""
     }
   ];
   // -----------------------
