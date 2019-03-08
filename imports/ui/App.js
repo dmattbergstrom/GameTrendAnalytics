@@ -33,7 +33,7 @@ class App extends Component {
         <Router history={browserHistory}>
           <Switch>
             <Route exact path="/" render={()=><Overview/>}/>
-            <Route path="/gameinfo" render={()=><Gameinfo/>}/>
+            <Route path="/gameinfo" render={()=><Gameinfo currentUser={this.props.currentUser}/>}/>
             <Route path="/watchlist" render={()=><Watchlist currentUser={this.props.currentUser}/>}/>
           </Switch>
         </Router>
