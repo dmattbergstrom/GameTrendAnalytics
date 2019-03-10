@@ -54,7 +54,7 @@ class App extends Component {
         <Router history={browserHistory}>
           <Switch>
             <Route exact path="/" render={() => loading ? spinner : <Overview loading={loading} model={modelInstance}/>}/>
-            <Route path="/gameinfo" render={() => loading ? spinner : <Gameinfo model={modelInstance}/>}/>
+            <Route path="/gameinfo" render={() => loading ? spinner : <Gameinfo currentUser={currentUser} model={modelInstance}/>}/>
             <Route path="/watchlist" render={() => loading ? spinner : <Watchlist currentUser={currentUser} model={modelInstance}/>}/>
           </Switch>
         </Router>

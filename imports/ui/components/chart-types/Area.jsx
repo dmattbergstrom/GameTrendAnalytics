@@ -5,6 +5,12 @@ class Area extends Component {
 
   constructor(props) {
     super(props);
+    // this.data = [];  // An array that contains last weeks data. 
+    // this.week_interval = [];  
+    // this.props.data.forEach(day => {        
+    //   this.data.push(day.popularity);
+    //   this.week_interval.push(day.dow);
+    // });
 
     this.state = {
       options: {
@@ -37,7 +43,7 @@ class Area extends Component {
           curve: 'smooth'
         },
         xaxis: {
-          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          categories: this.props.week_interval,
           labels: {
             style: {
               colors: '#d8d8d8', // Kan göra en array av denna om man vill ka olika färger på mån -> sön.
@@ -58,7 +64,7 @@ class Area extends Component {
       },
       series: [{
         name: "Streams (thousand)",
-        data: [40, 25, 50, 49, 21, 70, 51],
+        data: this.props.data,
       }],
     }
   }

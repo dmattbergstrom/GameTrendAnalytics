@@ -5,7 +5,13 @@ class Line extends Component {
 
   constructor(props) {
     super(props);
-
+    // this.data = [];  // An array that contains last weeks data. 
+    // this.week_interval = [];  
+    // this.props.data.forEach(day => {        
+    //   this.data.push(day.popularity);
+    //   this.week_interval.push(day.dow);
+    // });
+    
     this.state = {
       options: {
         title: {
@@ -27,7 +33,7 @@ class Line extends Component {
           curve: 'smooth'
         },
         xaxis: {
-          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          categories: this.props.week_interval,
           labels: {
             style: {
               colors: '#d8d8d8',
@@ -48,7 +54,7 @@ class Line extends Component {
       },
       series: [{
         name: "Streams (thousand)",
-        data: [40, 25, 50, 49, 21, 70, 51],
+        data: this.props.data,  // Data is set to last weeks data.
       }],
     }
   }
