@@ -109,6 +109,10 @@ a { text-decoration: none!important; }
   color: #444;  /* Ändras denna ändras färgen när man "hoverar" på ett värde i grafen */
 }
 
+#PieChart .apexcharts-legend-text, #DynamicLine .apexcharts-legend-text{
+  color: #eee!important;
+}
+
 #gameinfo {
   background-color: #343a40;
   border: 3px solid #252830;
