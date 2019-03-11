@@ -24,7 +24,7 @@ export default class Overview extends Component {
           <br /><br />
           <h4 className="white-text"><b>TOP 10 GAMES LAST 7 DAYS</b></h4>
           <DynamicLine/>
-          <button onClick={() => { model.addToWatchlist("NAME2"); console.log( model.getWatchlist())}}> TEST </button>
+          <button onClick={() => { console.log( model.getGames())}}> TEST </button>
         </div>
       </div>
     );

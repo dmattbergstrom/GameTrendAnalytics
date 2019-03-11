@@ -33,12 +33,12 @@ const Model = function(){
       // If the data point is within the 7-day range:
       if (dayTimeDiff <= 7) {
         // Add to data if game exists in array already.
-        if (thisWeeksGameData[name]) {
-          thisWeeksGameData[name].data.push(dataObject(viewers, channels, popularity, updated));
+        if (thisWeeksGameData[_id]) {
+          thisWeeksGameData[_id].data.push(dataObject(viewers, channels, popularity, updated));
         } else {
           // Otherwise create the game object.
-          thisWeeksGameData[name] = {
-            _id: _id,
+          thisWeeksGameData[_id] = {
+            name: name,
             data: [dataObject(viewers, channels, popularity, updated)],
             logo: logo.medium
           };
@@ -207,12 +207,12 @@ const Model = function(){
   ];
   // -----------------------
 
-  this.getAllGames = function() {
+  this.getGames = function() {
     return thisWeeksGameData;
   };
 
-  this.getSpecificGame = (name) => {
-    return thisWeeksGameData[name];
+  this.getSpecificGame = (id) => {
+    return thisWeeksGameData[id];
   };
 
   this.setWatchlist = (wl) => {
@@ -226,28 +226,28 @@ const Model = function(){
     return watchlist;
   };
 
-  this.removeFromWatchlist = (name) => {
+  this.removeFromWatchlist = (id) => {
     // Update Locally:
-    const index = watchlist.items.indexOf(name);
+    const index = watchlist.items.indexOf(id);
     if (index > -1)
       watchlist.items.splice(index, 1);
       Meteor.call("Watchlist.upsert", watchlistId, watchlist); // Update DB.
   };
 
-  this.addToWatchlist = (name) => {
+  this.addToWatchlist = (id) => {
     const empty = isEmpty(watchlist.items);
     // Update DB:
     if (empty) {
       // Create users watchlist & update locally:
-      watchlist.items.push(name);  
+      watchlist.items.push(id);  
       Meteor.call("Watchlist.insert", {items: items});
       return; // Done.
     }
 
     // Watchlist exists. Update Locally & then DB.
-    const index = watchlist.items.indexOf(name);
+    const index = watchlist.items.indexOf(id);
     if (index <= -1)
-      watchlist.items.push(name); // Only push if it does not already exist.
+      watchlist.items.push(id); // Only push if it does not already exist.
     if (!empty) {
       // Update users watchlist:
       Meteor.call("Watchlist.upsert", watchlistId, watchlist);

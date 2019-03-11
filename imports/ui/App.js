@@ -32,7 +32,7 @@ class App extends Component {
   componentWillMount() {
     // If the model hasn't loaded in it's necessary data, please do so after App mounting.
     Tracker.autorun(() => {
-      if (!modelInstance.getAllGames() || modelInstance.getAllGames().length <= 0) {
+      if (!modelInstance.getGames() || modelInstance.getGames().length <= 0) {
         const games = Games.find({}).fetch();
         const watchlist = Wl.find({}).fetch()[0];
         modelInstance.setGames(games);
