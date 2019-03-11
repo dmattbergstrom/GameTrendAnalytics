@@ -4,6 +4,7 @@ import { HTTP } from 'meteor/http';
 // Load in collections:
 import  "../../api/api.js";
 import Games from "../../api/collections/games/games.js"
+import Watchlist from "../../api/collections/watchlist/watchlist.js"
 
 const CLIENT_ID = '1p1vbzyuiq4miuyp06p3bbduvj4t4o';
 

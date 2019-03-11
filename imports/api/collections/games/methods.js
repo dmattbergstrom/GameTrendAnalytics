@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
+import Games from "./games.js";
+
 Meteor.methods({
   /**
   *  Inserts a document "doc" in to the "games" collection.
@@ -13,7 +15,6 @@ Meteor.methods({
       (error, res_id) => {
         if ( err ) {
           console.log ( "ERROR in INSERT: " + err ); //info about what went wrong
-          alert("Something went wrong.");
           return; // Stop exec
         }
       }
@@ -31,7 +32,6 @@ Meteor.methods({
       (err, objId) => { // Handle errors
         if(err) {
           console.log("ERROR in UPSERT: " + err + " with object " + objId);
-          alert("Something went wrong.");
         }
       }
      );

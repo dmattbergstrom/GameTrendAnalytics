@@ -1,35 +1,20 @@
 // Model:n vi använder för att lagra, hämta och hantera vår data (som inte hämtas från API:n)
 import { Meteor } from "meteor/meteor";
 import Games from "./collections/games/games";
-import Watchlistcollection from "./collections/watchlist/watchlist";
+import Watchlist from "./collections/watchlist/watchlist";
 
 const Model = function(){
 
   var thisWeeksGameData = [];
-  var watchlist = [];
+  var watchlist = {items: []};
+  var watchlistId = "";
 
-  const waitForDataLoad = (colname, findDoc = {}) => {
-    // choose the global context based on the environment
-    const root = Meteor.isClient ? window : global;
-    // find the instance in the global context - e.g. window['Games']
-    const collection = root[colname];
-
-    const subscription = Meteor.subscribe(colname.toLowerCase()).ready();
-
-    console.log(window["WatchlistCollection"]);
-
-    Meteor.setTimeout(() => {
-      if (subscription){
-        console.log(collection);
-        return collection.find(findDoc).fetch();
-      } else {
-        waitForDataLoad(colname, findDoc);
-      }
-    }, 1000);
-
-    return 1;
-
-  }
+  const isEmpty = (array) => {
+    if (array === undefined || array.length == 0) {
+      return true;
+    } 
+    return false;
+  };
 
   const dataObject = (pop, view, chan, upd)=>{
     return {
@@ -105,36 +90,6 @@ const Model = function(){
     }
 
   }
-
-  // console.log(thisWeeksGameData);
-  
-  // thisWeeksGameData = [
-  //    name: {
-  //     _id: 
-  //     data: [
-  //       {
-  //         popularity:
-  //         viewers:
-  //         channels:
-  //         updated:
-  //       },
-  //       ...
-  //       ...
-  //       ...
-  //       {
-  //         popularity:
-  //         viewers:
-  //         channels:
-  //         updated:
-  //       }
-  //     ]
-  //     logo:
-  //   }
-  // ];
-
-  // NOTE: For testing
-  let watchlistItems = [1,2];  // An array that contains the _id's of the games in a users watchlist
-  console.log(watchlistItems); // NOTE: For testing
 
   let testData = [
      {
@@ -260,35 +215,44 @@ const Model = function(){
     return thisWeeksGameData[name];
   };
 
-  this.getWatchlist = () => {
-    waitForDataLoad("Watchlistcollection", {});
+  this.setWatchlist = (wl) => {
+    if (!isEmpty(wl)) {
+      watchlist = wl;
+      watchlistId = wl._id;
+    }
   };
 
-  console.log(this.getWatchlist());
+  this.getWatchlist = () => {
+    return watchlist;
+  };
 
   this.removeFromWatchlist = (name) => {
-    delete watchlist[watchlist.indexOf("name")];
+    // Update Locally:
+    const index = watchlist.items.indexOf(name);
+    if (index > -1)
+      watchlist.items.splice(index, 1);
+      Meteor.call("Watchlist.upsert", watchlistId, watchlist); // Update DB.
   };
 
   this.addToWatchlist = (name) => {
-    watchlist.push("name");
+    const empty = isEmpty(watchlist.items);
+    // Update DB:
+    if (empty) {
+      // Create users watchlist & update locally:
+      watchlist.items.push(name);  
+      Meteor.call("Watchlist.insert", {items: items});
+      return; // Done.
+    }
+
+    // Watchlist exists. Update Locally & then DB.
+    const index = watchlist.items.indexOf(name);
+    if (index <= -1)
+      watchlist.items.push(name); // Only push if it does not already exist.
+    if (!empty) {
+      // Update users watchlist:
+      Meteor.call("Watchlist.upsert", watchlistId, watchlist);
+    }
   };
 
-  // Davids:
-  // this.addToWatchlist = (id) => {
-  //   // TODO: To be filled... [Push to watchlist-array declared on row 33]
-  //   watchlistItems.push(id);
-  //   console.log(watchlistItems); // NOTE: For testing
-  // };
-
-  // this.removeFromWatchlist = (id) => {
-  //   // TODO: To be filled... [Remove from watchlist-array declared on row 33]
-  //   var index = watchlistItems.indexOf(id);
-  //   if (index > -1) {
-  //     watchlistItems.splice(index, 1);
-  //   }
-  //   console.log(watchlistItems); // NOTE: For testing
-  // };
 };
-
 export const modelInstance = new Model();

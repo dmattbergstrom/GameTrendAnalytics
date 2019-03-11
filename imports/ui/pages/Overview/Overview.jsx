@@ -17,7 +17,6 @@ export default class Overview extends Component {
 
   render() {
     const {model} = this.props;
-    console.log(this.props.model.getAllGames());
       
     return (
       <div className="Overview">
@@ -25,6 +24,7 @@ export default class Overview extends Component {
           <br /><br />
           <h4 className="white-text"><b>TOP 10 GAMES LAST 7 DAYS</b></h4>
           <DynamicLine/>
+          <button onClick={() => { model.addToWatchlist("NAME2"); console.log( model.getWatchlist())}}> TEST </button>
         </div>
       </div>
     );

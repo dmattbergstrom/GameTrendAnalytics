@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
+import Watchlist from "./watchlist.js";
+
 Meteor.methods({
   /**
   *  Inserts a document "doc" in to the "watchlist" collection.
@@ -8,12 +10,13 @@ Meteor.methods({
   *  @param doc is a JSON object we wish to be inserted.
   **/
   "Watchlist.insert": function(doc) {
+    if (!doc.owner)
+      doc.owner = this.userId;
     Watchlist.insert(
       doc,
       (error, res_id) => {
         if ( err ) {
           console.log ( "ERROR in INSERT: " + err ); //info about what went wrong
-          alert("Something went wrong.");
           return; // Stop exec
         }
       }
@@ -31,9 +34,9 @@ Meteor.methods({
       (err, objId) => { // Handle errors
         if(err) {
           console.log("ERROR in UPSERT: " + err + " with object " + objId);
-          alert("Something went wrong.");
         }
       }
      );
-   }
+   },
+
 });
