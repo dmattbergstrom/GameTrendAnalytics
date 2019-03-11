@@ -107,7 +107,7 @@ const Model = function(){
           popularity: 20,
           viewers: 123,
           channels: 123,
-          dow: "Mon",
+          dow: "Tue",
           updated: new Date().toString(),
         },
         {  // Day 3
@@ -153,7 +153,7 @@ const Model = function(){
       name: "Fortnite",
       data: [
         {  // Day 1
-          popularity: 0,
+          popularity: 1000,
           viewers: 123,
           channels: 123,
           dow: "Mon",   // dow: Represents "Day of week", as of which dow the data was collected

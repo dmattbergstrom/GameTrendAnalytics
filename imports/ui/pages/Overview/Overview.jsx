@@ -9,6 +9,7 @@ import "./Overview.css"
 
 // Components
 import DynamicLine from "../../components/chart-types/DynamicLine.jsx";
+import Pie from "../../components/chart-types/Pie.jsx";
 
 export default class Overview extends Component {
   constructor(props) {
@@ -21,10 +22,11 @@ export default class Overview extends Component {
     return (
       <div className="Overview">
         <div className="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 container-fluid">
-          <br /><br />
-          <h4 className="white-text"><b>TOP 10 GAMES LAST 7 DAYS</b></h4>
+          <br/><br/>
+          <h4 className="white-text text-center" id="overview-header"><b>TOP 10 GAMES LAST 7 DAYS</b></h4>
           <DynamicLine/>
-          <button onClick={() => { console.log( model.getGames())}}> TEST </button>
+          <Pie/>
+          <button onClick={() => { console.log(model.getGames()) }}> TEST </button>
         </div>
       </div>
     );

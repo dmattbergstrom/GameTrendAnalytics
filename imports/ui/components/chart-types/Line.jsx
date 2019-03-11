@@ -5,12 +5,6 @@ class Line extends Component {
 
   constructor(props) {
     super(props);
-    // this.data = [];  // An array that contains last weeks data. 
-    // this.week_interval = [];  
-    // this.props.data.forEach(day => {        
-    //   this.data.push(day.popularity);
-    //   this.week_interval.push(day.dow);
-    // });
     
     this.state = {
       options: {

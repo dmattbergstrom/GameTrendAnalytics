@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
-    this.game = modelInstance.getSpecificGame(2);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
+    this.game = modelInstance.getSpecificGame(1);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
     this.data = [];  // An array that contains last weeks data. 
     this.week_interval = [];  
     this.game.data.forEach(day => {        
@@ -53,10 +53,10 @@ export default class Gameinfo extends Component {
 
   addToWatchlistChanged = e => {
     if(!this.state.isChecked){  // Adds or removes the game from the users watchlist
-      console.log("add");      
+      // console.log("add");      
       modelInstance.addToWatchlist(this.state.id);
     }else{
-      console.log("remove");      
+      // console.log("remove");      
       modelInstance.removeFromWatchlist(this.state.id);
     }
 
