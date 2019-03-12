@@ -16,7 +16,7 @@ export default class Navbar extends Component {
   render() {
     const { model, loading } = this.props;
     const { items } = model.getWatchlist();
-    let watchlistItems = loading ? " Loading..." : items.map((item)=>{
+    let watchlistItems = loading ? "&nbsp;&nbsp;Loading..." : items.map((item)=>{
       return <a key={item._id} className="dropdown-item" href={"/gameinfo/"+item._id}>{item.name}</a>;
     });
 

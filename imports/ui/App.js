@@ -42,12 +42,9 @@ class App extends Component {
   }
 
   render() {
-
+    // Create spinner that spins while data is loading.
+    const { loading, currentUser } = this.props;
     const spinner = <div className="col s12 text-center"><FontAwesomeIcon size="5x" icon="spinner" spin /></div>;
-
-    // Create Model Instance:
-    const {loading, currentUser} = this.props;
-
     return (
       <div className="App super-dark">
         {/* Navbar + Login! */}

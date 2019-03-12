@@ -78,6 +78,7 @@ const Model = function(){
         } else {
           // Otherwise create the game object.
           games[_id] = {
+            _id: _id,
             name: name,
             data: [dataObject(viewers, channels, popularity, updated)],
             logo: logo.medium
