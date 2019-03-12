@@ -5,17 +5,49 @@ import Watchlist from "./collections/watchlist/watchlist";
 
 const Model = function(){
 
-  var thisWeeksGameData = [];
+  var games = [];
   var watchlist = {items: []};
   var watchlistId = "";
 
+  /**
+   *  isEmpty(): Checks if an array is empty.
+   * 
+   *  @param {Array} array is the array we wish to check.
+   *  @returns true / false
+   */
   const isEmpty = (array) => {
     if (array === undefined || array.length == 0) {
       return true;
     } 
-    return false;
+    return  false;
   };
 
+  /**
+   *  containsId(): Checks if an array with JSON objects contains an item with a specific ID.
+   * 
+   *  @param {String} id is the ID we're after.
+   *  @param {Array} items is the array of JSON items we wish to search through. 
+   *  @returns true / false
+   */
+  const containsId = (id, items) => {
+    let idExists = false;
+    items.forEach(item => {
+      if (item._id == id)
+        idExists = true;
+    });
+    return idExists;
+  }
+
+  /**
+   *  dataObject(): Builds a JSON object with inputted game info.
+   * 
+   *  @param {Integer} pop is the current popularity of the game.
+   *  @param {Integer} view is the current # of viewers for this game.
+   *  @param {Integer} chan is the current # of live Twitch channels for this game.
+   *  @param {Date} upd is the date which this data has been fetched.
+   * 
+   *  @returns The constructed JSON object.
+   */
   const dataObject = (pop, view, chan, upd)=>{
     return {
       popularity: pop,
@@ -25,19 +57,27 @@ const Model = function(){
     };
   }
 
-  this.setGames = function(games){
-    games.forEach((g) => {
-      const { viewers, channels, game, _id, updated } = g;
+  /**
+   *  setGames(): Cleans and adds data, fetched from our Games collection. Sets the models "games" var.
+   *
+   *  @param {Array} gms is all of the game JSON objects returned from our Games collection.
+   *  @returns void
+   */
+  this.setGames = function(gms){
+    // Clean up the data for easier usage in components.
+    gms.forEach((g) => {
+      // NOTE: The _id is from our own collection, not to be confused with the _id from the API.
+      const { viewers, channels, game, updated, _id } = g;
       const { name, popularity, logo } = game;
       const dayTimeDiff = (new Date() - updated) / (1000 * 60 * 60 * 24);
       // If the data point is within the 7-day range:
       if (dayTimeDiff <= 7) {
         // Add to data if game exists in array already.
-        if (thisWeeksGameData[_id]) {
-          thisWeeksGameData[_id].data.push(dataObject(viewers, channels, popularity, updated));
+        if (games[_id]) {
+          games[_id].data.push(dataObject(viewers, channels, popularity, updated));
         } else {
           // Otherwise create the game object.
-          thisWeeksGameData[_id] = {
+          games[_id] = {
             name: name,
             data: [dataObject(viewers, channels, popularity, updated)],
             logo: logo.medium
@@ -46,9 +86,9 @@ const Model = function(){
       }
     });
 
-    // Add derivative data to our stored games:
-    for (const index in thisWeeksGameData) {
-      const game = thisWeeksGameData[index];
+    // Add derivative data to our stored games: (Again, for easier usage in components)
+    for (const index in games) {
+      const game = games[index];
       let avg_popularity = 0, avg_viewers = 0, avg_channels = 0;
       const { data } = game;
       const { length } = data;
@@ -73,8 +113,8 @@ const Model = function(){
 
       // Calculate status:
       let status = "";
-      const lowerLimit = 0.98;
-      const upperLimit = 1.02;
+      const lowerLimit = 0.98; // TODO
+      const upperLimit = 1.02; // TODO
 
       if (growthRate <= lowerLimit){
         status = "falling";
@@ -86,133 +126,28 @@ const Model = function(){
       game.growthRate = growthRate;
       game.status = status;
 
-      thisWeeksGameData[index] = game;
+      // Finally, update the game with all the clean and derivative data:
+      games[index] = game;
     }
 
   }
 
-  let testData = [
-     {
-      _id: 1,
-      name: "Apex Legends",
-      data: [  // This will always include 7 days data (of last week) 
-        {  // Day 1
-          popularity: 10,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",   // dow: Represents "Day of week", as of which dow the data was collected
-          updated: new Date().toString(),
-        },
-        {  // Day 2
-          popularity: 20,
-          viewers: 123,
-          channels: 123,
-          dow: "Tue",
-          updated: new Date().toString(),
-        },
-        {  // Day 3
-          popularity: 30,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 4
-          popularity: 40,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 5
-          popularity: 50,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 6
-          popularity: 60,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 7
-          popularity: 70,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-      ],
-      logo: "",
-    },
-    {
-      _id: 2,
-      name: "Fortnite",
-      data: [
-        {  // Day 1
-          popularity: 1000,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",   // dow: Represents "Day of week", as of which dow the data was collected
-          updated: new Date().toString(),
-        },
-        {  // Day 2
-          popularity: 40,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 3
-          popularity: 470,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 4
-          popularity: 900,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 5
-          popularity: 100,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 6
-          popularity: 600,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-        {  // Day 7
-          popularity: 1000,
-          viewers: 123,
-          channels: 123,
-          dow: "Mon",
-          updated: new Date().toString(),
-        },
-      ],
-      logo: "",
-    },
-  ];
-  // -----------------------
-
+  /**
+  *  Get:ers for games:
+  **/
   this.getGames = function() {
-    return thisWeeksGameData;
+    return games;
   };
 
   this.getSpecificGame = (id) => {
-    return thisWeeksGameData[id];
+    return games[id];
+  };
+
+  /**
+  *  Get:er & Set:er for Watchlist:
+  **/
+  this.getWatchlist = () => {
+    return watchlist;
   };
 
   this.setWatchlist = (wl) => {
@@ -222,32 +157,41 @@ const Model = function(){
     }
   };
 
-  this.getWatchlist = () => {
-    return watchlist;
-  };
-
+  /**
+   *  removeFromWatchlist(): Removes an item from the users Watchlist.
+   * 
+   *  @param {String} id is the ID of the item to be removed.
+   *  @returns void
+   **/
   this.removeFromWatchlist = (id) => {
     // Update Locally:
-    const index = watchlist.items.indexOf(id);
-    if (index > -1)
+    const idExists = containsId(id, watchlist.items);
+    if (!idExists)
       watchlist.items.splice(index, 1);
       Meteor.call("Watchlist.upsert", watchlistId, watchlist); // Update DB.
   };
 
-  this.addToWatchlist = (id) => {
+  /**
+  *  addToWatchlist(): Add an item to the users Watchlist. 
+  *
+  *  @param {String} id is the ID of the item to be added.
+  *  @param {String} name is the Name of the item to be added.
+  *  @returns void
+  **/
+  this.addToWatchlist = (id, name) => {
     const empty = isEmpty(watchlist.items);
     // Update DB:
     if (empty) {
       // Create users watchlist & update locally:
-      watchlist.items.push(id);  
+      watchlist.items.push({ _id: id, name: name });  
       Meteor.call("Watchlist.insert", {items: items});
       return; // Done.
     }
 
     // Watchlist exists. Update Locally & then DB.
-    const index = watchlist.items.indexOf(id);
-    if (index <= -1)
-      watchlist.items.push(id); // Only push if it does not already exist.
+    const idExists = containsId(id, watchlist.items);
+    if (!idExists)
+      watchlist.items.push({ _id: id, name: name}); // Only push if it does not already exist.
     if (!empty) {
       // Update users watchlist:
       Meteor.call("Watchlist.upsert", watchlistId, watchlist);

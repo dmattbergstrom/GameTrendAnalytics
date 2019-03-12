@@ -51,7 +51,7 @@ class App extends Component {
     return (
       <div className="App super-dark">
         {/* Navbar + Login! */}
-        <Navbar currentUser={currentUser} model={modelInstance}/>
+        <Navbar loading={loading} currentUser={currentUser} model={modelInstance}/>
 
         {/* App Routes: Show loading until model can be sent down as props. */}
         <Router history={browserHistory}>

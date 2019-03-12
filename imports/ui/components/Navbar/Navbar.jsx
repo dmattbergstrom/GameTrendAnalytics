@@ -14,6 +14,12 @@ export default class Navbar extends Component {
   }
 
   render() {
+    const { model, loading } = this.props;
+    const { items } = model.getWatchlist();
+    let watchlistItems = loading ? " Loading..." : items.map((item)=>{
+      return <a key={item._id} className="dropdown-item" href={"/gameinfo/"+item._id}>{item.name}</a>;
+    });
+
     return (
       <nav className="navbar navbar-expand-lg navbar-dark dark-grey container-fluid">
 
@@ -35,9 +41,7 @@ export default class Navbar extends Component {
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a className="dropdown-item" href="/watchlist">Show All</a>
                   <div className="dropdown-divider"></div>
-                  {/* TODO: Get the watchlist games! */}
-                  <a className="dropdown-item" href="/gameinfo/ID">Apex Legends</a>
-                  <a className="dropdown-item" href="/gameinfo/ID">Counter Strike</a>
+                  {watchlistItems}
                 </div>
               </li> : ''
             }
