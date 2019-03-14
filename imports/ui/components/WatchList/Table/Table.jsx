@@ -7,30 +7,6 @@ import './Table.css';
 import Item from '../Item/Item.jsx';
 import Button from '../../Button/Button.jsx';
 
-// TODO: Bug with showing buttons/checkboxlist after filtering has been done.
-// IDEA: Maybe uncheck all boxes that arent in the current filter? Or fix bug....
-// TODO: Fetch from DB.
-let testItems = [
-  {
-    id: "1322",
-    gameName: "Game 1",
-    category: "trending",
-    imgSrc: "https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
-  },
-  {
-    id: "1233",
-    gameName: "Game 2",
-    category: "falling",
-    imgSrc: "https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
-  },
-  {
-    id: "2233",
-    gameName: "Game 3",
-    category: "straight",
-    imgSrc: "https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
-  },
-];
-
 export default class Table extends Component {
   constructor(props) {
     super(props);
@@ -39,9 +15,10 @@ export default class Table extends Component {
     this.showBtnOptions = this.showBtnOptions.bind(this);
     this.filter = this.filter.bind(this);
     this.mapWatchlistItems = this.mapWatchlistItems.bind(this);
+    this.removeFromWL = this.removeFromWL.bind(this);
 
     this.state = {
-      checkedItems: [],
+      checkedItems: []
     }
 
     const mappedItems = this.mapWatchlistItems("all");
@@ -76,22 +53,25 @@ export default class Table extends Component {
   }
 
   /**
-  *   Rerenders the items that match the category filter.
+  *   Rerenders the items that match the status filter.
   **/
-  filter(category){
-    const mappedItems = this.mapWatchlistItems(category);
-    this.setState({activeFilter:category, items: mappedItems})
+  filter(status){
+    const mappedItems = this.mapWatchlistItems(status);
+    this.setState({activeFilter:status, items: mappedItems})
   }
 
   mapWatchlistItems(category){
-    const mappedItems = testItems.map((item, index)=>{
-      if (category == item.category || category == "all") {
-        const {id,gameName,category,imgSrc} = item;
-        const isChecked = this.state.checkedItems.includes(id);
+    const games = this.props.model.getGames();
+    const watchlist = this.props.model.getWatchlist().items;
+    const mappedItems = watchlist.map((item, index)=>{
+      const { _id, name } = item;
+      const { logo, status } = games[_id]; // get status / logo from DB.
+      if (category == status || category == "all") {
+        const isChecked = this.state.checkedItems.includes(_id);
         return (
           <Item
-            id={id} key={index} gameName={gameName}
-            category={category} imgSrc={imgSrc}
+            id={_id} key={index} name={name}
+            status={status} logo={logo}
             checkBoxHandler={this.checkBoxHandler} isChecked={isChecked}
           />
         );
@@ -99,6 +79,14 @@ export default class Table extends Component {
     });
     return mappedItems;
   }
+
+  removeFromWL(){
+    const { checkedItems } = this.state;
+    checkedItems.forEach(id => {
+      console.log(id);
+      this.props.model.removeFromWatchlist(id);
+    });
+  }  
 
   /**
   *   Shows/Hides Button options if one or more checkboxes are checked.
@@ -111,7 +99,7 @@ export default class Table extends Component {
       return (
         <React.Fragment>
           <Button classes="blue white-text" label="See Stats"/>
-          <Button classes="red white-text" label="Remove From Watchlist"/>
+          <Button classes="red white-text" label="Remove From Watchlist" clickHandler={this.removeFromWL}/>
         </React.Fragment>
       )
     }

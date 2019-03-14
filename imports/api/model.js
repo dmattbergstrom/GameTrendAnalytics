@@ -30,12 +30,14 @@ const Model = function(){
    *  @returns true / false
    */
   const containsId = (id, items) => {
-    let idExists = false;
-    items.forEach(item => {
+    let found = false;
+    let i = null
+    items.forEach((item, index) => {
       if (item._id == id)
-        idExists = true;
+        found = true;
+        i = index;
     });
-    return idExists;
+    return {found: found, index: i};
   }
 
   /**
@@ -166,9 +168,10 @@ const Model = function(){
    **/
   this.removeFromWatchlist = (id) => {
     // Update Locally:
-    const idExists = containsId(id, watchlist.items);
-    if (!idExists)
+    const {found, index} = containsId(id, watchlist.items);
+    if (found)
       watchlist.items.splice(index, 1);
+      console.log(index);
       Meteor.call("Watchlist.upsert", watchlistId, watchlist); // Update DB.
   };
 
@@ -190,8 +193,8 @@ const Model = function(){
     }
 
     // Watchlist exists. Update Locally & then DB.
-    const idExists = containsId(id, watchlist.items);
-    if (!idExists)
+    const {found} = containsId(id, watchlist.items);
+    if (!found)
       watchlist.items.push({ _id: id, name: name}); // Only push if it does not already exist.
     if (!empty) {
       // Update users watchlist:

@@ -18,7 +18,7 @@ export default class Watchlist extends Component {
     return (
       <div className="Watchlist container-fluid">
           { this.props.currentUser ?
-      			<Table/> : <h4 className="white-text align-center"> You have to sign in to view your watchlist! </h4>}
+      			<Table model={this.props.model}/> : <h4 className="white-text align-center"> You have to sign in to view your watchlist! </h4>}
       </div>
     );
   }
