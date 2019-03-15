@@ -183,11 +183,9 @@ const Model = function(){
   *  @returns void
   **/
   this.addToWatchlist = (id, name) => {
-    const empty = isEmpty(watchlist.items);
-    console.log(watchlist.items);
-    
+    const empty = isEmpty(watchlist.items);    
     // Update DB:
-    if (empty) {
+    if (empty && !watchlist._id) {
       // Create users watchlist & update locally:
       watchlist.items.push({ _id: id, name: name });  
       Meteor.call("Watchlist.insert", {items: watchlist.items});
