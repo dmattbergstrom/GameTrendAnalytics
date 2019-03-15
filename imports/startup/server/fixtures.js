@@ -58,8 +58,8 @@ Meteor.startup(function(){
     const limit = 50;
     const hours = 24;
 
-    // Check last inserted objects date to determine whether we need an initial API call.
-    const lastInsertedObj = Games.find({}, {sort: { _id: -1 }}, { limit: 1}).fetch().pop();
+  // Check last inserted objects date to determine whether we need an initial API call.
+  const lastInsertedObj = Games.find({}, { sort: { DateTime: -1, limit: 1}}).fetch().pop();
     if (lastInsertedObj || lastInsertedObj != undefined) {
       const hourTimeDiff = (new Date() - new Date(lastInsertedObj.updated)) / (1000 * 60 * 60);
       if (hourTimeDiff > hours) {

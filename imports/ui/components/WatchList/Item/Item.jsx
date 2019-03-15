@@ -11,19 +11,19 @@ export default class Item extends Component {
 
   render() {
 
-    const {id, category, imgSrc, gameName, checkBoxHandler, isChecked} = this.props;
+    const {id, status, logo, name, checkBoxHandler, isChecked} = this.props;
 
-    let categoryClasses = "media-meta pull-right ";
-    if (category == "trending") {
-      categoryClasses += "green-text";
-    } else if (category == "straight") {
-      categoryClasses += "blue-text";
-    } else if (category == "falling") {
-      categoryClasses += "red-text";
+    let statusClasses = "media-meta pull-right ";
+    if (status == "trending") {
+      statusClasses += "green-text";
+    } else if (status == "straight") {
+      statusClasses += "blue-text";
+    } else if (status == "falling") {
+      statusClasses += "red-text";
     }
 
     return (
-      <tr data-status={category}>
+      <tr data-status={status}>
         <td>
         <div className="checkbox">
           <label>
@@ -35,15 +35,15 @@ export default class Item extends Component {
         <td>
           <div className="media">
             <a href="#" className="pull-left">
-              <img src={imgSrc} className="media-photo"/>
+              <img src={logo} className="media-photo"/>
             </a>
           </div>
         </td>
         <td>
           <div className="media-body">
-            <span className={categoryClasses}>{category.toUpperCase()}</span>
+            <span className={statusClasses}>{status.toUpperCase()}</span> 
             <p className="title">
-              <a href="">{gameName}</a>
+              <a href="">{name}</a>
             </p>
           </div>
         </td>
