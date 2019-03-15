@@ -15,12 +15,12 @@ export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
     // TODO: FOR TESTING
-    console.log(modelInstance.getSpecificGame("2EticC3B4g2xHY8BW"));
-    console.log(modelInstance.getGames());
-    console.log(modelInstance.getWatchlist());
+    //console.log(modelInstance.getSpecificGame(33214));
+    // console.log(modelInstance.getGames());
+    // console.log(modelInstance.getWatchlist());
     //--------------
     
-    this.game = modelInstance.getSpecificGame("2EticC3B4g2xHY8BW");  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
+    this.game = modelInstance.getSpecificGame(21779);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
     this.data = [];  // An array that contains last weeks data. 
     this.week_interval = [];  // An array containging the updated week.
     this.game.data.forEach(day => {        
@@ -37,21 +37,21 @@ export default class Gameinfo extends Component {
       isChecked : false,
       img : this.game.img,
     };
+   console.log(this.state.isChecked);
    
   }
 
   componentDidMount(){  // Is a method that runs when the component is created. It checks if the game is in the users watchlist or not.
-    /*
     this.userWatchlist = modelInstance.getWatchlist();
-    this.userWatchlist.forEach(gameId =>{
-      if(this.state.id == gameId){
-        console.log("exists");
+    this.userWatchlist.items.forEach(game =>{
+      // console.log(game);
+      if(this.state.id == game._id){
+        // console.log("exists");
         this.setState({
           isChecked : true,
         });
       }
     });
-    */
   }
 
   chartToShow = e => {  // Toggles which chart to show, is called onChange on the radioboxes.

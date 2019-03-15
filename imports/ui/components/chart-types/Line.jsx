@@ -5,8 +5,16 @@ class Line extends Component {
 
   constructor(props) {
     super(props);
-    
+    this.data_length = this.props.data.length;
+    if(this.data_length > 7){
+      this.data = this.props.data[(this.data_length-7),this.data_length];
+    } else if(this.data_length == 7){
+      this.data = this.props.data;
+    } else {
+      this.data = [1, 2, 3, 4, 5, 6, 7];
+    }
     this.state = {
+      data: this.data,
       options: {
         title: {
             text: 'Streams last week',
@@ -48,7 +56,7 @@ class Line extends Component {
       },
       series: [{
         name: "Streams (thousand)",
-        data: [11,12,13,14,15,16,17]//this.props.data,  // Data is set to last weeks data.
+        data: this.state.data,  // Data is set to last weeks data.
       }],
     }
   }

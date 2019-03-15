@@ -70,7 +70,7 @@ const Model = function(){
     gms.forEach((g) => {
       // NOTE: The _id is from our own collection, not to be confused with the _id from the API.
       const { viewers, channels, game, updated } = g;
-      const { name, popularity, logo, _id } = game;
+      const { name, popularity, box, _id } = game;
       const dayTimeDiff = (new Date() - updated) / (1000 * 60 * 60 * 24);
       // If the data point is within the 7-day range:
       if (dayTimeDiff <= 7) {
@@ -190,7 +190,7 @@ const Model = function(){
     if (empty) {
       // Create users watchlist & update locally:
       watchlist.items.push({ _id: id, name: name });  
-      Meteor.call("Watchlist.insert", {items: items});
+      Meteor.call("Watchlist.insert", {items: watchlist.items});
       return; // Done.
     }
 
