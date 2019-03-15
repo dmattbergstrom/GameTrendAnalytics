@@ -69,8 +69,8 @@ const Model = function(){
     // Clean up the data for easier usage in components.
     gms.forEach((g) => {
       // NOTE: The _id is from our own collection, not to be confused with the _id from the API.
-      const { viewers, channels, game, updated, _id } = g;
-      const { name, popularity, logo } = game;
+      const { viewers, channels, game, updated } = g;
+      const { name, popularity, logo, _id } = game;
       const dayTimeDiff = (new Date() - updated) / (1000 * 60 * 60 * 24);
       // If the data point is within the 7-day range:
       if (dayTimeDiff <= 7) {
