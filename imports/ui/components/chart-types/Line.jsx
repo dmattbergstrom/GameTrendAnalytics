@@ -13,8 +13,7 @@ class Line extends Component {
     } else {
       this.data = [1, 2, 3, 4, 5, 6, 7];
     }
-    this.state = {
-      data: this.data,
+    this.state = {      
       options: {
         title: {
             text: 'Streams last week',
@@ -56,7 +55,7 @@ class Line extends Component {
       },
       series: [{
         name: "Streams (thousand)",
-        data: this.state.data,  // Data is set to last weeks data.
+        data: this.data,  // Data is set to last weeks data.
       }],
     }
   }
