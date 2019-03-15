@@ -1,4 +1,4 @@
-// Model:n vi använder för att lagra, hämta och hantera vår data (som inte hämtas från API:n)
+// Model:n vi använder för att lagra, hämta och hantera vår data.
 import { Meteor } from "meteor/meteor";
 import Games from "./collections/games/games";
 import Watchlist from "./collections/watchlist/watchlist";
@@ -68,7 +68,7 @@ const Model = function(){
     gms.forEach((g) => {
       // NOTE: The _id is from our own collection, not to be confused with the _id from the API.
       const { viewers, channels, game, updated, _id } = g;
-      const { name, popularity, logo } = game;
+      const { name, popularity, box } = game;
       const dayTimeDiff = (new Date() - updated) / (1000 * 60 * 60 * 24);
       // If the data point is within the 7-day range:
       if (dayTimeDiff <= 7) {
@@ -81,7 +81,7 @@ const Model = function(){
             _id: _id,
             name: name,
             data: [dataObject(viewers, channels, popularity, updated)],
-            logo: logo.medium
+            img: box.medium  
           };
         }
       }
@@ -140,7 +140,7 @@ const Model = function(){
     return games;
   };
 
-  this.getSpecificGame = (id) => {
+  this.getSpecificGame = (id) => {  
     return games[id];
   };
 
@@ -167,7 +167,9 @@ const Model = function(){
   this.removeFromWatchlist = (id) => {
     // Update Locally:
     const idExists = containsId(id, watchlist.items);
-    if (!idExists)
+    console.log(idExists);
+    
+    if (!idExists)  // SKA INTE DENNA VARA MOTSATT??
       watchlist.items.splice(index, 1);
       Meteor.call("Watchlist.upsert", watchlistId, watchlist); // Update DB.
   };
@@ -181,6 +183,8 @@ const Model = function(){
   **/
   this.addToWatchlist = (id, name) => {
     const empty = isEmpty(watchlist.items);
+    console.log(watchlist.items);
+    
     // Update DB:
     if (empty) {
       // Create users watchlist & update locally:

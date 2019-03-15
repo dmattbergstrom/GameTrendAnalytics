@@ -27,7 +27,7 @@ class Line extends Component {
           curve: 'smooth'
         },
         xaxis: {
-          categories: this.props.week_interval,
+          categories: ['mon','tue','wed','thu','fri','sat','sun'],//this.props.week_interval,
           labels: {
             style: {
               colors: '#d8d8d8',
@@ -48,7 +48,7 @@ class Line extends Component {
       },
       series: [{
         name: "Streams (thousand)",
-        data: this.props.data,  // Data is set to last weeks data.
+        data: [11,12,13,14,15,16,17]//this.props.data,  // Data is set to last weeks data.
       }],
     }
   }

@@ -43,7 +43,7 @@ class Area extends Component {
           curve: 'smooth'
         },
         xaxis: {
-          categories: this.props.week_interval,
+          categories: ['mon','tue','wed','thu','fri','sat','sun'],//this.props.week_interval,
           labels: {
             style: {
               colors: '#d8d8d8', // Kan göra en array av denna om man vill ka olika färger på mån -> sön.
@@ -64,7 +64,7 @@ class Area extends Component {
       },
       series: [{
         name: "Streams (thousand)",
-        data: this.props.data,
+        data: [11,12,13,14,15,16,17],//this.props.data,
       }],
     }
   }

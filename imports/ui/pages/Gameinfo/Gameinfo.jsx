@@ -14,14 +14,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
-    this.game = modelInstance.getSpecificGame(1);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
+    // TODO: FOR TESTING
+    console.log(modelInstance.getSpecificGame("2EticC3B4g2xHY8BW"));
+    console.log(modelInstance.getGames());
+    console.log(modelInstance.getWatchlist());
+    //--------------
+    
+    this.game = modelInstance.getSpecificGame("2EticC3B4g2xHY8BW");  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
     this.data = [];  // An array that contains last weeks data. 
-    this.week_interval = [];  
+    this.week_interval = [];  // An array containging the updated week.
     this.game.data.forEach(day => {        
       this.data.push(day.popularity);
       this.week_interval.push(day.dow);
     });
-
+    
     this.state = {
       id : this.game._id, // this.props.game.id
       title : this.game.name, // this.props.game.title
@@ -29,11 +35,13 @@ export default class Gameinfo extends Component {
       week_interval : this.week_interval,
       selectedOption : "lineChart",  // Default är lineChart,
       isChecked : false,
+      img : this.game.img,
     };
    
   }
 
   componentDidMount(){  // Is a method that runs when the component is created. It checks if the game is in the users watchlist or not.
+    /*
     this.userWatchlist = modelInstance.getWatchlist();
     this.userWatchlist.forEach(gameId =>{
       if(this.state.id == gameId){
@@ -43,26 +51,29 @@ export default class Gameinfo extends Component {
         });
       }
     });
+    */
   }
 
-  chartToShow = e => {
+  chartToShow = e => {  // Toggles which chart to show, is called onChange on the radioboxes.
     this.setState({
       selectedOption : e.target.value,
     });
   }
 
-  addToWatchlistChanged = e => {
+  addToWatchlistChanged = e => { // TODO: UPDATE/FIX according to the new model
+    
     if(!this.state.isChecked){  // Adds or removes the game from the users watchlist
-      // console.log("add");      
-      modelInstance.addToWatchlist(this.state.id);
+      console.log("add");      
+      modelInstance.addToWatchlist(this.state.id, this.state.title);  // TODO: FIX
     }else{
-      // console.log("remove");      
-      modelInstance.removeFromWatchlist(this.state.id);
+      console.log("remove");      
+      modelInstance.removeFromWatchlist(this.state.id); // TODO: FIX
     }
 
     this.setState({
       isChecked : !this.state.isChecked,
     });
+    
   }
 
   render() {
@@ -119,11 +130,12 @@ export default class Gameinfo extends Component {
                         <hr />
 
                         <div id="otherGameInformation">
-                          <h3>Other information</h3>
+                          {/*<h3>Other information</h3>*/}
                             {/*
                               Kan vi här sammanställa den datan vi har i text? Exempelvis säga om den gått upp eller ner
                               trending/falling/straight osv?
                              */}
+                             <img src={this.state.img} alt="No image found" />
                         </div>
                       </div>
                 </div>
