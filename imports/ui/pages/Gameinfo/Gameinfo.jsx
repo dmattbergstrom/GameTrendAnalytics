@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
-    this.game = modelInstance.getSpecificGame(1);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
+    this.game = modelInstance.getSpecificGame(21779);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
     this.data = [];  // An array that contains last weeks data. 
     this.week_interval = [];  
     this.game.data.forEach(day => {        
