@@ -6,13 +6,13 @@ class Line extends Component {
   constructor(props) {
     super(props);
     this.data_length = this.props.data.length;
+    
     if(this.data_length > 7){
-      this.data = this.props.data[(this.data_length-7),this.data_length];
-    } else if(this.data_length == 7){
+      this.data = this.props.data.slice((this.data_length-7),this.data_length);
+    } else if(this.data_length <= 7){
       this.data = this.props.data;
-    } else {
-      this.data = [1, 2, 3, 4, 5, 6, 7];
     }
+
     this.state = {      
       options: {
         title: {

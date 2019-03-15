@@ -20,7 +20,7 @@ export default class Gameinfo extends Component {
     // console.log(modelInstance.getWatchlist());
     //--------------
     
-    this.game = modelInstance.getSpecificGame(21779);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
+    this.game = modelInstance.getSpecificGame(33214);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
     this.data = [];  // An array that contains last weeks data. 
     this.week_interval = [];  // An array containging the updated week.
     this.game.data.forEach(day => {        

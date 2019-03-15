@@ -5,12 +5,13 @@ class Area extends Component {
 
   constructor(props) {
     super(props);
-    // this.data = [];  // An array that contains last weeks data. 
-    // this.week_interval = [];  
-    // this.props.data.forEach(day => {        
-    //   this.data.push(day.popularity);
-    //   this.week_interval.push(day.dow);
-    // });
+    this.data_length = this.props.data.length;
+    
+    if(this.data_length > 7){
+      this.data = this.props.data.slice((this.data_length-7),this.data_length);
+    } else if(this.data_length <= 7){
+      this.data = this.props.data;
+    }
 
     this.state = {
       options: {
@@ -64,7 +65,7 @@ class Area extends Component {
       },
       series: [{
         name: "Streams (thousand)",
-        data: [11,12,13,14,15,16,17],//this.props.data,
+        data: this.data,//this.props.data,
       }],
     }
   }
