@@ -16,7 +16,7 @@ class Line extends Component {
     this.state = {      
       options: {
         title: {
-            text: 'Streams last week',
+            text: 'Popularity last week',
             align: 'center',
             margin: 0,
             offsetX: 0,
@@ -54,7 +54,7 @@ class Line extends Component {
         },
       },
       series: [{
-        name: "Streams (thousand)",
+        name: "Popularity",
         data: this.data,  // Data is set to last weeks data.
       }],
     }

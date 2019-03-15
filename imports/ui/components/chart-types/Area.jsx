@@ -16,7 +16,7 @@ class Area extends Component {
     this.state = {
       options: {
         title: {
-            text: 'Streams last week',
+            text: 'Popularity last week',
             align: 'center',
             margin: 0,
             offsetX: 0,
@@ -64,8 +64,8 @@ class Area extends Component {
         },
       },
       series: [{
-        name: "Streams (thousand)",
-        data: this.data,//this.props.data,
+        name: "Popularity",
+        data: this.data,
       }],
     }
   }
