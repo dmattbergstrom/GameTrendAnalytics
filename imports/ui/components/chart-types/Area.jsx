@@ -5,12 +5,24 @@ class Area extends Component {
 
   constructor(props) {
     super(props);
-    this.data_length = this.props.data.length;
-    
-    if(this.data_length > 7){
-      this.data = this.props.data.slice((this.data_length-7),this.data_length);
-    } else if(this.data_length <= 7){
-      this.data = this.props.data;
+    let game_information;
+
+    if(this.props.data.length == 1){  // If we only want to show the data of one game.
+      this.data_length = this.props.data[0].game_data.length;
+      
+      if(this.data_length > 7){
+        game_information = [{
+          name: "Popularity",
+          data: this.props.data[0].game_data.slice((this.data_length-7),this.data_length)
+        }]
+      } else if(this.data_length <= 7){
+        game_information = [{
+          name: "Popularity",
+          data: this.props.data[0].game_data
+        }]
+      }
+    } else{
+      game_information = this.props.data;
     }
 
     this.state = {
@@ -44,7 +56,7 @@ class Area extends Component {
           curve: 'smooth'
         },
         xaxis: {
-          categories: ['mon','tue','wed','thu','fri','sat','sun'],//this.props.week_interval,
+          categories: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],//this.props.week_interval,
           labels: {
             style: {
               colors: '#d8d8d8', // Kan göra en array av denna om man vill ka olika färger på mån -> sön.
@@ -63,10 +75,7 @@ class Area extends Component {
           },
         },
       },
-      series: [{
-        name: "Popularity",
-        data: this.data,
-      }],
+      series: game_information,
     }
   }
 

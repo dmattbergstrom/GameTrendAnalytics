@@ -43,7 +43,7 @@ export default class Item extends Component {
           <div className="media-body">
             <span className={statusClasses}>{status.toUpperCase()}</span> 
             <p className="title">
-              <a href="">{name}</a>
+              <a href={"/gameinfo/"+id}>{name}</a>
             </p>
           </div>
         </td>

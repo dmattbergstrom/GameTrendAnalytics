@@ -111,7 +111,7 @@ a { text-decoration: none!important; }
   color: #444;  /* Ändras denna ändras färgen när man "hoverar" på ett värde i grafen */
 }
 
-#PieChart .apexcharts-legend-text, #DynamicLine .apexcharts-legend-text{
+#PieChart .apexcharts-legend-text, #LineChart .apexcharts-legend-text{
   color: #eee!important;
 }
 
