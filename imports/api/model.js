@@ -91,7 +91,7 @@ const Model = function(){
       const dayTimeDiff = Math.abs(new Date() - updated) / (1000 * 60 * 60 * 24);
       // console.log("dayTimeDiff ", dayTimeDiff);
       // If the data point is within the 8-day (including from 8 to not get too little data) range:
-      if (dayTimeDiff <= 8) {
+      if (dayTimeDiff <= 7) {
 
         // Add to data if game exists in array already.
         if (games[_id]) {
@@ -101,7 +101,7 @@ const Model = function(){
           games[_id].data.forEach(dataItem => {
             const hourDiff = Math.abs(updated - dataItem.updated) / (1000 * 60 * 60);
             // console.log("hourDiff ", hourDiff);
-            if (hourDiff >= 23) 
+            if (hourDiff >= 18) 
               ok = true;    
           });
 
