@@ -25,6 +25,15 @@ Since every user will have their own “watchlist”, the application demands a 
 3. (Maybe) implement search functionality.
 4. Clean up code & Overlook Architecture.
 
+## How to test each page:
+1. Frontpage / Overview page: This one is pretty straight forward, just look at the visualized data!
+2. Gameinfo page: This page displays data for a specific game. We listed three game ID's for simplicity's sake, which you can view:
+  * http://localhost:3000/gameinfo/32982
+  * http://localhost:3000/gameinfo/21779
+  * http://localhost:3000/gameinfo/29595
+3. The Watchlist page: Add some games to your watchlist on the Gameinfo page. Then, proceed to the navigation bar, and click "Show All" under the Watchlist dropdown menu.
+4. Play around! It isn't fully bug-free experience yet, but do make note of what improvements you think are most important to make.
+
 ## Link to running application:
 [CLICK HERE](https://game-trend-analytics.herokuapp.com/)
 
@@ -52,38 +61,64 @@ imports/
   startup/
     client/
       index.js                 # import client startup through a single index entry point.
-      routes.js                # set up all routes in the app.
       accounts-config.js       # configuration of login template.
     server/
-      fixtures.js              # fill the DB with example data on startup.
+      fixtures.js              # fills the DB with Game data, with intervals, and keeps the app from sleeping, by pinging itself!
       index.js                 # import server startup through a single index entry point.
-      security.js              # contains collection-specific security.
+      security.js              # contains collection-specific security. (Don't allow faulty inserts and such)
 
   api/
     collections/               
-      */                         # a unit of domain logic for a given collection.
+      */                         # a unit of domain logic for a given collection. (E.g. Games / Watchlist collection)
         server/
-          publications.js        # all collection-related publications.
-          publications.tests.js  # tests for the collection publications.
-        *.js                     # definition of the given collection.
-        *.tests.js               # tests for the behavior of that collection.
-        methods.js               # methods related to this collection.
-        methods.tests.js         # tests for those methods.
+          publications.js        # all collection publications. Defines what data each user can take part of.
+          publications.tests.js  # tests for the collection publications. (TODO)
+        *.js                     # definition of the given collection. (TODO)
+        methods.js               # Methods related to this collection. (Calls that need to be made server-side are defined here).
+        methods.tests.js         # tests for those methods. (TODO)
 
-    model.js                     # a unit of domain logic for the entire application.
+    model.js                     # a unit of domain logic for the entire application. (Get:ers, Set:ers, and so on).
     api-client.js                # API imports only for the client.
     api.js                       # All API imports. (For both client and server).
 
   ui/
-    components/                # all reusable components in the application
-                               # can be split by domain if there are many
-    layouts/                   # wrapper components for behaviour and visuals
-    pages/                     # entry points for rendering used by the router
+    components/                # all reusable components in the application split by domain 
+      AccountsUIWrapper/
+        AccountsUIWrapper.css  # Component-specific styling.
+        AccountsUIWrapper.jsx  # contains the wrapper for the login system component.
+      chart-types/
+        Area.jsx               # Area chart type component.
+        Line.jsx               # Line chart type component.
+        Pie.jsx                # Pie chart type component.
+      Navbar/
+        Navbar.css             # Component-specific styling.
+        Navbar.jsx             # Navbar component. Contains universal navbar functionality used in entire App.
+      Watchlist/
+        Item/
+          Item.css             # Component-specific styling.
+          Item.jsx             # Each item in the Watchlist Table component.
+        Table/
+          Table.css            # Component-specific styling.
+          Table.jsx            # A smart component that handles some watchlist data and displays it.
+      
+    pages/                     # entry points for rendering used by the router split by domain 
+      Gameinfo/
+        Gameinfo.css            # Page-specific styling.
+        Gameinfo.jsx            # Gameinfo page-logic.
+      Overview/
+        Overview.css            # Page-specific styling.
+        Overview.jsx            # Overview page-logic.
+      Watchlist/
+        Watchlist.css           # Page-specific styling.
+        Watchlist.jsx           # Watchlist page-logic.
+
+    App.jsx                    # Defines the routes of the app, and is a universal component for all pages.
 
 client/
   main.js                      # client entry point, imports all client code
 
 server/
+
   main.js                      # server entry point, imports all server code
 ```
 
