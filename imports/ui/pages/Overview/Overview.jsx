@@ -29,17 +29,10 @@ export default class Overview extends Component {
       <div className="Overview">
         <div className="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 container-fluid">
           <br/><br/>
-<<<<<<< HEAD
-          <h4 className="white-text text-center" id="overview-header"><b>TOP 10 GAMES LAST 7 DAYS</b></h4>
-          <DynamicLine/>
-          <Pie/>
-          <button onClick={() => { console.log(model.getTopGames()) }}> TEST </button>
-=======
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
           <Line data={this.state.top_games} />
           <Pie data={this.state.top_games}/>
-          <button onClick={() => { console.log(model.getGames()) }}> TEST </button>
->>>>>>> b89b456ecfe0a56640855f798a564eec02c90d3e
+          <button onClick={() => { console.log(model.getTopGames()) }}> TEST </button>
         </div>
       </div>
     );
