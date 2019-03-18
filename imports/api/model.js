@@ -202,7 +202,6 @@ const Model = function(){
     const {found, index} = containsId(id, watchlist.items);
     if (found)
       watchlist.items.splice(index, 1);
-      console.log(index);
       Meteor.call("Watchlist.upsert", watchlistId, watchlist); // Update DB.
   };
 
@@ -214,17 +213,15 @@ const Model = function(){
   *  @returns void
   **/
   this.addToWatchlist = (id, name) => {
-    const empty = isEmpty(watchlist.items);  
-    console.log(id+" "+name);
-    console.log(watchlist._id);
       
     // Update DB:
-    if (empty && !watchlist._id) {
-      console.log("test");
-      
+    if (!watchlistId) {
       // Create users watchlist & update locally:
+      watchlist.owner = Meteor.userId();
       watchlist.items.push({ _id: id, name: name });  
-      Meteor.call("Watchlist.insert", {items: watchlist.items});
+      Meteor.call("Watchlist.insert", {items: watchlist.items}, function(res_id) {
+        console.log(res_id);
+      });
       return; // Done.
     }
 
@@ -232,7 +229,7 @@ const Model = function(){
     const {found} = containsId(id, watchlist.items);
     if (!found)
       watchlist.items.push({ _id: id, name: name}); // Only push if it does not already exist.
-    if (!empty) {
+    if (watchlistId) {
       // Update users watchlist:
       Meteor.call("Watchlist.upsert", watchlistId, watchlist);
     }

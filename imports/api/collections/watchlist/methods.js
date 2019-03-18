@@ -14,7 +14,7 @@ Meteor.methods({
       doc.owner = this.userId;
     Watchlist.insert(
       doc,
-      (error, res_id) => {
+      (err, res_id) => {
         if ( err ) {
           console.log ( "ERROR in INSERT: " + err ); //info about what went wrong
           return; // Stop exec

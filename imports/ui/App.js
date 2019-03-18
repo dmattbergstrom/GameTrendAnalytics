@@ -34,10 +34,11 @@ class App extends Component {
     Tracker.autorun(() => {
       if (!modelInstance.getGames() || modelInstance.getGames().length <= 0) {
         const games = Games.find({}).fetch();
-        const watchlist = Wl.find({}).fetch()[0];
         modelInstance.setGames(games);
-        modelInstance.setWatchlist(watchlist);
       }
+
+      const watchlist = Wl.find({}).fetch()[0];
+      modelInstance.setWatchlist(watchlist);
     })
   }
 
