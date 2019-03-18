@@ -89,7 +89,7 @@ const Model = function(){
       const { viewers, channels, game, updated } = g;
       const { name, popularity, box, _id, logo } = game;
       const dayTimeDiff = Math.abs(new Date() - updated) / (1000 * 60 * 60 * 24);
-      console.log("dayTimeDiff ", dayTimeDiff);
+      // console.log("dayTimeDiff ", dayTimeDiff);
       // If the data point is within the 8-day (including from 8 to not get too little data) range:
       if (dayTimeDiff <= 8) {
 
