@@ -18,7 +18,7 @@ export default class Overview extends Component {
     super(props);
 
     this.state = {
-      top_games: modelInstance.getTopGames(),
+      top_games: modelInstance.getTestTopGames(),
     }
   }
 

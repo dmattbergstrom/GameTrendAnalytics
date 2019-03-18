@@ -160,12 +160,16 @@ const Model = function(){
     return games;
   };
 
-  // Sorts the array by avg_popularity and returns the top 7 games.
+  this.getTestTopGames = function (){
+    return topGames;
+  }
+
+  // Sorts the array by avg_popularity and returns the top 5 games.
   this.getTopGames = function () {
     let gms = games.slice();
     gms.sort((a, b) =>  -1*(parseFloat(a.avg_popularity) - parseFloat(b.avg_popularity)));
     const { length } = gms;
-    gms = gms.slice(0, 7);
+    gms = gms.slice(0, 5);
     return gms;
   };
 
