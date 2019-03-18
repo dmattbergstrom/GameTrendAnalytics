@@ -32,7 +32,7 @@ export default class Overview extends Component {
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
           <Line data={this.state.top_games} />
           <Pie data={this.state.top_games}/>
-          <button onClick={() => { console.log(model.getTopGames()) }}> TEST </button>
+          <button onClick={() => { console.log(model.getGames()) }}> TEST </button>
         </div>
       </div>
     );

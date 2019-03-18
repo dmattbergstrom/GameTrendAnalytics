@@ -89,11 +89,23 @@ const Model = function(){
       const { viewers, channels, game, updated } = g;
       const { name, popularity, box, _id, logo } = game;
       const dayTimeDiff = (new Date() - updated) / (1000 * 60 * 60 * 24);
-      // If the data point is within the 7-day range:
-      if (dayTimeDiff <= 7) {
+      // If the data point is within the 8-day (including from 8 to not get too little data) range:
+      if (dayTimeDiff <= 8) {
+
         // Add to data if game exists in array already.
         if (games[_id]) {
-          games[_id].data.push(dataObject(viewers, channels, popularity, updated));
+
+          // But first, check that its far enough from all our other data.
+          let ok = true;
+          games[_id].data.forEach(dataItem => {
+            const hourDiff = (updated - dataItem.updated) / (1000 * 60 * 60);
+            if (hourDiff < 12) 
+              ok = false;    
+          });
+
+          if (ok)
+            games[_id].data.push(dataObject(viewers, channels, popularity, updated));
+        
         } else {
           // Otherwise create the game object.
           games[_id] = {

@@ -81,11 +81,25 @@ export default class Table extends Component {
   }
 
   removeFromWL(){
-    const { checkedItems } = this.state;
-    checkedItems.forEach(id => {
-      console.log(id);
+    let { checkedItems } = this.state;
+    let newCheckedItems = checkedItems.slice();
+    let rmIndices = [];
+    checkedItems.forEach((id, index) => {
       this.props.model.removeFromWatchlist(id);
+      rmIndices.push(index);
     });
+
+    rmIndices.forEach(cIndex => {
+      newCheckedItems = newCheckedItems.splice(cIndex, 1);
+    });
+
+    // TODO: Investigate bug.
+    console.log(newCheckedItems);
+    this.setState({ checkedItems: newCheckedItems.slice() });
+    console.log(this.state.checkedItems);
+    const mappedItems = this.mapWatchlistItems(this.state.activeFilter);
+    this.setState({ items: mappedItems}); // Update watchlist items.
+    console.log(this.state.checkedItems);
   }  
 
   /**
