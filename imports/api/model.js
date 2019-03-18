@@ -101,7 +101,7 @@ const Model = function(){
           games[_id].data.forEach(dataItem => {
             const hourDiff = Math.abs(updated - dataItem.updated) / (1000 * 60 * 60);
             console.log("hourDiff ", hourDiff);
-            if (hourDiff < 12) 
+            if (hourDiff < 18) 
               ok = false;    
           });
 
