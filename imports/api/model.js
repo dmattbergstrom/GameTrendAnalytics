@@ -219,9 +219,7 @@ const Model = function(){
       // Create users watchlist & update locally:
       watchlist.owner = Meteor.userId();
       watchlist.items.push({ _id: id, name: name });  
-      Meteor.call("Watchlist.insert", {items: watchlist.items}, function(res_id) {
-        console.log(res_id);
-      });
+      Meteor.call("Watchlist.insert", {items: watchlist.items});
       return; // Done.
     }
 
