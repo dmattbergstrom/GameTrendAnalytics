@@ -26,7 +26,7 @@ export default class Overview extends Component {
           <h4 className="white-text text-center" id="overview-header"><b>TOP 10 GAMES LAST 7 DAYS</b></h4>
           <DynamicLine/>
           <Pie/>
-          <button onClick={() => { console.log(model.getGames()) }}> TEST </button>
+          <button onClick={() => { console.log(model.getTopGames()) }}> TEST </button>
         </div>
       </div>
     );

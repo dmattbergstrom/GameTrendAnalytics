@@ -142,6 +142,15 @@ const Model = function(){
     return games;
   };
 
+  // Sorts the array by avg_popularity and returns the top 7 games.
+  this.getTopGames = function () {
+    let gms = games.slice();
+    gms.sort((a, b) =>  -1*(parseFloat(a.avg_popularity) - parseFloat(b.avg_popularity)));
+    const { length } = gms;
+    gms = gms.slice(0, 7);
+    return gms;
+  };
+
   this.getSpecificGame = (id) => {  
     return games[id];
   };
