@@ -95,18 +95,18 @@ const Model = function(){
 
         // Add to data if game exists in array already.
         if (games[_id]) {
-          console.log("Game data exists!");
+          // console.log("Game data exists!");
           // But first, check that its far enough from all our other data.
-          let ok = true;
+          let ok = false;
           games[_id].data.forEach(dataItem => {
             const hourDiff = Math.abs(updated - dataItem.updated) / (1000 * 60 * 60);
-            console.log("hourDiff ", hourDiff);
-            if (hourDiff < 18) 
-              ok = false;    
+            // console.log("hourDiff ", hourDiff);
+            if (hourDiff >= 23) 
+              ok = true;    
           });
 
           if (ok)
-            console.log("PUSHING");
+            // console.log("PUSHING");
             games[_id].data.push(dataObject(viewers, channels, popularity, updated));
         
         } else {
