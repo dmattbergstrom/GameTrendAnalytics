@@ -13,11 +13,11 @@ const Model = function(){
 
   //FOR TESTING 
     topGames = [
-      {name: "Game1", data: [1,2,3,4,5,6,7], viewers: 44},  // Viewers ska ersättas med avg_popularity/avg_viewers
-      {name: "Game2", data: [8,22,33,44,55,66,77], viewers: 55},
-      {name: "Game3", data: [11,11,13,13,14,14,12], viewers: 10},
-      {name: "Game4", data: [12,17,13,14,15,16,14], viewers: 42},
-      {name: "Game5", data: [13,63,11,66,15,19,57], viewers: 99},
+      {name: "Game1", data: [1,2,3,4,5,6,7], avg_popularity: 44},  // Viewers ska ersättas med avg_popularity/avg_viewers
+      {name: "Game2", data: [8,22,33,44,55,66,77], avg_popularity: 55},
+      {name: "Game3", data: [11,11,13,13,14,14,12], avg_popularity: 10},
+      {name: "Game4", data: [12,17,13,14,15,16,14], avg_popularity: 42},
+      {name: "Game5", data: [13,63,11,66,15,19,57], avg_popularity: 99},
       /*{name: "Game6", data: [14,41,22,55,16,5,27], viewers: 10},
       {name: "Game7", data: [15,12,44,44,17,23,77], viewers: 20},
       {name: "Game8", data: [16,42,33,12,18,44,1], viewers: 50},

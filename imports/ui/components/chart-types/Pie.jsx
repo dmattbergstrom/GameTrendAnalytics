@@ -6,11 +6,11 @@ class Pie extends Component {
     constructor(props) {
       super(props);
       const game_names = [];
-      const viewers = [];
+      const avg_popularity = [];
 
       this.props.data.forEach(game_data => {
         game_names.push(game_data.name);
-        viewers.push(game_data.viewers);
+        avg_popularity.push(game_data.avg_popularity);
       });
       
       this.state = {
@@ -40,7 +40,7 @@ class Pie extends Component {
                 },
             },
         },
-        series: viewers,
+        series: avg_popularity,
       }
     }
 
