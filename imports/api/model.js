@@ -88,7 +88,7 @@ const Model = function(){
       // NOTE: The _id is from our own collection, not to be confused with the _id from the API.
       const { viewers, channels, game, updated } = g;
       const { name, popularity, box, _id, logo } = game;
-      const dayTimeDiff = (new Date() - updated) / (1000 * 60 * 60 * 24);
+      const dayTimeDiff = Math.abs(new Date() - updated) / (1000 * 60 * 60 * 24);
       // If the data point is within the 8-day (including from 8 to not get too little data) range:
       if (dayTimeDiff <= 8) {
 
@@ -98,7 +98,7 @@ const Model = function(){
           // But first, check that its far enough from all our other data.
           let ok = true;
           games[_id].data.forEach(dataItem => {
-            const hourDiff = (updated - dataItem.updated) / (1000 * 60 * 60);
+            const hourDiff = Math.abs(updated - dataItem.updated) / (1000 * 60 * 60);
             if (hourDiff < 12) 
               ok = false;    
           });
