@@ -5,7 +5,14 @@ class Pie extends Component {
       
     constructor(props) {
       super(props);
+      const game_names = [];
+      const viewers = [];
 
+      this.props.data.forEach(game_data => {
+        game_names.push(game_data.name);
+        viewers.push(game_data.viewers);
+      });
+      
       this.state = {
         options: {
             title: {
@@ -20,7 +27,7 @@ class Pie extends Component {
                   color:  '#d8d8d8'
                 },
             },
-            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            labels: game_names,
             dataLabels: {
                 enabled: true,
                 formatter: function (val, opts) {
@@ -33,7 +40,7 @@ class Pie extends Component {
                 },
             },
         },
-        series: [44, 55, 13, 43, 22],
+        series: viewers,
       }
     }
 

@@ -14,13 +14,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
-    // TODO: FOR TESTING
-    //console.log(modelInstance.getSpecificGame(33214));
-    // console.log(modelInstance.getGames());
-    // console.log(modelInstance.getWatchlist());
-    //--------------
+    const game_id = window.location.href.split("/").slice(-1)[0]; // The id of the game is in the URL. Gets it go do a call to the model.
     
-    this.game = modelInstance.getSpecificGame(33214);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
+    this.game = modelInstance.getSpecificGame(game_id);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
     this.data = [];  // An array that contains last weeks data. 
     this.week_interval = [];  // An array containging the updated week.
     this.game.data.forEach(day => {        
@@ -31,7 +27,11 @@ export default class Gameinfo extends Component {
     this.state = {
       id : this.game._id, // this.props.game.id
       title : this.game.name, // this.props.game.title
-      data : this.data,
+      data :[{
+              name: this.game.name,
+              game_data: this.data,
+              week_interval: this.week_interval,
+            }],
       week_interval : this.week_interval,
       selectedOption : "lineChart",  // Default är lineChart,
       isChecked : false,
@@ -60,14 +60,14 @@ export default class Gameinfo extends Component {
     });
   }
 
-  addToWatchlistChanged = e => { // TODO: UPDATE/FIX according to the new model
+  addToWatchlistChanged = e => { 
     
-    if(!this.state.isChecked){  // Adds or removes the game from the users watchlist
+    if(!this.state.isChecked){
       console.log("add");      
-      modelInstance.addToWatchlist(this.state.id, this.state.title);  // TODO: FIX
+      modelInstance.addToWatchlist(this.state.id, this.state.title);
     }else{
       console.log("remove");      
-      modelInstance.removeFromWatchlist(this.state.id); // TODO: FIX
+      modelInstance.removeFromWatchlist(this.state.id);
     }
 
     this.setState({
@@ -81,9 +81,9 @@ export default class Gameinfo extends Component {
     let {title, selectedOption} = this.state;
 
     if (this.state.selectedOption == 'lineChart'){
-      activeChart = <Line data={this.state.data} week_interval={this.state.week_interval} />;
+      activeChart = <Line data={this.state.data} />;
     } else if(this.state.selectedOption == 'areaChart'){
-      activeChart = <Area data={this.state.data} week_interval={this.state.week_interval} />;
+      activeChart = <Area data={this.state.data} />;
     }
 
     return (

@@ -9,6 +9,23 @@ const Model = function(){
   var watchlist = {items: []};
   var watchlistId = "";
 
+  var topGames = [] // Contains top games
+
+  //FOR TESTING 
+    topGames = [
+      {name: "Game1", data: [1,2,3,4,5,6,7], viewers: 44},  // Viewers ska ersättas med avg_popularity/avg_viewers
+      {name: "Game2", data: [8,22,33,44,55,66,77], viewers: 55},
+      {name: "Game3", data: [11,11,13,13,14,14,12], viewers: 10},
+      {name: "Game4", data: [12,17,13,14,15,16,14], viewers: 42},
+      {name: "Game5", data: [13,63,11,66,15,19,57], viewers: 99},
+      /*{name: "Game6", data: [14,41,22,55,16,5,27], viewers: 10},
+      {name: "Game7", data: [15,12,44,44,17,23,77], viewers: 20},
+      {name: "Game8", data: [16,42,33,12,18,44,1], viewers: 50},
+      {name: "Game9", data: [17,22,66,20,19,100,7], viewers: 14},
+      {name: "Game10", data: [11,12,63,1,55,8,10], viewers: 90},*/
+    ];
+  //------
+
   /**
    *  isEmpty(): Checks if an array is empty.
    * 
@@ -70,7 +87,7 @@ const Model = function(){
     gms.forEach((g) => {
       // NOTE: The _id is from our own collection, not to be confused with the _id from the API.
       const { viewers, channels, game, updated } = g;
-      const { name, popularity, box, _id } = game;
+      const { name, popularity, box, _id, logo } = game;
       const dayTimeDiff = (new Date() - updated) / (1000 * 60 * 60 * 24);
       // If the data point is within the 7-day range:
       if (dayTimeDiff <= 7) {
@@ -83,7 +100,8 @@ const Model = function(){
             _id: _id,
             name: name,
             data: [dataObject(viewers, channels, popularity, updated)],
-            img: box.medium  
+            img: box.medium,
+            logo: box.small
           };
         }
       }
@@ -192,9 +210,14 @@ const Model = function(){
   *  @returns void
   **/
   this.addToWatchlist = (id, name) => {
-    const empty = isEmpty(watchlist.items);    
+    const empty = isEmpty(watchlist.items);  
+    console.log(id+" "+name);
+    console.log(watchlist._id);
+      
     // Update DB:
     if (empty && !watchlist._id) {
+      console.log("test");
+      
       // Create users watchlist & update locally:
       watchlist.items.push({ _id: id, name: name });  
       Meteor.call("Watchlist.insert", {items: watchlist.items});
