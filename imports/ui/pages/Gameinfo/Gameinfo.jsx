@@ -15,30 +15,28 @@ export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
     const game_id = window.location.href.split("/").slice(-1)[0]; // The id of the game is in the URL. Gets it go do a call to the model.
-    
     this.game = modelInstance.getSpecificGame(game_id);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
-    this.data = [];  // An array that contains last weeks data. 
-    this.week_interval = [];  // An array containging the updated week.
-    this.game.data.forEach(day => {        
-      this.data.push(day.popularity);
-      this.week_interval.push(day.dow);
-    });
-    
-    this.state = {
-      id : this.game._id, // this.props.game.id
-      title : this.game.name, // this.props.game.title
-      data :[{
-              name: this.game.name,
-              game_data: this.data,
-              week_interval: this.week_interval,
-            }],
-      week_interval : this.week_interval,
-      selectedOption : "lineChart",  // Default är lineChart,
-      isChecked : false,
-      img : this.game.img,
-    };
-   console.log(this.state.isChecked);
-   
+    if(this.game == undefined){  // Checks if game is valid/exists, for errorhandling. GÖR OM? ÄR DETTA FULT?
+      this.valid_game = false;
+
+      this.state = {
+        id : game_id, // this.props.game.id
+        title : "", // this.props.game.title
+        selectedOption : "",  // Default är lineChart,
+        isChecked : false,
+        img : "",
+      };
+    } else{
+      this.valid_game = true;
+
+      this.state = {
+        id : this.game._id, // this.props.game.id
+        title : this.game.name, // this.props.game.title
+        selectedOption : "lineChart",  // Default är lineChart,
+        isChecked : false,
+        img : this.game.img,
+      };
+    }    
   }
 
   componentDidMount(){  // Is a method that runs when the component is created. It checks if the game is in the users watchlist or not.
@@ -81,15 +79,17 @@ export default class Gameinfo extends Component {
     let {title, selectedOption} = this.state;
 
     if (this.state.selectedOption == 'lineChart'){
-      activeChart = <Line data={this.state.data} />;
+      activeChart = <Line games={[this.game]} />;
     } else if(this.state.selectedOption == 'areaChart'){
-      activeChart = <Area data={this.state.data} />;
+      activeChart = <Area games={[this.game]} />;
     }
 
     return (
       <div className="container-fluid">
             <div className="row text-center justify-content-center">
                 <div className="col-md-8 col-sm-12 mt-4" id="gameinfo">
+                {this.valid_game ?
+                  <div>
                       <div>
                         <h2 className="dark-green-text">{title}</h2>
                       </div>
@@ -137,7 +137,9 @@ export default class Gameinfo extends Component {
                              */}
                              <img src={this.state.img} alt="No image found" />
                         </div>
-                      </div>
+                      </div>      
+                  </div>          
+                : <h2><a className="dark-green-text" href="/">Game doesn't exists go back to overview</a></h2>}
                 </div>
             </div>
       </div>

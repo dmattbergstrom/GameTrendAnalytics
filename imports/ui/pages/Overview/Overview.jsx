@@ -19,7 +19,7 @@ export default class Overview extends Component {
 
     this.state = {
       top_games: modelInstance.getTopGames(),
-    }
+    };
   }
 
   render() {
@@ -30,8 +30,8 @@ export default class Overview extends Component {
         <div className="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 container-fluid">
           <br/><br/>
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
-          <Line data={this.state.top_games} />
-          <Pie data={this.state.top_games}/>
+          <Line games={this.state.top_games} />
+          <Pie games={this.state.top_games}/>
           <button onClick={() => { console.log(model.getGames()) }}> TEST </button>
         </div>
       </div>

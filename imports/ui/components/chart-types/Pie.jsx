@@ -8,9 +8,9 @@ class Pie extends Component {
       const game_names = [];
       const avg_popularity = [];
 
-      this.props.data.forEach(game_data => {
-        game_names.push(game_data.name);
-        avg_popularity.push(game_data.avg_popularity);
+      this.props.games.forEach(game => {
+        game_names.push(game.name);
+        avg_popularity.push(game.avg_popularity);
       });
       
       this.state = {
@@ -18,7 +18,7 @@ class Pie extends Component {
             title: {
                 text: 'Popularity distribution',
                 align: 'center',
-                margin: 10,
+                margin: 20,
                 offsetX: 0,
                 offsetY: 0,
                 floating: false,
@@ -28,13 +28,18 @@ class Pie extends Component {
                 },
             },
             labels: game_names,
+            legend: {
+              offsetY: 0,
+              position: "bottom",
+              verticalAlign: "center",              
+            },            
             dataLabels: {
                 enabled: true,
                 formatter: function (val, opts) {
                     return Math.round(val) + "%"
                 },
                 style: {
-                    fontSize: '16px',
+                    fontSize: '13px',
                     fontFamily: 'Helvetica, Arial, sans-serif',
                     colors: ["#eee"],
                 },

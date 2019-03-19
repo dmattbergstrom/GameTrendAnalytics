@@ -5,25 +5,31 @@ class Area extends Component {
 
   constructor(props) {
     super(props);
-    let game_information;
-
-    if(this.props.data.length == 1){  // If we only want to show the data of one game.
-      this.data_length = this.props.data[0].game_data.length;
-      
-      if(this.data_length > 7){
-        game_information = [{
-          name: "Popularity",
-          data: this.props.data[0].game_data.slice((this.data_length-7),this.data_length)
-        }]
-      } else if(this.data_length <= 7){
-        game_information = [{
-          name: "Popularity",
-          data: this.props.data[0].game_data
-        }]
+    let game_information = [];
+    this.props.games.forEach(game => {
+      var data_length = game.data.length;
+      var data_last_week = [];
+       
+     if(this.data_length > 7){
+        game.data.slice((data_length-7), data_length).forEach(day =>{
+          data_last_week.push(day.popularity);
+        });
+        game_information.push(
+          {
+            name: game.name,
+            data: data_last_week
+          }
+        );
+      } else if(data_length <= 7){
+        game.data.forEach(day =>{
+          data_last_week.push(day.popularity);
+        });        
+        game_information.push({
+          name: game.name,
+          data: data_last_week
+        });
       }
-    } else{
-      game_information = this.props.data;
-    }
+    });
 
     this.state = {
       options: {
