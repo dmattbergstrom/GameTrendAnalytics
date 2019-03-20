@@ -26,11 +26,12 @@ Since every user will have their own “watchlist”, the application demands a 
 4. Clean up code & Overlook Architecture.
 
 ## How to test each page:
+**Do not use your localhost for testing pages. Use the herokuapp linked below when testing the application**
 1. Frontpage / Overview page: This one is pretty straight forward, just look at the visualized data!
 2. Gameinfo page: This page displays data for a specific game. We listed three game ID's for simplicity's sake, which you can view:
-  * http://localhost:3000/gameinfo/32982
-  * http://localhost:3000/gameinfo/21779
-  * http://localhost:3000/gameinfo/29595
+  * https://game-trend-analytics.herokuapp.com/gameinfo/32982
+  * https://game-trend-analytics.herokuapp.com/gameinfo/21779
+  * https://game-trend-analytics.herokuapp.com/gameinfo/29595
 3. The Watchlist page: Add some games to your watchlist on the Gameinfo page. Then, proceed to the navigation bar, and click "Show All" under the Watchlist dropdown menu.
 4. Play around! It isn't fully bug-free experience yet, but do make note of what improvements you think are most important to make.
 
