@@ -50,11 +50,7 @@ Since every user will have their own “watchlist”, the application demands a 
 * Twitch API
 
 ## How to install
-1. Clone the git repo in the terminal.
-2. Run `cd GameTrendAnalytics` in the terminal.
-3. Run `meteor npm i` in the terminal.
-4. Run `meteor` in the terminal.
-5. The application should now be running on `http://localhost:3000`
+Download the application as a .zip. The architecture and a short desciption of files and maps is presented below.
 
 ## Architecture
 ```
