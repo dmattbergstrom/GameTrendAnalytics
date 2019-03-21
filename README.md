@@ -50,7 +50,7 @@ Since every user will have their own “watchlist”, the application demands a 
 * Twitch API
 
 ## How to install
-Download the application as a .zip. The architecture and a short desciption of files and maps is presented below.
+Download the application as a .zip. The architecture and a short desciption of files and folders is presented below.
 
 ## Architecture
 ```
