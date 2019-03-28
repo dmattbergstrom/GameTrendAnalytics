@@ -36,7 +36,7 @@ export default class Item extends Component {
         </td>        
         <td>
           <div className="media">
-            <a href="#" className="pull-left">
+            <a href={"/gameinfo/"+id} className="pull-left">
               <img src={logo} className="media-photo"/>
             </a>
           </div>
