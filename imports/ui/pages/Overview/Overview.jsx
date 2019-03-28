@@ -12,8 +12,6 @@ import DynamicLine from "../../components/chart-types/DynamicLine.jsx";
 import Line from "../../components/chart-types/Line.jsx";
 import Pie from "../../components/chart-types/Pie.jsx";
 import { modelInstance } from '../../../api/model';
-import { timingSafeEqual } from 'crypto';
-import { isRegExp } from 'util';
 
 export default class Overview extends Component {
   constructor(props) {
@@ -30,15 +28,28 @@ export default class Overview extends Component {
     Tracker.autorun(() => {
       const {loading} = this.props;
       if(!loading) {
-        let topGames;
-        while (modelInstance.getTopGames().length < 0) {
-          topGames = modelInstance.getTopGames();
-        }
 
-        if ( modelInstance.getTopGames().length < 0 ) {
-          this.setState({
-            top_games: topGames,
-          });
+        // Data-proofing: Did we get all necessary data?
+        if (modelInstance.getTopGames().length > 0 ) {
+          let topGames = modelInstance.getTopGames();
+
+          // Retry to set data until successful.
+          const {length} = modelInstance.getTopGames()[0].data;
+          while (length < 0) {
+            topGames = modelInstance.getTopGames();
+          }
+
+          if ( length > 0) {
+            // Set data.
+            this.setState({
+              top_games: topGames,
+            });
+
+            // Not enough data was loaded in. Prompt user to refresh page.
+            if (length < 5) {
+              alert("Data-load was insufficient. Please refresh page.");
+            }
+          }
         }
       }
     });
