@@ -20,14 +20,24 @@ export default class Table extends Component {
     this.state = {
       checkedItems: []
     }
+    this.state = this.initWatchlistData();
+  }
 
-    const mappedItems = this.mapWatchlistItems("all");
-    this.state = {
-      activeFilter: "all",
-      checkedItems: [],
-      btnOptions: "",
-      items: mappedItems
-    };
+  componentWillMount() {
+    // If the model hasn't loaded in it's necessary data, please do so after App mounting.
+    Tracker.autorun(() => {
+      const {loading, model} = this.props;
+      if(!loading) {
+        let wlData;
+        while(!(model.getWatchlist().items.length > -1)) {
+          wlData = this.initWatchlistData();
+        }
+
+        if (!model.getWatchlist().items.length >= 0) {
+          this.setState(wlData);
+        }
+      }
+    });
   }
 
   /**
@@ -78,6 +88,16 @@ export default class Table extends Component {
       }
     });
     return mappedItems;
+  }
+
+  initWatchlistData(){
+    const mappedItems = this.mapWatchlistItems("all");
+    return {
+      activeFilter: "all",
+      checkedItems: [],
+      btnOptions: "",
+      items: mappedItems
+    };
   }
 
   removeFromWL(){

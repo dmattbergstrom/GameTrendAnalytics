@@ -13,6 +13,7 @@ import Line from "../../components/chart-types/Line.jsx";
 import Pie from "../../components/chart-types/Pie.jsx";
 import { modelInstance } from '../../../api/model';
 import { timingSafeEqual } from 'crypto';
+import { isRegExp } from 'util';
 
 export default class Overview extends Component {
   constructor(props) {
@@ -29,9 +30,16 @@ export default class Overview extends Component {
     Tracker.autorun(() => {
       const {loading} = this.props;
       if(!loading) {
-        this.setState({
-          top_games: modelInstance.getTopGames(),
-        });
+        let topGames;
+        while (modelInstance.getTopGames().length < 0) {
+          topGames = modelInstance.getTopGames();
+        }
+
+        if ( modelInstance.getTopGames().length < 0 ) {
+          this.setState({
+            top_games: topGames,
+          });
+        }
       }
     });
   }
