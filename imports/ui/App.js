@@ -22,6 +22,7 @@ import Watchlist from './pages/Watchlist/Watchlist.jsx';
 import Gameinfo from './pages/Gameinfo/Gameinfo.jsx';
 
 import { modelInstance } from '../api/model.js';
+import { log } from 'util';
 
 // App component - represents the whole app
 class App extends Component {
@@ -71,13 +72,24 @@ class App extends Component {
 
 export default withTracker(() => {
   // Subscribing to all relevant collections for all pages:
-  const handles = [
-    Meteor.subscribe('games'),
-    Meteor.subscribe('watchlist'),
-  ];
+  let loading = true;
+  const modelGames = modelInstance.getGames();
+  const modelWatchlist = modelInstance.getWatchlist();
 
-  // If handles aren't ready, "loading" will be set to true.
-  const loading = handles.some(handle => !handle.ready());
+  const dataMissing = (modelWatchlist.items === undefined || modelWatchlist.items.length == 0 || modelGames === undefined || modelGames.length == 0);
+
+  if ( dataMissing ) {
+    const handles = [
+      Meteor.subscribe('games'),
+      Meteor.subscribe('watchlist'),
+    ];
+
+    // If handles aren't ready, "loading" will be set to true.
+    loading = handles.some(handle => !handle.ready());
+  } else {
+    loading = false;
+  }
+
   return {
     loading: loading,
     currentUser: Meteor.user()
