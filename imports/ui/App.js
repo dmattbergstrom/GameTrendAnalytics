@@ -35,12 +35,12 @@ class App extends Component {
       const modelGames = modelInstance.getGames();
       const modelWatchlist = modelInstance.getWatchlist();
 
-      if (!modelGames || modelGames.length <= 0) {
+      if (modelGames === undefined || modelGames.length == 0) {
         const games = Games.find({}).fetch();
         modelInstance.setGames(games);
       }
 
-      if (!modelWatchlist || modelWatchlist.length <= 0) {
+      if (modelWatchlist.items === undefined || modelWatchlist.items.length == 0) {
         const watchlist = Wl.find({}).fetch()[0];
         modelInstance.setWatchlist(watchlist);
       }
