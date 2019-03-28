@@ -5,7 +5,6 @@ import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';  
 import Line from '../../components/chart-types/Line.jsx';
 import Area from '../../components/chart-types/Area.jsx';
-import { modelInstance } from '../../../api/model.js';
 import './Gameinfo.css';
 import '../../../../client/css/custom-radio-checkbox.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +14,7 @@ export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
     const game_id = window.location.href.split("/").slice(-1)[0]; // The id of the game is in the URL. Gets it go do a call to the model.
-    this.game = modelInstance.getSpecificGame(game_id);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
+    this.game = this.props.model.getSpecificGame(game_id);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
     if(this.game == undefined){  // Checks if game is valid/exists, for errorhandling. GÖR OM? ÄR DETTA FULT?
       this.valid_game = false;
 
@@ -39,8 +38,42 @@ export default class Gameinfo extends Component {
     }    
   }
 
+  componentWillMount() {
+    // If the model hasn't loaded in it's necessary data, please do so after App mounting.
+    Tracker.autorun(() => {
+      const {loading, model} = this.props;
+      const MIN_DATA = 3;
+      if(!loading) {
+
+        const game_id = window.location.href.split("/").slice(-1)[0];
+        this.game = model.getSpecificGame(game_id);
+
+        // Data-proofing: Did we get all necessary data?
+        if (model.getGames().length > 0 ) {
+          let topGames = model.getTopGames();
+
+          // Retry to set data until successful.
+          const {length} = this.game.data;
+          while (length < 0) {
+            this.game = model.getSpecificGame(game_id);
+          }
+
+          if ( length > 0) {
+            // Set data.
+            this.game = model.getSpecificGame(game_id);
+
+            // Not enough data was loaded in. Prompt user to refresh page.
+            if (length < MIN_DATA) {
+              alert("Data-load was insufficient. Please refresh page.");
+            }
+          }
+        }
+      }
+    });
+  }
+
   componentDidMount(){  // Is a method that runs when the component is created. It checks if the game is in the users watchlist or not.
-    this.userWatchlist = modelInstance.getWatchlist();
+    this.userWatchlist = this.props.model.getWatchlist();
     this.userWatchlist.items.forEach(game =>{
       // console.log(game);
       if(this.state.id == game._id){
@@ -62,10 +95,10 @@ export default class Gameinfo extends Component {
     
     if(!this.state.isChecked){
       console.log("add");      
-      modelInstance.addToWatchlist(this.state.id, this.state.title);
+      this.props.model.addToWatchlist(this.state.id, this.state.title);
     }else{
       console.log("remove");      
-      modelInstance.removeFromWatchlist(this.state.id);
+      this.props.model.removeFromWatchlist(this.state.id);
     }
 
     this.setState({
