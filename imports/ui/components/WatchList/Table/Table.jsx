@@ -73,6 +73,7 @@ export default class Table extends Component {
             id={_id} key={index} name={name}
             status={status} logo={logo}
             checkBoxHandler={this.checkBoxHandler} isChecked={isChecked}
+            checkbox={true}
           />
         );
       }

@@ -11,7 +11,7 @@ export default class Item extends Component {
 
   render() {
 
-    const {id, status, logo, name, checkBoxHandler, isChecked} = this.props;
+    const {id, status, logo, name, checkBoxHandler, isChecked, checkbox} = this.props;
 
     let statusClasses = "media-meta pull-right ";
     if (status == "trending") {
@@ -24,6 +24,7 @@ export default class Item extends Component {
 
     return (
       <tr data-status={status}>
+        {checkbox ? 
         <td>
         <div className="checkbox">
           <label>
@@ -32,6 +33,7 @@ export default class Item extends Component {
            </label>
         </div>
         </td>
+        : ""}
         <td>
           <div className="media">
             <a href="#" className="pull-left">
