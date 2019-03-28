@@ -19,7 +19,6 @@ Meteor.methods({
         if (!e) {
           let games = JSON.parse(res.content).top;
           games.map((game)=>{
-            // TODO: Maybe clean data a little bit?
             game.updated = new Date();
             Games.insert(game);
           });

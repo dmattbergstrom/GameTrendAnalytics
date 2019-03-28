@@ -12,12 +12,11 @@ import DynamicLine from "../../components/chart-types/DynamicLine.jsx";
 import Line from "../../components/chart-types/Line.jsx";
 import Pie from "../../components/chart-types/Pie.jsx";
 import Item from "../../components/WatchList/Item/Item.jsx";
-import { modelInstance } from '../../../api/model';
 
 export default class Overview extends Component {
   constructor(props) {
     super(props);
-    this.getTopGames = modelInstance.getTopGames();
+    this.getTopGames = this.props.model.getTopGames();
     this.mapGames = this.getTopGames.map((game, index) => {      
       console.log(game._id);
       
@@ -31,8 +30,40 @@ export default class Overview extends Component {
     this.state = {
       top_games: this.mapGames,
     };
-    console.log(this.mapGames);
     
+  }
+
+  componentWillMount() {
+    // If the model hasn't loaded in it's necessary data, please do so after App mounting.
+    Tracker.autorun(() => {
+      const MIN_DATA = 5;
+      const {loading, model} = this.props;
+      if(!loading) {
+
+        // Data-proofing: Did we get all necessary data?
+        if (model.getTopGames().length > 0 ) {
+          let topGames = model.getTopGames();
+
+          // Retry to set data until successful.
+          const {length} = model.getTopGames()[0].data;
+          while (length < 0) {
+            topGames = model.getTopGames();
+          }
+
+          if ( length > 0) {
+            // Set data.
+            this.setState({
+              top_games: topGames,
+            });
+
+            // Not enough data was loaded in. Prompt user to refresh page.
+            if (length < MIN_DATA) {
+              alert("Data-load was insufficient. Please refresh page.");
+            }
+          }
+        }
+      }
+    });
   }
 
   render() {
@@ -60,7 +91,6 @@ export default class Overview extends Component {
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
           <Line games={this.getTopGames} />
           <Pie games={this.getTopGames}/>
-          <button onClick={() => { console.log(model.getGames()) }}> TEST </button>
         </div>
       </div>
     );

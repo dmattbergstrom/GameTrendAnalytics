@@ -32,14 +32,19 @@ class App extends Component {
   componentWillMount() {
     // If the model hasn't loaded in it's necessary data, please do so after App mounting.
     Tracker.autorun(() => {
-      if (!modelInstance.getGames() || modelInstance.getGames().length <= 0) {
+      const modelGames = modelInstance.getGames();
+      const modelWatchlist = modelInstance.getWatchlist();
+
+      if (modelGames === undefined || modelGames.length == 0) {
         const games = Games.find({}).fetch();
         modelInstance.setGames(games);
       }
 
-      const watchlist = Wl.find({}).fetch()[0];
-      modelInstance.setWatchlist(watchlist);
-    })
+      if (modelWatchlist.items === undefined || modelWatchlist.items.length == 0) {
+        const watchlist = Wl.find({}).fetch()[0];
+        modelInstance.setWatchlist(watchlist);
+      }
+    });
   }
 
   render() {
@@ -65,14 +70,27 @@ class App extends Component {
 }
 
 export default withTracker(() => {
-  // Subscribing to all relevant collections for all pages:
-  const handles = [
-    Meteor.subscribe('games'),
-    Meteor.subscribe('watchlist'),
-  ];
 
-  // If handles aren't ready, "loading" will be set to true.
-  const loading = handles.some(handle => !handle.ready());
+  // Does data need to be loaded?
+  let loading = true;
+  const modelGames = modelInstance.getGames();
+  const modelWatchlist = modelInstance.getWatchlist();
+
+  const dataMissing = (modelWatchlist.items === undefined || modelWatchlist.items.length == 0 || modelGames === undefined || modelGames.length == 0);
+
+  // Data is missing. Subscribe to all relevant collections for all pages:
+  if ( dataMissing ) {
+    const handles = [
+      Meteor.subscribe('games'),
+      Meteor.subscribe('watchlist'),
+    ];
+
+    // If handles aren't ready, "loading" will be set to true.
+    loading = handles.some(handle => !handle.ready());
+  } else {
+    loading = false; // data wasn't missing.
+  }
+
   return {
     loading: loading,
     currentUser: Meteor.user()
