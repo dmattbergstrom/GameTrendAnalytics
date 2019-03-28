@@ -24,16 +24,16 @@ export default class Item extends Component {
 
     return (
       <tr data-status={status}>
-        {checkbox ? 
         <td>
-        <div className="checkbox">
-          <label>
-           <input id={id} onChange={checkBoxHandler} type="checkbox" name="checkbox" value="" defaultChecked={isChecked}/>
-           <span className="cr"><FontAwesomeIcon className="cr-icon green-text" icon="check" /></span>
-           </label>
-        </div>
-        </td>
-        : ""}
+          {checkbox ? 
+            <div className="checkbox">
+              <label>
+              <input id={id} onChange={checkBoxHandler} type="checkbox" name="checkbox" value="" defaultChecked={isChecked}/>
+              <span className="cr"><FontAwesomeIcon className="cr-icon green-text" icon="check" /></span>
+              </label>
+            </div>
+          : ""}
+        </td>        
         <td>
           <div className="media">
             <a href="#" className="pull-left">
