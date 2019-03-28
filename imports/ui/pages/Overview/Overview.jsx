@@ -18,8 +18,6 @@ export default class Overview extends Component {
     super(props);
     this.getTopGames = this.props.model.getTopGames();
     this.mapGames = this.getTopGames.map((game, index) => {      
-      console.log(game._id);
-      
       const {_id, name, status, logo} = game;
       return (<Item
           id={_id} key={index} name={name}
@@ -28,7 +26,7 @@ export default class Overview extends Component {
         />)
       });
     this.state = {
-      top_games: this.mapGames,
+      top_games: this.getTopGames,
     };
     
   }
@@ -81,7 +79,7 @@ export default class Overview extends Component {
                   <tr><td>League of Legends</td></tr>
                   <tr><td>Dota 2</td></tr>
                   <tr><td>Sekiro: Shadow Die Twice</td></tr> */}
-                  {this.state.top_games}
+                  {this.mapGames}
                 </tbody>
               </table>
             </div>
