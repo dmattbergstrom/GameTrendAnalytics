@@ -12,6 +12,7 @@ import DynamicLine from "../../components/chart-types/DynamicLine.jsx";
 import Line from "../../components/chart-types/Line.jsx";
 import Pie from "../../components/chart-types/Pie.jsx";
 import { modelInstance } from '../../../api/model';
+import { timingSafeEqual } from 'crypto';
 
 export default class Overview extends Component {
   constructor(props) {
@@ -20,6 +21,19 @@ export default class Overview extends Component {
     this.state = {
       top_games: modelInstance.getTopGames(),
     };
+    
+  }
+
+  componentWillMount() {
+    // If the model hasn't loaded in it's necessary data, please do so after App mounting.
+    Tracker.autorun(() => {
+      const {loading} = this.props;
+      if(!loading) {
+        this.setState({
+          top_games: modelInstance.getTopGames(),
+        });
+      }
+    });
   }
 
   render() {
