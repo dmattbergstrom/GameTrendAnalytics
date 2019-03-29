@@ -192,6 +192,17 @@ const Model = function(){
     return games[id];
   };
 
+  this.searchGames = (name) => {
+    let allGames = this.getGames();
+    var result = undefined;
+    allGames.forEach(game => {
+      if(game.name == name){
+        result = game._id;
+      }
+    });
+    return result;
+  };
+
   /**
   *  Get:er & Set:er for Watchlist:
   **/

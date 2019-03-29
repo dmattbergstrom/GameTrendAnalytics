@@ -11,9 +11,37 @@ export default class Navbar extends Component {
 
   constructor(props){
     super(props);
+
+    this.state = {
+      search_value: '',
+      redirect: false,
+      redirectToGame: 0,
+    };
   }
 
+  searchGames = (e) => {
+    e.preventDefault();
+    console.log(this.state.search_value);
+    let searchResult = this.props.model.searchGames(this.state.search_value); // The game._id is returned of the searched game. undefined is returned if the game wasn't found.
+    console.log(searchResult);
+    
+    // this.setState({ // Is connected to the redirect to gameinfo, but the redirect doesnt work atm.
+    //   redirect: true,
+    //   redirectToGame: searchResult
+    // });
+  };  
+  
+  seachValueChanged = (e) => {
+    this.setState({
+      search_value: e.target.value,
+    });
+  };
+
   render() {
+    // if(this.state.redirect){  //Doesn't work atm!
+    //   return <Link to={'/gameinfo/'+this.state.redirectToGame} />
+    // }
+
     const { model, loading } = this.props;
     const { items } = model.getWatchlist();
     let watchlistItems = loading ? "&nbsp;&nbsp;Loading..." : items.map((item)=>{
@@ -51,9 +79,9 @@ export default class Navbar extends Component {
               </a>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button className="button inverse-dark-green my-2 my-sm-0" type="submit">Search</button>
+          <form className="form-inline my-2 my-lg-0" onSubmit={this.searchGames} >
+            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={this.seachValueChanged} />
+            <button className="button inverse-dark-green my-2 my-sm-0" type="submit" >Search</button>
           </form>
         </div>
       </nav>
