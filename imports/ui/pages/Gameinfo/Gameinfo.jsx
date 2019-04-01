@@ -5,6 +5,7 @@ import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';  
 import Line from '../../components/chart-types/Line.jsx';
 import Area from '../../components/chart-types/Area.jsx';
+import OtherInformation from '../../components/GameInfoComp/OtherInformation.jsx';
 import './Gameinfo.css';
 import '../../../../client/css/custom-radio-checkbox.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,36 +41,38 @@ export default class Gameinfo extends Component {
 
   componentWillMount() {
     // If the model hasn't loaded in it's necessary data, please do so after App mounting.
-    Tracker.autorun(() => {
-      const {loading, model} = this.props;
-      const MIN_DATA = 3;
-      if(!loading) {
+    if (this.valid_game){
+      Tracker.autorun(() => {
+        const {loading, model} = this.props;
+        const MIN_DATA = 3;
+        if(!loading) {
 
-        const game_id = window.location.href.split("/").slice(-1)[0];
-        this.game = model.getSpecificGame(game_id);
+          const game_id = window.location.href.split("/").slice(-1)[0];
+          this.game = model.getSpecificGame(game_id);
 
-        // Data-proofing: Did we get all necessary data?
-        if (model.getGames().length > 0 ) {
-          let topGames = model.getTopGames();
+          // Data-proofing: Did we get all necessary data?
+          if (model.getGames().length > 0 ) {
+            let topGames = model.getTopGames();
 
-          // Retry to set data until successful.
-          const {length} = this.game.data;
-          while (length < 0) {
-            this.game = model.getSpecificGame(game_id);
-          }
+            // Retry to set data until successful.
+            const {length} = this.game.data;
+            while (length < 0) {
+              this.game = model.getSpecificGame(game_id);
+            }
 
-          if ( length > 0) {
-            // Set data.
-            this.game = model.getSpecificGame(game_id);
+            if ( length > 0) {
+              // Set data.
+              this.game = model.getSpecificGame(game_id);
 
-            // Not enough data was loaded in. Prompt user to refresh page.
-            if (length < MIN_DATA) {
-              alert("Data-load was insufficient. Please refresh page.");
+              // Not enough data was loaded in. Prompt user to refresh page.
+              if (length < MIN_DATA) {
+                alert("Data-load was insufficient. Please refresh page.");
+              }
             }
           }
         }
-      }
-    });
+      });
+    }
   }
 
   componentDidMount(){  // Is a method that runs when the component is created. It checks if the game is in the users watchlist or not.
@@ -147,7 +150,7 @@ export default class Gameinfo extends Component {
                                 </label>    
                               </div>
 
-                              <div className="form-check radiobox">                                
+                              <div className="form-check radiobox">
                                 <label>
                                   <input className="form-check-input" type="radio" name="chartType" id="areaChart" value="areaChart" checked={selectedOption === "areaChart"} onChange={this.chartToShow} />
                                   <span>Area</span>
@@ -162,13 +165,8 @@ export default class Gameinfo extends Component {
 
                         <hr />
 
-                        <div id="otherGameInformation">
-                          {/*<h3>Other information</h3>*/}
-                            {/*
-                              Kan vi här sammanställa den datan vi har i text? Exempelvis säga om den gått upp eller ner
-                              trending/falling/straight osv?
-                             */}
-                             <img src={this.state.img} alt="No image found" />
+                        <div id="otherGameInformation">                          
+                            <OtherInformation gameInfo={this.game} />                         
                         </div>
                       </div>      
                   </div>          

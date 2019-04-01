@@ -6,12 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Router
 import { Router, Route, Switch } from 'react-router';
+import { Link } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 const browserHistory = createBrowserHistory();
 
 //Collections:
 import Games from "/imports/api/collections/games/games.js";
-import {default as Wl} from "/imports/api/collections/watchlist/watchlist.js";
+import { default as Wl } from "/imports/api/collections/watchlist/watchlist.js";
 
 // General Components:
 import Navbar from './components/Navbar/Navbar.jsx';
@@ -54,16 +55,18 @@ class App extends Component {
     return (
       <div className="App super-dark">
         {/* Navbar + Login! */}
-        <Navbar loading={loading} currentUser={currentUser} model={modelInstance}/>
+        <Navbar loading={loading} currentUser={currentUser} model={modelInstance} />
 
         {/* App Routes: Show loading until model can be sent down as props. */}
-        <Router history={browserHistory}>
+        {/* <Router history={browserHistory}>
+          <Switch> */}
           <Switch>
-            <Route exact path="/" render={() => loading ? spinner : <Overview loading={loading} model={modelInstance}/>}/>
-            <Route path="/gameinfo" render={() => loading ? spinner : <Gameinfo currentUser={currentUser} model={modelInstance}/>}/>
-            <Route path="/watchlist" render={() => loading ? spinner : <Watchlist currentUser={currentUser} model={modelInstance}/>}/>
+            <Route exact path="/" render={() => loading ? spinner : <Overview loading={loading} model={modelInstance} />} />
+            <Route path="/gameinfo" render={() => loading ? spinner : <Gameinfo currentUser={currentUser} model={modelInstance} />} />
+            <Route path="/watchlist" render={() => loading ? spinner : <Watchlist currentUser={currentUser} model={modelInstance} />} />
           </Switch>
-        </Router>
+          {/* </Switch>
+        </Router> */}
       </div>
     );
   }
@@ -79,7 +82,7 @@ export default withTracker(() => {
   const dataMissing = (modelWatchlist.items === undefined || modelWatchlist.items.length == 0 || modelGames === undefined || modelGames.length == 0);
 
   // Data is missing. Subscribe to all relevant collections for all pages:
-  if ( dataMissing ) {
+  if (dataMissing) {
     const handles = [
       Meteor.subscribe('games'),
       Meteor.subscribe('watchlist'),

@@ -8,23 +8,15 @@ import { Link } from 'react-router-dom';
 import "./Overview.css"
 
 // Components
-import DynamicLine from "../../components/chart-types/DynamicLine.jsx";
 import Line from "../../components/chart-types/Line.jsx";
 import Pie from "../../components/chart-types/Pie.jsx";
-import Item from "../../components/WatchList/Item/Item.jsx";
+import GameTable from "../../components/OverviewComponents/GameTable.jsx";
+
 
 export default class Overview extends Component {
   constructor(props) {
     super(props);
-    this.getTopGames = this.props.model.getTopGames();
-    this.mapGames = this.getTopGames.map((game, index) => {      
-      const {_id, name, status, logo} = game;
-      return (<Item
-          id={_id} key={index} name={name}
-          status={status} logo={logo}
-          checkbox={false}
-        />)
-      });
+    this.getTopGames = this.props.model.getTopGames();    
     this.state = {
       top_games: this.getTopGames,
     };
@@ -64,27 +56,19 @@ export default class Overview extends Component {
     });
   }
 
+  test = () =>{
+    console.log("hes");    
+  }
+
   render() {
     const {model} = this.props;
       
     return (
       <div className="Overview row">
-        <div className="col-md-4 col-lg-4 white-text" id="gameRow">
-          <h2>Top 5 games</h2>          
-          <div className="table-container">
-              <table className="table table-filter white-text">
-                <tbody>
-                  {/* <tr><td>Counterstrike</td></tr>
-                  <tr><td>Just Chat</td></tr>
-                  <tr><td>League of Legends</td></tr>
-                  <tr><td>Dota 2</td></tr>
-                  <tr><td>Sekiro: Shadow Die Twice</td></tr> */}
-                  {this.mapGames}
-                </tbody>
-              </table>
-            </div>
+        <div className="col-md-3 col-lg-3 white-text" id="gameRow">
+          <GameTable getTopGames={this.getTopGames} />
         </div>
-        <div className="col-sm-12 col-md-7 col-lg-6 container-fluid">
+        <div className="col-sm-12 col-md-8 col-lg-8 container-fluid">
           <br/><br/>
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
           <Line games={this.getTopGames} />
