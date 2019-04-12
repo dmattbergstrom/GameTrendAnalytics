@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Autosuggest from 'react-autosuggest';
 
 // CSS
 import "./Navbar.css";
@@ -11,28 +12,80 @@ export default class Navbar extends Component {
 
   constructor(props){
     super(props);
-
+    // Autosuggest is a controlled component.
+    // This means that you need to provide an input value
+    // and an onChange handler that updates this value (see below).
+    // Suggestions also need to be provided to the Autosuggest,
+    // and they are initially empty because the Autosuggest is closed.
     this.state = {
-      search_value: '',
+      value: '',
+      suggestions: [],
+      search_value: '', // ????
       redirect: false,
       redirectToGame: 0,
-      searchGame: "1111",
+      searchGame: "1111", // ????
     };
+
+    this.games = this.props.model.getGames();
   }
-  
-  handleSearch = (e) => {
-    let searchResult = this.props.model.searchGames(e.target.value); // The game._id is returned of the searched game. undefined is returned if the game wasn't found.
-    if(!searchResult){
-      searchResult = "1111";
-    } else {
-      window.location.href = "/gameinfo/"+searchResult;
-    }
-    this.setState({
-      search_value: e.target.value,
-      searchGame: searchResult,
-    });
-    
+
+  // Teach Autosuggest how to calculate suggestions for any given input value.
+  getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0 ? [] : this.games.filter(game =>
+      game.name.toLowerCase().slice(0, inputLength) === inputValue
+    );
   };
+
+  // When suggestion is clicked, Autosuggest needs to populate the input
+  // based on the clicked suggestion. Teach Autosuggest how to calculate the
+  // input value for every given suggestion.
+  getSuggestionValue = suggestion => suggestion.name;
+
+  // Use your imagination to render suggestions.
+  renderSuggestion = suggestion => (
+    <div>
+      {suggestion.name}
+    </div>
+  );
+
+  
+  // handleSearch = (e) => {
+  //   let searchResult = this.props.model.searchGames(e.target.value); // The game._id is returned of the searched game. undefined is returned if the game wasn't found.
+  //   if(!searchResult){
+  //     searchResult = "1111";
+  //   } else {
+  //     window.location.href = "/gameinfo/"+searchResult;
+  //   }
+  //   this.setState({
+  //     search_value: e.target.value,
+  //     searchGame: searchResult,
+  //   });
+  //  
+  // };
+
+  handleSearch = (e, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+  }
+
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: this.getSuggestions(value)
+    });
+  };
+
+    // Autosuggest will call this function every time you need to clear suggestions.
+    onSuggestionsClearRequested = () => {
+      this.setState({
+        suggestions: []
+      });
+    };
 
   render() {
     const { model, loading } = this.props;
@@ -40,6 +93,17 @@ export default class Navbar extends Component {
     let watchlistItems = loading ? "&nbsp;&nbsp;Loading..." : items.map((item)=>{
       return <a key={item._id} className="dropdown-item" href={"/gameinfo/"+item._id}>{item.name}</a>;
     });
+
+    /**
+     *  Autosuggestion Setup:
+     **/
+    const { value, suggestions } = this.state;
+    // Autosuggest will pass through all these props to the input.
+    const inputProps = {
+      placeholder: 'Type a popular game name',
+      value,
+      onChange: this.handleSearch
+    };
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark dark-grey container-fluid">
@@ -73,8 +137,17 @@ export default class Navbar extends Component {
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0" >
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={this.handleSearch} />          
-            <Link to={"/gameinfo/"+this.state.searchGame} ><button className="button inverse-dark-green my-2 my-sm-0" type="submit" >Search</button></Link>
+            <div className="form-control mr-sm-2">
+              <Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                getSuggestionValue={this.getSuggestionValue}
+                renderSuggestion={this.renderSuggestion}
+                inputProps={inputProps}
+              />
+            </div>
+            <button className="button inverse-dark-green my-2 my-sm-0" type="submit" >Search</button>
           </form>
         </div>
       </nav>

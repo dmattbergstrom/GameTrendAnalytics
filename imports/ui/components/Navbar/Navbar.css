@@ -2,3 +2,17 @@
   color:#20c997;
   border-color:#20c997;
 }
+
+
+.react-autosuggest__container {
+  background-color:#eee;
+  color:#000;
+  width: 100%;
+  border: none;
+  z-index: 99999;
+}
+
+.react-autosuggest__suggestions-list{
+  list-style: none;
+  z-index: 99999;
+}

@@ -11,7 +11,7 @@ class UnvalidChart extends Component {
     render() {
       return (
         <div className="chartType unvalidChart">
-            <h4 class="text-center red-text text-darken-2">Data-load was insufficient. Refresh the page to retrieve complete data.</h4>
+            <h4 className="text-center red-text text-darken-2">Data-load was insufficient. Refresh the page to retrieve complete data.</h4>
         </div>
       );
     }
