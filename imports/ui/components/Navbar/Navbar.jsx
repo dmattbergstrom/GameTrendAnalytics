@@ -130,7 +130,7 @@ export default class Navbar extends Component {
             </li>
           </ul>
           <form onSubmit={this.handleSearch} className="form-inline my-2 my-lg-0" >
-            <div className="mr-sm-2">
+            <div className="form-control mr-sm-2">
               <Autosuggest
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
