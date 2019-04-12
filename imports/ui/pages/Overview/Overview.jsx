@@ -10,6 +10,7 @@ import "./Overview.css"
 // Components
 import Line from "../../components/chart-types/Line.jsx";
 import Pie from "../../components/chart-types/Pie.jsx";
+import UnvalidChart from "../../components/chart-types/UnvalidChart.jsx";
 import GameTable from "../../components/OverviewComponents/GameTable.jsx";
 
 
@@ -19,6 +20,7 @@ export default class Overview extends Component {
     this.getTopGames = this.props.model.getTopGames();    
     this.state = {
       top_games: this.getTopGames,
+      valid_data: true,
     };
     
   }
@@ -49,6 +51,7 @@ export default class Overview extends Component {
             // Not enough data was loaded in. Prompt user to refresh page.
             if (length < MIN_DATA) {
               alert("Data-load was insufficient. Please refresh page.");
+              this.state.valid_data = true; // Change to false!!
             }
           }
         }
@@ -71,7 +74,7 @@ export default class Overview extends Component {
         <div className="col-sm-12 col-md-8 col-lg-8 container-fluid">
           <br/><br/>
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
-          <Line games={this.getTopGames} />
+          {valid_data ? <Line games={this.getTopGames} /> : <UnvalidChart />}          
           <Pie games={this.getTopGames}/>
         </div>
       </div>

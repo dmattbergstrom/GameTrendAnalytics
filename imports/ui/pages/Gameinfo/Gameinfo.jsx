@@ -5,6 +5,7 @@ import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';  
 import Line from '../../components/chart-types/Line.jsx';
 import Area from '../../components/chart-types/Area.jsx';
+import UnvalidChart from '../../components/chart-types/UnvalidChart.jsx';
 import OtherInformation from '../../components/GameInfoComp/OtherInformation.jsx';
 import './Gameinfo.css';
 import '../../../../client/css/custom-radio-checkbox.css';
@@ -35,6 +36,7 @@ export default class Gameinfo extends Component {
         selectedOption : "lineChart",  // Default är lineChart,
         isChecked : false,
         img : this.game.img,
+        valid_data: true,
       };
     }    
   }
@@ -67,6 +69,7 @@ export default class Gameinfo extends Component {
               // Not enough data was loaded in. Prompt user to refresh page.
               if (length < MIN_DATA) {
                 alert("Data-load was insufficient. Please refresh page.");
+                this.state.valid_data = true // If data is not sufficient, or enough. SWOP TO FALSE!!!
               }
             }
           }
@@ -118,7 +121,10 @@ export default class Gameinfo extends Component {
       activeChart = <Line games={[this.game]} />;
     } else if(this.state.selectedOption == 'areaChart'){
       activeChart = <Area games={[this.game]} />;
-    }
+    } 
+    // else if(!this.state.valid_data){ // If data is "not enough" show another component. For UX and User Interface!
+    //   activeChart = <UnvalidChart />;
+    // }
 
     return (
       <div className="container-fluid">
