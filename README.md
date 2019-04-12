@@ -17,13 +17,8 @@ Since every user will have their own “watchlist”, the application demands a 
 7. Implemented a loading spinner which waits until all data is loaded in to the application.
 8. Implemented a dynamic navbar which changes depending on user info / being signed in or not.
 9. Setup a Heroku Application.
-
-## What's next?
-0. In general, work on interactivity features. Meaning, more intuitive features that tell the user what is actually going on in the application. If data fails to load, and so on and so forth.
-1. Data proof the application further. Handle cases wher eunexpected or shortage of data occurs.
-2. (Maybe) implement dynamic comparisions between games in the watchlist. Allowing users to compare two, three, or more specific games to one another.
-3. (Maybe) implement search functionality.
-4. Clean up code & Overlook Architecture.
+10. Implemented search functionality.
+11. Implemented autosuggest in search.
 
 ## How to test each page:
 **Do not use your localhost for testing pages. Use the herokuapp linked below when testing the application**
@@ -119,15 +114,5 @@ server/
   main.js                      # server entry point, imports all server code
 ```
 
-## Nifty Bash Files (For UNIX systems)
-```
-  ./run_unix                  # Runs the program from the terminal.
-
-  ./git_push_unix "<MSG>"     # Pushes all changes in current dir to current branch, with a commit message as parameter.
-
-  ./git_merge_unix
-    "<MSG>"
-    "<MERGE_TO>"
-    "<MERGE_FROM>"            # Does the same as the file above, and checks out a new branch <MERGE_TO> and attempts a merge with
-                              # <MERGE_FROM> branch.
-```
+## ERROR: "Data-load was insufficient. Refresh the page to retrieve complete data."
+Sometimes the collections doesn't get to load before the components render in. This seems to be a data-race on the backend of our storage. Since backend wasn't graded, we didn't bother to fully data-proof the the loaded data. Instead, we show the user, visually, when the data fetch was incomplete - adding to the user experience / interactivity quality of the app.
