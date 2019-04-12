@@ -24,11 +24,14 @@ export default class Navbar extends Component {
     let searchResult = this.props.model.searchGames(e.target.value); // The game._id is returned of the searched game. undefined is returned if the game wasn't found.
     if(!searchResult){
       searchResult = "1111";
+    } else {
+      window.location.href = "/gameinfo/"+searchResult;
     }
     this.setState({
       search_value: e.target.value,
       searchGame: searchResult,
     });
+    
   };
 
   render() {

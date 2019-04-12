@@ -196,7 +196,7 @@ const Model = function(){
     let allGames = this.getGames();
     var result = undefined;
     allGames.forEach(game => {
-      if(game.name == name){
+      if(game.name.toLowerCase() == name.toLowerCase()){
         result = game._id;
       }
     });

@@ -56,10 +56,6 @@ export default class Overview extends Component {
     });
   }
 
-  test = () =>{
-    console.log("hes");    
-  }
-
   render() {
     const {model} = this.props;
       
