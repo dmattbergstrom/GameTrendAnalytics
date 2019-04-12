@@ -50,8 +50,7 @@ export default class Overview extends Component {
 
             // Not enough data was loaded in. Prompt user to refresh page.
             if (length < MIN_DATA) {
-              alert("Data-load was insufficient. Please refresh page.");
-              this.state.valid_data = true; // Change to false!!
+              this.state.valid_data = false; // Change to false!!
             }
           }
         }
@@ -61,6 +60,7 @@ export default class Overview extends Component {
 
   render() {
     const {model} = this.props;
+    const {valid_data} = this.state;
       
     return (
       <div className="Overview row">
@@ -70,7 +70,7 @@ export default class Overview extends Component {
         <div className="col-sm-12 col-md-8 col-lg-8 container-fluid">
           <br/><br/>
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
-          {valid_data ? <Line games={this.getTopGames} /> : <UnvalidChart />}          
+          {valid_data ? <Line games={this.getTopGames} /> : <React.Fragment><Line games={this.getTopGames} /><UnvalidChart /></React.Fragment>}          
           <Pie games={this.getTopGames}/>
         </div>
       </div>
