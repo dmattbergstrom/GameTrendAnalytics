@@ -68,8 +68,7 @@ export default class Gameinfo extends Component {
 
               // Not enough data was loaded in. Prompt user to refresh page.
               if (length < MIN_DATA) {
-                alert("Data-load was insufficient. Please refresh page.");
-                this.state.valid_data = true // If data is not sufficient, or enough. SWOP TO FALSE!!!
+                this.state.valid_data = false // If data is not sufficient, or enough. 
               }
             }
           }
@@ -115,16 +114,13 @@ export default class Gameinfo extends Component {
 
   render() {
     let activeChart;
-    let {title, selectedOption} = this.state;
+    let {title, selectedOption, valid_data} = this.state;
 
-    if (this.state.selectedOption == 'lineChart'){
-      activeChart = <Line games={[this.game]} />;
-    } else if(this.state.selectedOption == 'areaChart'){
+    if (selectedOption == 'lineChart'){
+        activeChart = <Line games={[this.game]} />;
+    } else if(selectedOption == 'areaChart'){
       activeChart = <Area games={[this.game]} />;
     } 
-    // else if(!this.state.valid_data){ // If data is "not enough" show another component. For UX and User Interface!
-    //   activeChart = <UnvalidChart />;
-    // }
 
     return (
       <div className="container-fluid">
@@ -168,6 +164,9 @@ export default class Gameinfo extends Component {
                             {activeChart}
                           </div>
                         </div>
+                        
+                        <br/>
+                        {valid_data ? "" : <UnvalidChart />}
 
                         <hr />
 
