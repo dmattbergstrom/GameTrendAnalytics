@@ -20,10 +20,8 @@ export default class Navbar extends Component {
     this.state = {
       value: '',
       suggestions: [],
-      search_value: '', // ????
       redirect: false,
       redirectToGame: 0,
-      searchGame: "1111", // ????
     };
 
     this.games = this.props.model.getGames();
@@ -50,23 +48,18 @@ export default class Navbar extends Component {
       {suggestion.name}
     </div>
   );
-
   
-  // handleSearch = (e) => {
-  //   let searchResult = this.props.model.searchGames(e.target.value); // The game._id is returned of the searched game. undefined is returned if the game wasn't found.
-  //   if(!searchResult){
-  //     searchResult = "1111";
-  //   } else {
-  //     window.location.href = "/gameinfo/"+searchResult;
-  //   }
-  //   this.setState({
-  //     search_value: e.target.value,
-  //     searchGame: searchResult,
-  //   });
-  //  
-  // };
+  handleSearch = (e) => {
+    e.preventDefault();
+    const {value} = this.state;
+    let searchResult = this.props.model.searchGames(value); // The game._id is returned of the searched game. undefined is returned if the game wasn't found.
+    if(!searchResult){
+      searchResult = "";
+    }
+    window.location.href = "/gameinfo/"+searchResult;
+  };
 
-  handleSearch = (e, { newValue }) => {
+  onChange = (e, { newValue }) => {
     this.setState({
       value: newValue
     });
@@ -102,7 +95,7 @@ export default class Navbar extends Component {
     const inputProps = {
       placeholder: 'Type a popular game name',
       value,
-      onChange: this.handleSearch
+      onChange: this.onChange
     };
 
     return (
@@ -136,7 +129,7 @@ export default class Navbar extends Component {
               </a>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0" >
+          <form onSubmit={this.handleSearch} className="form-inline my-2 my-lg-0" >
             <div className="form-control mr-sm-2">
               <Autosuggest
                 suggestions={suggestions}

@@ -175,7 +175,7 @@ export default class Gameinfo extends Component {
                         </div>
                       </div>      
                   </div>          
-                : <h2><a className="dark-green-text" href="/">Game doesn't exists go back to overview</a></h2>}
+                : <h2 className="dark-green-text">Game doesn't exists, please go back to <a className="goBackLink blue-text" href="/">Overview</a></h2>}
                 </div>
             </div>
       </div>
