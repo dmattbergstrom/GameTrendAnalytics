@@ -44,7 +44,7 @@ export default class Navbar extends Component {
 
   // Use your imagination to render suggestions.
   renderSuggestion = suggestion => (
-    <div>
+    <div className="suggestion-container" >
       {suggestion.name}
     </div>
   );
@@ -93,7 +93,7 @@ export default class Navbar extends Component {
     const { value, suggestions } = this.state;
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'Type a popular game name',
+      placeholder: 'Search games',
       value,
       onChange: this.onChange
     };
@@ -131,7 +131,7 @@ export default class Navbar extends Component {
           </ul>
           <form onSubmit={this.handleSearch} className="form-inline my-2 my-lg-0" >
             <div className="form-control mr-sm-2">
-              <Autosuggest
+                <Autosuggest
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={this.onSuggestionsClearRequested}

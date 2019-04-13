@@ -155,17 +155,21 @@ hr {
 }
 
 #gameRow {
-  min-height: 20vh;
+  max-height: 80vh;
   margin: 60px 0px 0px 20px;
   border: 3px solid #343a40;
   border-radius: 10px;
 }
 
-#gameRow h2 {
+#gameRow h3, #gameRow h2 {
   text-align: center;
 }
 #gameRow .table-filter tr td:nth-child(3) { width: 300px; }
 
 .goBackLink {
   text-decoration: underline!important;
+}
+
+#view-top-games{
+  color: none!important;
 }

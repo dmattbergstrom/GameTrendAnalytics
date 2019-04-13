@@ -16,3 +16,10 @@
   list-style: none;
   z-index: 99999;
 }
+
+.react-autosuggest__input, .react-autosuggest__input--focused, .react-autosuggest__input--open{
+  border: none;
+  outline: none;
+  /* height: 100%;
+  width: 100%; */
+}

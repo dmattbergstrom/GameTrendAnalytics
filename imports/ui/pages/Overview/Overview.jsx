@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // CSS
 import "./Overview.css"
@@ -63,9 +64,14 @@ export default class Overview extends Component {
     const {valid_data} = this.state;
       
     return (
-      <div className="Overview row">
-        <div className="col-md-3 col-lg-3 white-text" id="gameRow">
-          <GameTable getTopGames={this.getTopGames} />
+      <div className="Overview row container-fluid">
+        <div className="col-md-3 col-lg-3 col-sm-12 white-text" id="gameRow">
+          <div className="d-block d-md-none" id="on-mobile">
+              <h3 data-toggle="collapse" data-target="#top-games-container">Click to view games!!!!</h3>
+          </div>
+          <div className="collapse d-lg-block d-md-block" id="top-games-container">
+            <GameTable getTopGames={this.getTopGames} />
+          </div>          
         </div>
         <div className="col-sm-12 col-md-8 col-lg-8 container-fluid">
           <br/><br/>
