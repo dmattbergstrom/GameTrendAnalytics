@@ -132,10 +132,7 @@ export default class Table extends Component {
       return "";
     } else {
       return (
-        <React.Fragment>
-          <Button classes="blue white-text" label="See Stats"/>
-          <Button classes="red white-text" label="Remove From Watchlist" clickHandler={this.removeFromWL}/>
-        </React.Fragment>
+        <Button classes="red white-text" label="Remove From Watchlist" clickHandler={this.removeFromWL}/>
       )
     }
   }
