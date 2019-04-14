@@ -67,7 +67,7 @@ export default class Overview extends Component {
       <div className="Overview row container-fluid">
         <div className="col-md-3 col-lg-3 col-sm-12 white-text" id="gameRow">
           <div className="d-block d-md-none" id="on-mobile">
-              <h3 data-toggle="collapse" data-target="#top-games-container">Click to view games!!!!</h3>
+              <h3 data-toggle="collapse" data-target="#top-games-container">Click to view games!</h3>
           </div>
           <div className="collapse d-lg-block d-md-block" id="top-games-container">
             <GameTable getTopGames={this.getTopGames} />
