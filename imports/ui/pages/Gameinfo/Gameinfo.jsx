@@ -12,14 +12,14 @@ export default class Gameinfo extends Component {
   constructor(props) {
     super(props);
     const game_id = window.location.href.split("/").slice(-1)[0]; // The id of the game is in the URL. Gets it go do a call to the model.
-    this.game = this.props.model.getSpecificGame(game_id);  // 1 => this.props.id, ska ändras när vi senare ankallar Gameinfo komponenten
-    if(this.game == undefined){  // Checks if game is valid/exists, for errorhandling. GÖR OM? ÄR DETTA FULT?
+    this.game = this.props.model.getSpecificGame(game_id);  
+    if(this.game == undefined){  // Checks if game is valid/exists, for errorhandling.
       this.valid_game = false;
 
       this.state = {
-        id : game_id, // this.props.game.id
-        title : "", // this.props.game.title
-        selectedOption : "",  // Default är lineChart,
+        id : game_id, 
+        title : "", 
+        selectedOption : "", 
         isChecked : false,
         img : "",
       };
@@ -27,9 +27,9 @@ export default class Gameinfo extends Component {
       this.valid_game = true;
 
       this.state = {
-        id : this.game._id, // this.props.game.id
-        title : this.game.name, // this.props.game.title
-        selectedOption : "lineChart",  // Default är lineChart,
+        id : this.game._id, 
+        title : this.game.name,
+        selectedOption : "lineChart",  
         isChecked : false,
         img : this.game.img,
         valid_data: true,
@@ -76,9 +76,7 @@ export default class Gameinfo extends Component {
   componentDidMount(){  // Is a method that runs when the component is created. It checks if the game is in the users watchlist or not.
     this.userWatchlist = this.props.model.getWatchlist();
     this.userWatchlist.items.forEach(game =>{
-      // console.log(game);
-      if(this.state.id == game._id){
-        // console.log("exists");
+      if(this.state.id == game._id){        
         this.setState({
           isChecked : true,
         });
