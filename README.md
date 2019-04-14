@@ -44,7 +44,7 @@ Since every user will have their own “watchlist”, the application demands a 
   * https://game-trend-analytics.herokuapp.com/gameinfo/21779
   * https://game-trend-analytics.herokuapp.com/gameinfo/29595
 3. The Watchlist page: Add some games to your watchlist on the Gameinfo page. Then, proceed to the navigation bar, and click "Show All" under the Watchlist dropdown menu.
-4. Play around! It isn't fully bug-free experience yet, but do make note of what improvements you think are most important to make.
+4. Play around!
 
 ## Link to running application:
 [CLICK HERE](https://game-trend-analytics.herokuapp.com/)
@@ -62,6 +62,13 @@ Since every user will have their own “watchlist”, the application demands a 
 
 ## How to install
 Download the application as a .zip. The architecture and a short desciption of files and folders is presented below.
+
+If you wish to test to run the application locally, the persintent data won't exist (you will only have todays game popularity data points), although, you may do so by following these steps:
+
+1. Navigate to the downloaded folder/repo.
+2. Run ```meteor npm install```
+3. Run ```meteor```
+4. The application should now be running at ```http://localhost:3000```
 
 ## Architecture
 ```
