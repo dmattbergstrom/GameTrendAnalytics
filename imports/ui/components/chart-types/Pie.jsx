@@ -18,7 +18,7 @@ class Pie extends Component {
             title: {
                 text: 'Popularity distribution',
                 align: 'center',
-                margin: 20,
+                margin: 0,
                 offsetX: 0,
                 offsetY: 0,
                 floating: false,
@@ -31,7 +31,9 @@ class Pie extends Component {
             legend: {
               offsetY: 0,
               position: "bottom",
-              verticalAlign: "center",              
+              floating: false,
+              horizontalAlign: "left",   
+              verticalAlign: "left",              
             },            
             dataLabels: {
                 enabled: true,
@@ -52,7 +54,7 @@ class Pie extends Component {
     render() {
       return (
         <div className="chartType">
-            <Chart id="PieChart" options={this.state.options} series={this.state.series} type="pie" width="100%" height="400" />
+            <Chart id="PieChart" options={this.state.options} series={this.state.series} type="pie" width="350" height="350" />
         </div>
       );
     }

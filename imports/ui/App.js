@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Router
 import { Router, Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
-const browserHistory = createBrowserHistory();
+import history from 'history';
+const browserHistory = history.createBrowserHistory();
 
 //Collections:
 import Games from "/imports/api/collections/games/games.js";

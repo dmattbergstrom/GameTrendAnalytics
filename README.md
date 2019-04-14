@@ -20,6 +20,22 @@ Since every user will have their own “watchlist”, the application demands a 
 10. Implemented search functionality.
 11. Implemented autosuggest in search.
 
+## Interactivity Features you may have missed:
+1. The search bar has suggestions. Navigate through suggestions with your arrow keys, if you wish.
+2. When performing a search, the search button can be clicked, or, you could just press enter.
+3. Hovering over line-graphs will show data values for each label, each day in the line-graph. Same for area-graphs.
+4. The pie chart has percentage values of top-popularity, on the overview page. Hover the different segments to see exactly how popular each game is today, in the terms of users playing the game.
+5. If a data-load fails, because of a data-race between loading our layout components and loading stored data from our DB, (that we have stored through daily API calls to twitch, since they don't provide historical data), this data-fail is showed to the user, underneath the line-graph. This is shown on both the Overiview page and the GameInfo page.
+6. Clicking on any game name that is blue, and hoverable, will navigate you to the specific game stats of that game.
+7. It's possible to change password while logged in, by clicking your username in the navigation bar. It's also possible to sign out.
+8. If you click the watchlist in the navigation bar, you can choose to either go directly to a specific game's data from your watchlist (by clicking a individual game name), or, you can proceed to the watchlist page by clicking "Show All".
+9. You can get to the "Home/Overview" page, by clicking either our logo "Twitch Trend Analytics", or, the "Overview" option in our navigation bar.
+10. Clicking any checkbox on the Watchlist page, will display a "Remove from watchlist" button. Click several checkboxes to remove several games from your personal watchlist at once.
+11.There is an option to download any line or area chart, by clicking the small hamburger in the top right corner of the chart. Available formats are PNG and SVG.
+12. No watchlist option is displayed for users that aren't signed in. This simplifies the page for new users, preventing confusion when exploring the website for the first time.
+13. When a user searches for game data of a game that doesn't exist in our database, the user is navigated to a "game not found" page, and is then presented with the option to click a link to return to the "Overview/Home" page.
+14. Popularity data is analyzed overtime, and a label is set on games that are "trending"/going "straight" of "failling" in popularity. This arithmetic is done behind the scenes, and helps the users determine which game is hot right now, with a simple label.
+
 ## How to test each page:
 **Do not use your localhost for testing pages. Use the herokuapp linked below when testing the application**
 1. Frontpage / Overview page: This one is pretty straight forward, just look at the visualized data!

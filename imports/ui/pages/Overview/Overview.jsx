@@ -14,7 +14,6 @@ import Pie from "../../components/chart-types/Pie.jsx";
 import UnvalidChart from "../../components/chart-types/UnvalidChart.jsx";
 import GameTable from "../../components/OverviewComponents/GameTable.jsx";
 
-
 export default class Overview extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +76,9 @@ export default class Overview extends Component {
           <br/><br/>
           <h4 className="white-text text-center" id="overview-header"><b>TOP 5 GAMES LAST 7 DAYS</b></h4>
           {valid_data ? <Line games={this.getTopGames} /> : <React.Fragment><Line games={this.getTopGames} /><UnvalidChart /></React.Fragment>}          
+
           <Pie games={this.getTopGames}/>
+          
         </div>
       </div>
     );
