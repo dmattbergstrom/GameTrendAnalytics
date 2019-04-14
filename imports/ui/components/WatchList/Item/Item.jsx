@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// CSS
-import "./Item.css";
-
 export default class Item extends Component {
   constructor(props) {
     super(props);

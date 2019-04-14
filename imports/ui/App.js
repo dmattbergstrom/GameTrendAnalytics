@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Router
-import { Router, Route, Switch } from 'react-router';
-import { Link } from 'react-router-dom';
-import history from 'history';
-const browserHistory = history.createBrowserHistory();
+import { Route, Switch } from 'react-router';
 
 //Collections:
 import Games from "/imports/api/collections/games/games.js";
@@ -58,15 +54,11 @@ class App extends Component {
         <Navbar loading={loading} currentUser={currentUser} model={modelInstance} />
 
         {/* App Routes: Show loading until model can be sent down as props. */}
-        {/* <Router history={browserHistory}>
-          <Switch> */}
-          <Switch>
-            <Route exact path="/" render={() => loading ? spinner : <Overview loading={loading} model={modelInstance} />} />
-            <Route path="/gameinfo" render={() => loading ? spinner : <Gameinfo currentUser={currentUser} model={modelInstance} />} />
-            <Route path="/watchlist" render={() => loading ? spinner : <Watchlist currentUser={currentUser} model={modelInstance} />} />
-          </Switch>
-          {/* </Switch>
-        </Router> */}
+        <Switch>
+          <Route exact path="/" render={() => loading ? spinner : <Overview loading={loading} model={modelInstance} />} />
+          <Route path="/gameinfo" render={() => loading ? spinner : <Gameinfo currentUser={currentUser} model={modelInstance} />} />
+          <Route path="/watchlist" render={() => loading ? spinner : <Watchlist currentUser={currentUser} model={modelInstance} />} />
+        </Switch>
       </div>
     );
   }

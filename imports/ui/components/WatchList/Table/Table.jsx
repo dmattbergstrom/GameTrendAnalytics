@@ -114,13 +114,12 @@ export default class Table extends Component {
       newCheckedItems = newCheckedItems.splice(cIndex, 1);
     });
 
-    // TODO: Investigate bug.
-    console.log(newCheckedItems);
+    //console.log(newCheckedItems);
     this.setState({ checkedItems: newCheckedItems.slice() });
-    console.log(this.state.checkedItems);
+    //console.log(this.state.checkedItems);
     const mappedItems = this.mapWatchlistItems(this.state.activeFilter);
     this.setState({ items: mappedItems}); // Update watchlist items.
-    console.log(this.state.checkedItems);
+    //console.log(this.state.checkedItems);
   }  
 
   /**
