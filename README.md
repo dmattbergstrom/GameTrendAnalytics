@@ -82,9 +82,13 @@ imports/
         Area.jsx               # Area chart type component.
         Line.jsx               # Line chart type component.
         Pie.jsx                # Pie chart type component.
+      GameInfoComp/
+        OtherInformation.jsx   # Component that contains other information regarding a game.
       Navbar/
         Navbar.css             # Component-specific styling.
         Navbar.jsx             # Navbar component. Contains universal navbar functionality used in entire App.
+      OverviewComponents/
+        GameTable.jsx          # Component visualizing the top 5 games table.
       Watchlist/
         Item/
           Item.css             # Component-specific styling.
