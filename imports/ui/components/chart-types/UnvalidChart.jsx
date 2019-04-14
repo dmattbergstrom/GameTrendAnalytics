@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Chart from 'react-apexcharts';
 
 class UnvalidChart extends Component {
       

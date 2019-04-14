@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Template } from 'meteor/templating';
 import Item from "..//WatchList/Item/Item.jsx";
 
 // This is a presentation comonent presenting other information, in this case just an image of the game.
