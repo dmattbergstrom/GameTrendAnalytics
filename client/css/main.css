@@ -116,6 +116,13 @@ a { text-decoration: none!important; }
   color: #eee!important;
 }
 
+@media screen and (min-width: 800px) {
+  #PieChart{
+    position: relative;
+    margin-left: 20%;
+  }
+}
+
 #gameinfo {
   background-color: #343a40;
   border: 3px solid #252830;
