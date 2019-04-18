@@ -27,4 +27,5 @@
 
 .suggestion-container {
   font-size: 0.9em!important;
+  z-index: 999;
 }

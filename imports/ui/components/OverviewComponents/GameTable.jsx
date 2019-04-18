@@ -8,6 +8,7 @@ export default class OtherInformation extends Component {
     this.mapGames = this.props.getTopGames.map((game, index) => {      
         const {_id, name, status, logo} = game;
         return (
+        '<hr />',
         <Item
             id={_id} key={index} name={name}
             status={status} logo={logo}

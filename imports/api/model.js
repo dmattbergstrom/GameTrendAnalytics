@@ -118,6 +118,9 @@ const Model = function(){
             img: box.medium,
             logo: box.small
           };
+
+          console.log(games[_id].data.length);
+          
         }
       }
     });
