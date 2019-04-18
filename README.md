@@ -6,6 +6,20 @@ A data visualization web application that displays the trending game streams fro
 Users will also be allowed to search for specific game stream analytics and then add a specific game to their own “watchlist”, which is a tool to help users keep track of the data of the games that the user is especially interested in.
 Since every user will have their own “watchlist”, the application demands a login system that stores user-specific data.
 
+## How does the data from the Twitch API work?
+The Twitch API supplies us with real time data for several parameters which all indicate game popularity levels. However, Twitch does not supply historical data. Therefore, to make this project work, we had to set up a automatic API call from the server that happened every 24 hours, and then store the data from that API call for later usage in the application.
+
+So the data that is being displayed, is not data fetched directly from the API, rather, it is data we previously fetched and then stored, in order to display popularity levels of games over time.
+
+## Problems with no historical data
+We had some issues with making automatic API calls from the server every 24 hours, since the application went in to "sleep-mode" if no users visited the page for 5 minutes. This is due to the Heroku service energy saving policy. Because the application went to sleep every 5 minutes of no users, no automatic API call was being made. 
+
+However, we solved this by setting up an automatic ping, a GET request if you will, from our own application, to our own application, that is made every 5 minutes and thereby preventing the application from ever going to sleep. This made us never miss any API calls and get full historical popularity data of the games.
+
+Sadly, we had some issues in the data-load order when rendering pages. There seemed to be a data-race when trying to fetch our stored data from our own backend, which resulted in sometimes incomplete data showing in the application.
+
+The data-race doesn't always happen, but when it does, we make sure to display it for the user. If you would like to know more, please read the last section of this README.
+
 ## What have we done so far?
 0. Implemented API calls every 24 h to get game data.
 1. We've set up a database to store the fetched data, and to store user-specific information.
